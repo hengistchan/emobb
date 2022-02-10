@@ -27,6 +27,7 @@
   import EditorRightAside from "./components/EditorRightAside.vue";
   import EditorMain from "./components/EditorMain.vue";
   import componentModules from "@/package";
+  import useEditorStore from "@/store/editor";
 
   console.log(componentModules);
 
@@ -38,6 +39,8 @@
       EditorRightAside,
     },
     setup() {
+      const editorStore = useEditorStore();
+      console.log(editorStore.getPage);
       return {};
     },
   });

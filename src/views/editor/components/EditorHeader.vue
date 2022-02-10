@@ -1,9 +1,9 @@
 <template>
   <el-page-header class="editor-header-container h-full bg-dark-800 text-light-50">
-    <template v-slot:icon>
+    <template #icon>
       <el-icon><arrow-left-bold /></el-icon>
     </template>
-    <template v-slot:content>
+    <template #content>
       <div class="w-full flex text-light-50 justify-center">
         <div class="page-name">test</div>
         <div class="page-actions"></div>
@@ -32,6 +32,10 @@
 
     .el-page-header__content {
       width: 100%;
+    }
+
+    .page-name {
+      transform: translateX(-50px);
     }
   }
 </style>
