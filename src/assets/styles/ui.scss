@@ -1,0 +1,28 @@
+:root {
+  // --el-header-padding: 0;
+}
+
+.tabs {
+  & > .el-tabs__content {
+    background-color: #f4f5f7;
+    color: #6b778c;
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  & .el-tabs__nav-scroll {
+    display: flex;
+    justify-content: center;
+  }
+
+  & .el-tabs__active-bar {
+    color: #000;
+    background-color: #000;
+    font-weight: 700;
+  }
+
+  & .el-tabs__item.is-active {
+    color: #000;
+    font-weight: 700;
+  }
+}

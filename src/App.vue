@@ -1,10 +1,9 @@
 <template>
-  <h1>{{ a }}</h1>
-  <el-button>1</el-button>
+  <router-view />
 </template>
 
 <script setup lang="ts">
-  const a = 1;
+  import { RouterView } from "vue-router";
 </script>
 
 <style lang="scss">

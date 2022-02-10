@@ -6,3 +6,10 @@ declare module "*.vue" {
   const component: DefineComponent<{}, {}, any>;
   export default component;
 }
+
+declare module "*.ts" {
+  interface ImportMeta {
+    env: Record<string, unknown>;
+    globEager: (path: string) => Record<string, any>;
+  }
+}

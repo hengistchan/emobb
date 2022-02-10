@@ -1,6 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@element-plus/icons-vue': ^0.2.7
+  '@types/lodash-es': ^4.17.6
   '@types/node': ^17.0.16
   '@typescript-eslint/eslint-plugin': ^5.11.0
   '@typescript-eslint/parser': ^5.11.0
@@ -14,6 +16,7 @@ specifiers:
   eslint-plugin-vue: ^8.4.1
   husky: ^7.0.4
   lint-staged: ^12.3.3
+  lodash-es: ^4.17.21
   mrm: ^3.0.10
   normalize.css: ^8.0.1
   pinia: ^2.0.11
@@ -23,12 +26,17 @@ specifiers:
   unplugin-auto-import: ^0.5.11
   unplugin-vue-components: ^0.17.18
   vite: ^2.8.0
+  vite-plugin-windicss: ^1.7.0
   vue: ^3.2.25
   vue-router: '4'
   vue-tsc: ^0.29.8
+  windicss: ^3.4.3
 
 dependencies:
+  '@element-plus/icons-vue': 0.2.7_vue@3.2.30
+  '@types/lodash-es': 4.17.6
   element-plus: 2.0.1_vue@3.2.30
+  lodash-es: 4.17.21
   normalize.css: 8.0.1
   pinia: 2.0.11_typescript@4.5.5+vue@3.2.30
   vue: 3.2.30
@@ -54,7 +62,9 @@ devDependencies:
   unplugin-auto-import: 0.5.11_vite@2.8.0
   unplugin-vue-components: 0.17.18_vite@2.8.0+vue@3.2.30
   vite: 2.8.0_sass@1.49.7
+  vite-plugin-windicss: 1.7.0_vite@2.8.0
   vue-tsc: 0.29.8_typescript@4.5.5
+  windicss: 3.4.3
 
 packages:
 
@@ -491,6 +501,16 @@ packages:
     resolution: {integrity: sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==}
     dev: true
 
+  /@types/lodash-es/4.17.6:
+    resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
+    dependencies:
+      '@types/lodash': 4.14.178
+    dev: false
+
+  /@types/lodash/4.14.178:
+    resolution: {integrity: sha512-0d5Wd09ItQWH1qFbEyQ7oTQ3GZrMfth5JkbN3EvTKLXcHLRDSXeLnlvlOn0wvxVIwK5o2M8JzP/OWz7T3NRsbw==}
+    dev: false
+
   /@types/node/17.0.16:
     resolution: {integrity: sha512-ydLaGVfQOQ6hI1xK2A5nVh8bl0OGoIfYMxPWHqqYe9bTkWCfqiVvZoh2I/QF2sNSkZzZyROBoTefIEI+PB6iIA==}
     dev: true
@@ -844,6 +864,30 @@ packages:
       vue: 3.2.30
       vue-demi: 0.12.1_vue@3.2.30
     dev: false
+
+  /@windicss/config/1.7.0:
+    resolution: {integrity: sha512-jP+SYEUMTcvEQexYAeaIGKWq3sE+yv0myyOCph7Glm/YZE2ZCK1GukI1oDG6fcVer121EQzCY4Rx11trb3oSZg==}
+    dependencies:
+      debug: 4.3.3
+      jiti: 1.12.15
+      windicss: 3.4.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /@windicss/plugin-utils/1.7.0:
+    resolution: {integrity: sha512-4zxTIhpGaia4FTxL/c20GQU2bK3bqToerdErvDzwLqWQECVGt7vTGFQd3e4XMpfR6Ujgk4/p7fCHv/F15R/pkA==}
+    dependencies:
+      '@antfu/utils': 0.4.0
+      '@windicss/config': 1.7.0
+      debug: 4.3.3
+      fast-glob: 3.2.11
+      magic-string: 0.25.7
+      micromatch: 4.0.4
+      windicss: 3.4.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   /acorn-jsx/5.3.2_acorn@8.7.0:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -2619,6 +2663,11 @@ packages:
     resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=}
     dev: true
 
+  /jiti/1.12.15:
+    resolution: {integrity: sha512-/+K89y6KJA2nISbWrlc/773XdpDgSQq/LdQ+ZZyw2jRxUNyquPtbsDCCCMRzzNORUgroUGc4nAXxJEnQvpViCA==}
+    hasBin: true
+    dev: true
+
   /js-stringify/1.0.2:
     resolution: {integrity: sha1-Fzb939lyTyijaCrcYjCufk6Weds=}
     dev: true
@@ -2694,6 +2743,10 @@ packages:
   /kleur/3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
+    dev: true
+
+  /kolorist/1.5.1:
+    resolution: {integrity: sha512-lxpCM3HTvquGxKGzHeknB/sUjuVoUElLlfYnXZT73K8geR9jQbroGlSCFBax9/0mpGoD3kzcMLnOlGQPJJNyqQ==}
     dev: true
 
   /latest-version/3.1.0:
@@ -2802,6 +2855,10 @@ packages:
     dependencies:
       p-locate: 4.1.0
     dev: true
+
+  /lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
 
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
@@ -4150,6 +4207,20 @@ packages:
       builtins: 1.0.3
     dev: true
 
+  /vite-plugin-windicss/1.7.0_vite@2.8.0:
+    resolution: {integrity: sha512-1ps7hk6Pr9TqsW9Y+QXmJ9PMowVLjM0h32c+jh9vdQr5Jzyim3hHivR0rXSkDV9znIB9RkjRQD1znRbAMX0OcQ==}
+    peerDependencies:
+      vite: ^2.0.1
+    dependencies:
+      '@windicss/plugin-utils': 1.7.0
+      debug: 4.3.3
+      kolorist: 1.5.1
+      vite: 2.8.0_sass@1.49.7
+      windicss: 3.4.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /vite/2.8.0_sass@1.49.7:
     resolution: {integrity: sha512-ed5rjyeysttuPJX/aKSA0gTB/8ZKLM5xF6FtEuKy1B9DiQbDNFMVMQxnb9JesgBPUMMIJxC8w5KZ/KNWLKFXoA==}
     engines: {node: '>=12.2.0'}
@@ -4400,6 +4471,12 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       string-width: 4.2.3
+    dev: true
+
+  /windicss/3.4.3:
+    resolution: {integrity: sha512-UnugThsvEgy8RsPm4/B5DYMCAqvZzD6yWU7Anh+f07t5RSJ8zvmAylGLbXrHPJEmCKzo2Mf+fOUvISH7IJqM3A==}
+    engines: {node: '>= 12'}
+    hasBin: true
     dev: true
 
   /with/7.0.2:
