@@ -13,5 +13,3 @@ declare module "*.ts" {
     globEager: (path: string) => Record<string, any>;
   }
 }
-
-declare type Nullable<T> = null | T;
