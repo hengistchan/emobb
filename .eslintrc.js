@@ -41,4 +41,6 @@ module.exports = defineConfig({
       },
     },
   ],
+
+  ignorePatterns: ["auto-imports.d.ts", "components.d.ts"],
 });

@@ -2,7 +2,7 @@ import { createInputProp } from "@/package/helper/CreateProps";
 import { EditorComponent } from "@/package/types/component";
 
 export default {
-  key: "text",
+  name: "text",
   moduleName: "text",
   label: "文本",
   preview: () => <span>文本</span>,

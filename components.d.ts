@@ -2,10 +2,19 @@
 // We suggest you to commit this file into source control
 // Read more: https://github.com/vuejs/vue-next/pull/3399
 
-declare module 'vue' {
+declare module "vue" {
   export interface GlobalComponents {
-    ElButton: typeof import('element-plus/es')['ElButton']
+    ElAside: typeof import("element-plus/es")["ElAside"];
+    ElCollapse: typeof import("element-plus/es")["ElCollapse"];
+    ElCollapseItem: typeof import("element-plus/es")["ElCollapseItem"];
+    ElContainer: typeof import("element-plus/es")["ElContainer"];
+    ElHeader: typeof import("element-plus/es")["ElHeader"];
+    ElIcon: typeof import("element-plus/es")["ElIcon"];
+    ElMain: typeof import("element-plus/es")["ElMain"];
+    ElPageHeader: typeof import("element-plus/es")["ElPageHeader"];
+    ElTabPane: typeof import("element-plus/es")["ElTabPane"];
+    ElTabs: typeof import("element-plus/es")["ElTabs"];
   }
 }
 
-export { }
+export {};
