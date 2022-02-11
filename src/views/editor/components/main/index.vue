@@ -11,7 +11,7 @@
 
 <script lang="ts">
   import { defineComponent } from "vue";
-  import ToolBar from "./Toolbar.vue";
+  import ToolBar from "./ToolBar.vue";
   import SimulatorEditor from "./Main.vue";
 
   export default defineComponent({
