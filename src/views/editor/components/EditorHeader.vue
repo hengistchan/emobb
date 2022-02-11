@@ -1,10 +1,12 @@
 <template>
-  <el-page-header class="editor-header-container h-full bg-dark-800 text-light-50">
+  <el-page-header class="editor-header-container">
     <template #icon>
       <el-icon><arrow-left-bold /></el-icon>
     </template>
     <template #content>
-      <div class="w-full flex text-light-50 justify-center">
+      <div
+        class="editor-header-content w-full flex text-light-50 justify-center"
+      >
         <div class="page-name">test</div>
         <div class="page-actions"></div>
       </div>
@@ -29,6 +31,16 @@
 <style lang="scss">
   .editor-header-container {
     line-height: 50px;
+    height: 100%;
+    background-color: rgba(24, 24, 24, 1);
+    color: rgba(253, 253, 253, 1);
+
+    .editor-header-content {
+      width: 100%;
+      display: flex;
+      color: rgba(253, 253, 253, 1);
+      justify-content: center;
+    }
 
     .el-page-header__content {
       width: 100%;
