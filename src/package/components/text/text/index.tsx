@@ -1,6 +1,7 @@
 import { createInputProp } from "@/package/helper/CreateProps";
 import { EditorComponent } from "@/package/types/component";
 import { Document } from "@element-plus/icons-vue";
+import { commonComponentStyles } from "@/package/style";
 
 export default {
   name: "text",
@@ -12,7 +13,7 @@ export default {
       <p
         style={{
           ...styles,
-          color: props.color,
+          color: props.color as string,
           fontSize: props.size,
           fontFamily: props.font,
         }}

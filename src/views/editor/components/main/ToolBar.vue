@@ -1,5 +1,5 @@
 <template>
-  <el-container class="editor-main-container">main</el-container>
+  <div>toolbar</div>
 </template>
 
 <script lang="ts">
@@ -12,8 +12,4 @@
   });
 </script>
 
-<style lang="scss">
-  .editor-main-container {
-    height: 100%;
-  }
-</style>
+<style lang="scss"></style>

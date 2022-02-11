@@ -3,6 +3,7 @@
  */
 import { CSSProperties } from "vue";
 import { Component as VueComponent } from "vue";
+import * as CSS from "csstype";
 
 export interface Component {
   // component ID
@@ -10,13 +11,13 @@ export interface Component {
   // module name
   moduleName: string;
   // component name
-  key: string;
+  name: string;
   // component label
   label: string;
   // css style
   styles: CSSProperties;
   // check had resize
-  hasResize: true;
+  hasResize: boolean;
   // data props
   props: Record<string, any>;
   // v-model
@@ -31,7 +32,7 @@ export interface Component {
 export interface EditorComponent {
   _id?: string;
   name: string;
-  moduleName: keyof ComponentModules;
+  moduleName: string;
   label: string;
   preview: () => JSX.Element;
   render: (data: {
@@ -47,4 +48,27 @@ export interface EditorComponent {
   events?: { label: string; value: string }[];
   styles?: CSSProperties;
   icon: VueComponent;
+}
+
+export interface CommonComponentStyles extends Record<string, string> {
+  // size
+  height: string;
+  width: string;
+  paddingLeft: string;
+  paddingRight: string;
+  paddingTop: string;
+  paddingBottom: string;
+  // border type
+  borderStyle: string;
+  borderColor: string;
+  borderWidth: string;
+  borderRadius: string;
+  // shadow and opacity
+  boxShadow: string;
+  opacity: string;
+  // position and x,y
+  position: CSS.Property.Position;
+  left: string;
+  top: string;
+  right: string;
 }

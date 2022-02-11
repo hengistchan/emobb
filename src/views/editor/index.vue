@@ -1,6 +1,6 @@
 <template>
-  <el-container class="editor-container flex-col h-full">
-    <el-header height="50px" style="--el-header-padding: 0">
+  <el-container class="editor-container">
+    <el-header height="50px">
       <!-- 编辑器头部 -->
       <editor-header></editor-header>
     </el-header>
@@ -25,9 +25,7 @@
   import EditorHeader from "./components/EditorHeader.vue";
   import EditorLeftAside from "./components/leftAside/index.vue";
   import EditorRightAside from "./components/EditorRightAside.vue";
-  import EditorMain from "./components/EditorMain.vue";
-  import componentModules from "@/package";
-  import useEditorStore from "@/store/editor";
+  import EditorMain from "./components/main/index.vue";
 
   // console.log(componentModules);
 
@@ -46,8 +44,15 @@
 
 <style lang="scss">
   .editor-container {
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
     .editor-aside-container {
       height: 100%;
+    }
+
+    .el-main {
+      padding: 0;
     }
   }
 </style>

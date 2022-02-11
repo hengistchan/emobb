@@ -9,7 +9,7 @@ export default {
   preview: () => <h3>标题</h3>,
   render: ({ props, styles, component }) => {
     return () => (
-      <p
+      <h3
         style={{
           ...styles,
           color: props.color,
@@ -18,7 +18,7 @@ export default {
         }}
       >
         {props.text || "默认标题"}
-      </p>
+      </h3>
     );
   },
   props: {

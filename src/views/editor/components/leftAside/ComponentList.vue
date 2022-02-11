@@ -7,7 +7,7 @@
         :title="item.label"
         :name="item.name"
       >
-        <template v-slot:title>
+        <template #title>
           <el-icon :size="20"><component :is="item.icon" /></el-icon>
           <div class="component-module-label">{{ item.label }}</div>
         </template>
@@ -17,6 +17,7 @@
           :sort="false"
           :group="{ name: 'components', pull: 'clone', put: false }"
           item-key="label"
+          :clone="clone"
           @change="onDrag"
         >
           <template #item="{ element: cpn }">
@@ -37,10 +38,13 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref } from "vue";
+  import { Component, computed, defineComponent, ref } from "vue";
   import componentModules from "@/package";
   import RenderVNode from "@/helper/RenderVNode";
   import draggable from "vuedraggable";
+  import { cloneDeep } from "lodash-es";
+  import { EditorComponent } from "@/package/types/component";
+  import useEditor from "../../hook/useEditor";
 
   export default defineComponent({
     components: {
@@ -52,13 +56,19 @@
       const componentList = computed(() =>
         Object.values(componentModules).sort((a, b) => a.order - b.order),
       );
+      const { createNewComponent } = useEditor();
       const onDrag = (e: any) => {
         console.log(e);
+      };
+      const clone = (cpn: EditorComponent): Component => {
+        console.log("drag", cpn);
+        return createNewComponent(cloneDeep(cpn));
       };
       return {
         activeName,
         componentList,
         onDrag,
+        clone,
       };
     },
   });

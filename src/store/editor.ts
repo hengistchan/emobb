@@ -13,7 +13,10 @@ const editorStore = defineStore("editor", {
     page: null,
   }),
   getters: {
-    getPage: (state) => state.page,
+    getComponentById:
+      (state) =>
+      (id: string): Nullable<Component> =>
+        state?.page?.components.find((cpn) => cpn._id === id) || null,
   },
 });
 

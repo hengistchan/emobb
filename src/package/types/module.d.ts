@@ -20,4 +20,6 @@ export interface ComponentModule {
   components: EditorComponent[];
   // 显示组件模块的icon
   icon: Component;
+  // component map
+  componentMap: { [key: string]: EditorComponent };
 }

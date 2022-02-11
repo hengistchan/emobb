@@ -9,7 +9,11 @@ interface EditorInputProp {
   tips?: string;
 }
 
-export const createInputProp = ({ label, defaultValue, tips }: EditorInputProp): EditorProp => ({
+export const createInputProp = ({
+  label,
+  defaultValue,
+  tips,
+}: EditorInputProp): EditorProp => ({
   type: EditorPropType.input,
   label,
   tips,
