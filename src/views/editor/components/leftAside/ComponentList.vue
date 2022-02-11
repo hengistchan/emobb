@@ -11,8 +11,15 @@
           <el-icon :size="20"><component :is="item.icon" /></el-icon>
           <div class="component-module-label">{{ item.label }}</div>
         </template>
-        <ul class="component-container">
-          <li v-for="cpn in item.components" :key="cpn.label">
+        <draggable
+          v-model="item.components"
+          class="component-container drag-area"
+          :sort="false"
+          :group="{ name: 'components', pull: 'clone', put: false }"
+          item-key="label"
+          @change="onDrag"
+        >
+          <template #item="{ element: cpn }">
             <div class="component">
               <!-- <component :is="cpn.preview" /> -->
               <el-icon :size="20">
@@ -22,8 +29,8 @@
                 {{ cpn.label }}
               </div>
             </div>
-          </li>
-        </ul>
+          </template>
+        </draggable>
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -33,19 +40,25 @@
   import { computed, defineComponent, ref } from "vue";
   import componentModules from "@/package";
   import RenderVNode from "@/helper/RenderVNode";
+  import draggable from "vuedraggable";
 
   export default defineComponent({
     components: {
       RenderVNode,
+      draggable,
     },
     setup() {
       const activeName = ref("text");
       const componentList = computed(() =>
         Object.values(componentModules).sort((a, b) => a.order - b.order),
       );
+      const onDrag = (e: any) => {
+        console.log(e);
+      };
       return {
         activeName,
         componentList,
+        onDrag,
       };
     },
   });
@@ -63,24 +76,23 @@
       margin: 10px 0;
       padding: 0 20px;
       justify-content: space-around;
-      li {
+
+      .component {
         width: 50%;
         height: 25px;
         line-height: 25px;
-        .component {
-          display: flex;
-          align-items: center;
-          padding-left: 10px;
-          &:hover {
-            border-radius: 3px;
-            background-color: #f0f0f0;
-            cursor: pointer;
-          }
-          .component-label {
-            display: inline-block;
-            vertical-align: top;
-            padding-left: 5px;
-          }
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        &:hover {
+          border-radius: 3px;
+          background-color: #f0f0f0;
+          cursor: pointer;
+        }
+        .component-label {
+          display: inline-block;
+          vertical-align: top;
+          padding-left: 5px;
         }
       }
     }

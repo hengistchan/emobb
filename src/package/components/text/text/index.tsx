@@ -25,4 +25,5 @@ export default {
     color: createInputProp({ label: "文本" }),
   },
   icon: Document,
+  draggable: true,
 } as EditorComponent;
