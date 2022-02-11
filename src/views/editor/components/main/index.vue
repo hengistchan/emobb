@@ -33,6 +33,8 @@
       height: 40px;
       background-color: #fdfdfd;
       position: relative;
+      border-left: 2px solid #e4e7ed;
+      border-right: 2px solid #e4e7ed;
 
       &::after {
         content: "";
