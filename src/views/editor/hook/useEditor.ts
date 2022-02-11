@@ -1,4 +1,4 @@
-import { Page } from "@/package/types/page";
+import { Page } from "@/package/types/page.d";
 
 export const createNewPage = ({ title = "页面" }): Page => ({
   title,

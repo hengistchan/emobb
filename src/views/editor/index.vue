@@ -23,13 +23,13 @@
 <script lang="ts">
   import { defineComponent } from "vue";
   import EditorHeader from "./components/EditorHeader.vue";
-  import EditorLeftAside from "./components/EditorLeftAside.vue";
+  import EditorLeftAside from "./components/leftAside/index.vue";
   import EditorRightAside from "./components/EditorRightAside.vue";
   import EditorMain from "./components/EditorMain.vue";
   import componentModules from "@/package";
   import useEditorStore from "@/store/editor";
 
-  console.log(componentModules);
+  // console.log(componentModules);
 
   export default defineComponent({
     components: {
@@ -39,8 +39,6 @@
       EditorRightAside,
     },
     setup() {
-      const editorStore = useEditorStore();
-      console.log(editorStore.getPage);
       return {};
     },
   });

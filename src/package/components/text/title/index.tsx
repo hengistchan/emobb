@@ -1,12 +1,12 @@
 import { createInputProp } from "@/package/helper/CreateProps";
 import { EditorComponent } from "@/package/types/component";
-import { Document } from "@element-plus/icons-vue";
+import { EditPen } from "@element-plus/icons-vue";
 
 export default {
-  name: "text",
+  name: "title",
   moduleName: "text",
-  label: "普通文本",
-  preview: () => <p>普通文本</p>,
+  label: "标题",
+  preview: () => <h3>标题</h3>,
   render: ({ props, styles, component }) => {
     return () => (
       <p
@@ -17,12 +17,12 @@ export default {
           fontFamily: props.font,
         }}
       >
-        {props.text || "默认文本"}
+        {props.text || "默认标题"}
       </p>
     );
   },
   props: {
-    color: createInputProp({ label: "文本" }),
+    color: createInputProp({ label: "颜色" }),
   },
-  icon: Document,
+  icon: EditPen,
 } as EditorComponent;

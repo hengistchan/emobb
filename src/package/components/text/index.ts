@@ -11,7 +11,7 @@ mapValues(c, (component: { default: EditorComponent }) => {
 
 const m: ComponentModule = {
   name: "text",
-  label: "文本",
+  label: "文本组件",
   icon: Document,
   order: 1,
   components,

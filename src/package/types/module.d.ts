@@ -2,7 +2,7 @@
  * 左侧组件模块类型定义
  */
 import { EditorComponent } from "./component";
-import { Component } from "vue";
+import { Component, VNode } from "vue";
 
 interface ModuleIcon {
   name: string;

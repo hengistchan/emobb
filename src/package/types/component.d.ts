@@ -2,6 +2,7 @@
  * 组件类型定义
  */
 import { CSSProperties } from "vue";
+import { Component as VueComponent } from "vue";
 
 export interface Component {
   // component ID
@@ -45,4 +46,5 @@ export interface EditorComponent {
   props?: Record<string, unknown>;
   events?: { label: string; value: string }[];
   styles?: CSSProperties;
+  icon: VueComponent;
 }
