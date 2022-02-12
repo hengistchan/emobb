@@ -39,7 +39,14 @@ const useEditor = () => {
       ...commonComponentStyles,
     },
     hasResize: false,
-    props: component.props || {},
+    props: Object.keys(component.props || {}).reduce((prev, curr) => {
+      // const { propObj, prop } = useDotProp(prev, curr);
+      if (component.props && (component.props[curr] as any)?.defaultValue) {
+        // propObj[prop] = prev[curr] = component.props![curr]?.defaultValue;
+        prev[curr] = (component.props[curr] as any)?.defaultValue;
+      }
+      return prev;
+    }, {} as { [key: string]: any }),
     draggable: component.draggable ?? true, // 是否可以拖拽
     showStyleConfig: component.showStyleConfig ?? true, // 是否显示组件样式配置
     events: component.events || [], // 事件集合

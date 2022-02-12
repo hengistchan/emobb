@@ -83,37 +83,39 @@
   /**
   * 编辑器中组件拖拽的样式
   */
-  .sortable-ghost {
-    width: 100%;
-    display: block;
-    background-color: #016fff;
-    height: 2px;
-    > * {
-      display: none;
-    }
-    &::before,
-    &::after {
-      content: "" !important;
-      display: block !important;
-      width: 4px !important;
-      height: 4px !important;
-      border: 2px solid #016fff !important;
-      position: absolute !important;
-      top: 0 !important;
-      font-size: 16px !important;
-      font-weight: 600 !important;
-      transform: translate(0, -3px) !important;
-      color: #fff !important;
-      line-height: 0px !important;
-      padding: 0 !important;
-      border-radius: 50% !important;
-      background-color: #fff !important;
-    }
-    &::before {
-      left: -2px !important;
-    }
-    &::after {
-      right: -2px !important;
+  .simulator-editor {
+    .sortable-ghost {
+      width: 100%;
+      display: block;
+      background-color: #016fff;
+      height: 2px;
+      > * {
+        display: none;
+      }
+      &::before,
+      &::after {
+        content: "" !important;
+        display: block !important;
+        width: 4px !important;
+        height: 4px !important;
+        border: 2px solid #016fff !important;
+        position: absolute !important;
+        top: 0 !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        transform: translate(0, -3px) !important;
+        color: #fff !important;
+        line-height: 0px !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        background-color: #fff !important;
+      }
+      &::before {
+        left: -2px !important;
+      }
+      &::after {
+        right: -2px !important;
+      }
     }
   }
 

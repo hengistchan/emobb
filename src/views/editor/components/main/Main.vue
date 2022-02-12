@@ -1,3 +1,4 @@
+/* eslint-disable vue/no-use-v-if-with-v-for */
 <template>
   <div class="simulator-container">
     <div class="simulator-editor">
@@ -6,17 +7,26 @@
         tag="transition-group"
         group="components"
         item-key="_id"
-        @change="change"
       >
         <template #item="{ element }">
           <edit-wrapper :element="element">
-            <render-component :element="element"></render-component>
+            <render-component :element="element">
+              <template
+                v-for="(value, key) in element.props?.slots"
+                :key="key"
+                #[key]
+              >
+                <slot-item :slot-data="value" :slot-key="key" />
+              </template>
+            </render-component>
           </edit-wrapper>
         </template>
       </draggable>
     </div>
   </div>
 </template>
+
+<!--  -->
 
 <script lang="ts">
   import { defineComponent, computed } from "vue";
@@ -25,9 +35,10 @@
   import useEditor from "@/views/editor/hook/useEditor";
   import RenderComponent from "./RenderComponent";
   import EditWrapper from "./EditWrapper.vue";
+  import SlotItem from "./SlotItem.vue";
 
   export default defineComponent({
-    components: { draggable, RenderComponent, EditWrapper },
+    components: { draggable, RenderComponent, EditWrapper, SlotItem },
     setup() {
       const editorStore = useEditorStore();
       const page = computed(() => editorStore.page);

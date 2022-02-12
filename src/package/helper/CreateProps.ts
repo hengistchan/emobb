@@ -9,6 +9,20 @@ interface EditorInputProp {
   tips?: string;
 }
 
+export type EditorSelectOptions = {
+  label: string;
+  value: string | number | boolean | object;
+  [prop: string]: any;
+}[];
+
+interface EditorSelectProp {
+  label: string;
+  options: EditorSelectOptions;
+  defaultValue?: any;
+  multiple?: boolean;
+  tips?: string;
+}
+
 export const createInputProp = ({
   label,
   defaultValue,
@@ -19,3 +33,20 @@ export const createInputProp = ({
   tips,
   defaultValue,
 });
+
+export function createSelectProp({
+  label,
+  options,
+  defaultValue,
+  tips,
+  multiple,
+}: EditorSelectProp): EditorProp {
+  return {
+    type: EditorPropType.select,
+    label,
+    defaultValue,
+    tips,
+    options,
+    multiple,
+  };
+}

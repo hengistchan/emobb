@@ -1,6 +1,6 @@
 <template>
   <div class="component-module-list">
-    <el-collapse v-model="activeName">
+    <el-collapse v-model="activeName" accordion>
       <el-collapse-item
         v-for="item in componentList"
         :key="item.name"

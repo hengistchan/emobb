@@ -10,14 +10,16 @@ export default defineComponent({
       default: () => ({}),
     },
   },
-  setup({ element }) {
-    return componentModules[element.moduleName].componentMap[
-      element.name
+  setup(props) {
+    console.log(props.element, "element");
+
+    return componentModules[props.element.moduleName].componentMap[
+      props.element.name
     ].render({
-      styles: element.styles,
-      props: element.props || {},
+      styles: props.element.styles,
+      props: props.element.props || {},
       model: {},
-      component: element,
+      component: props.element,
       custom: {},
     });
   },
