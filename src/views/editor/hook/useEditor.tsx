@@ -9,6 +9,11 @@ import componentModules from "@/package";
 const useEditor = () => {
   const editorStore = useEditorStore();
 
+  /**
+   * 生成新页面
+   * @param param0 页面数据
+   * @returns 页面实例
+   */
   const createNewPage = ({ title = "页面" }: { title: string }): Page => ({
     title,
     props: {
@@ -20,6 +25,11 @@ const useEditor = () => {
     components: [],
   });
 
+  /**
+   * 生成新组件
+   * @param component 编辑器组件实例
+   * @returns 组件实例
+   */
   const createNewComponent = (component: EditorComponent): Component => ({
     _id: `${uuidv4().slice(0, 5)}_${editorStore.page?.components.length || 0}`,
     moduleName: component.moduleName,
@@ -27,12 +37,6 @@ const useEditor = () => {
     label: component.label,
     styles: {
       ...commonComponentStyles,
-      display: "flex",
-      justifyContent: "flex-start",
-      paddingTop: "0",
-      paddingRight: "0",
-      paddingLeft: "0",
-      paddingBottom: "0",
     },
     hasResize: false,
     props: component.props || {},
@@ -42,9 +46,42 @@ const useEditor = () => {
     model: {},
   });
 
+  /**
+   * 设置当前点击组件
+   * @param componentId 组件ID
+   */
+  const setActive = (componentId: string): void => {
+    editorStore.currentComponent = componentId;
+  };
+
+  /**
+   * 各种组件事件
+   */
+
+  /**
+   * 点击组件
+   * @param event 鼠标事件
+   * @param component 组件实例
+   */
+  const handleClick = (event: MouseEvent, component: Component) => {
+    component._id && setActive(component._id);
+  };
+
+  /**
+   * 鼠标悬停
+   * @param event 鼠标事件
+   * @param component 组件实例
+   */
+  const handleMouseOver = (event: MouseEvent, component: Component) => {
+    console.log(event);
+  };
+
   return {
     createNewPage,
     createNewComponent,
+    setActive,
+    handleClick,
+    handleMouseOver,
   };
 };
 

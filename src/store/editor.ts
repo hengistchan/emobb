@@ -3,7 +3,7 @@ import { Component } from "@/package/types/component";
 import { Page } from "@/package/types/page";
 
 interface EditorState {
-  currentComponent: Nullable<Component>;
+  currentComponent: Nullable<string>;
   page: Nullable<Page>;
 }
 

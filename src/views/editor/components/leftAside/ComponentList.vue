@@ -100,6 +100,7 @@
           cursor: pointer;
         }
         .component-label {
+          width: 100%;
           display: inline-block;
           vertical-align: top;
           padding-left: 5px;

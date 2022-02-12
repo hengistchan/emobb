@@ -9,10 +9,9 @@
         @change="change"
       >
         <template #item="{ element }">
-          <render-component
-            :key="element._id"
-            :element="element"
-          ></render-component>
+          <edit-wrapper :element="element">
+            <render-component :element="element"></render-component>
+          </edit-wrapper>
         </template>
       </draggable>
     </div>
@@ -23,27 +22,32 @@
   import { defineComponent, computed } from "vue";
   import draggable from "vuedraggable";
   import useEditorStore from "@/store/editor";
+  import useEditor from "@/views/editor/hook/useEditor";
   import RenderComponent from "./RenderComponent";
+  import EditWrapper from "./EditWrapper.vue";
 
   export default defineComponent({
-    components: { draggable, RenderComponent },
+    components: { draggable, RenderComponent, EditWrapper },
     setup() {
       const editorStore = useEditorStore();
       const page = computed(() => editorStore.page);
-      const components = editorStore.page?.components;
+      const currentComponent = computed(() => editorStore.currentComponent);
+      const { handleClick, handleMouseOver } = useEditor();
       const change = (e: any) => {
         console.log(e);
       };
       return {
         page,
-        components,
         change,
+        handleClick,
+        currentComponent,
+        handleMouseOver,
       };
     },
   });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .simulator-container {
     width: 100%;
     height: calc(100vh - 90px);
@@ -57,6 +61,8 @@
       margin: 20px auto 0;
       background-color: #fff;
       box-shadow: 0 8px 12px #ebedf0;
+      // overflow-y: auto;
+      // overflow-x: hidden;
     }
   }
 </style>

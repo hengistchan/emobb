@@ -14,8 +14,10 @@ export default {
         style={{
           ...styles,
           color: props.color as string,
-          fontSize: props.size,
+          // fontSize: props.size,
+          fontSize: "1rem",
           fontFamily: props.font,
+          textAlign: "center",
         }}
       >
         {props.text || "默认文本"}

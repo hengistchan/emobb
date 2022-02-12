@@ -3,7 +3,7 @@ import { CommonComponentStyles } from "./types/component";
 export const commonComponentStyles: CommonComponentStyles = {
   // size
   height: "",
-  width: "100px",
+  width: "",
   paddingLeft: "0px",
   paddingRight: "0px",
   paddingTop: "0px",
