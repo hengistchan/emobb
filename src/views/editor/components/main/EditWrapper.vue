@@ -38,48 +38,6 @@
 </script>
 
 <style lang="scss">
-  .edit-wrapper {
-    cursor: grab;
-    padding: 2px;
-    position: relative;
-
-    &:hover {
-      cursor: grab;
-      outline: 2px dotted #006eff;
-      outline-offset: -2px;
-    }
-
-    &.active {
-      outline: 2px solid #006eff;
-      outline-offset: -2px;
-    }
-
-    &:hover::before,
-    &.active::before {
-      display: block;
-      position: absolute;
-      font-size: 12px;
-      font-weight: 600;
-      transform: translate(-100%, 0);
-      color: #fff;
-      height: 18px;
-      line-height: 18px;
-      padding: 0 6px;
-      top: 0;
-      left: -2px;
-      border-radius: 3px;
-      content: attr(data-label);
-    }
-
-    &:hover::before {
-      background-color: #8ab0ee;
-    }
-
-    &.active::before {
-      background-color: #0052d9;
-    }
-  }
-
   /**
   * 编辑器中组件拖拽的样式
   */
