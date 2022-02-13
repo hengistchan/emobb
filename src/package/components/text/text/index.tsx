@@ -1,7 +1,11 @@
-import { createInputProp } from "@/package/helper/CreateProps";
+import {
+  createInputProp,
+  createSelectProp,
+} from "@/package/helper/CreateProps";
 import { EditorComponent } from "@/package/types/component";
 import { Document } from "@element-plus/icons-vue";
 import { commonComponentStyles } from "@/package/style";
+import { fonts, textAlign } from "./props";
 
 export default {
   name: "text",
@@ -14,10 +18,9 @@ export default {
         style={{
           ...styles,
           color: props.color as string,
-          // fontSize: props.size,
-          fontSize: "1rem",
-          fontFamily: props.font,
-          textAlign: "center",
+          fontSize: props.fontSize,
+          fontFamily: props.fontFamily,
+          textAlign: props.textAlign,
         }}
       >
         {props.text || "默认文本"}
@@ -25,7 +28,19 @@ export default {
     );
   },
   props: {
-    color: createInputProp({ label: "文本" }),
+    value: createInputProp({ label: "文本内容" }),
+    color: createInputProp({ label: "字体颜色" }),
+    fontSize: createInputProp({
+      label: "字体大小",
+      defaultValue: "1rem",
+      tips: "当前页面，1rem = 16px",
+    }),
+    fontFamily: createSelectProp({ label: "字体名称", options: fonts }),
+    textAlign: createSelectProp({
+      label: "对齐",
+      options: textAlign,
+      defaultValue: "center",
+    }),
   },
   icon: Document,
 } as EditorComponent;

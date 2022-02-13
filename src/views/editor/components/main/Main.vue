@@ -1,7 +1,7 @@
 /* eslint-disable vue/no-use-v-if-with-v-for */
 <template>
   <div class="simulator-container">
-    <div class="simulator-editor">
+    <div ref="editorRef" class="simulator-editor">
       <DraggableTransitionGroup
         v-model:drag="drag"
         v-model="page!.components"
@@ -51,7 +51,7 @@
 <!--  -->
 
 <script lang="ts">
-  import { defineComponent, computed, reactive, toRefs } from "vue";
+  import { defineComponent, computed, reactive, toRefs, ref } from "vue";
   import useEditorStore from "@/store/editor";
   import useEditor from "@/views/editor/hook/useEditor";
   import RenderComponent from "./RenderComponent";
@@ -68,21 +68,19 @@
     },
     setup() {
       const editorStore = useEditorStore();
+      const editorRef = ref<HTMLElement | null>(null);
       const page = computed(() => editorStore.page);
       const currentComponent = computed(() => editorStore.currentComponent);
       const { handleClick, handleMouseOver } = useEditor();
-      const change = (e: any) => {
-        console.log(e);
-      };
       const state = reactive({
         drag: false,
       });
       return {
         page,
-        change,
         handleClick,
         currentComponent,
         handleMouseOver,
+        editorRef,
         ...toRefs(state),
       };
     },
@@ -156,30 +154,30 @@
         > * {
           display: none;
         }
-        &::before,
-        &::after {
-          content: "" !important;
-          display: block !important;
-          width: 4px !important;
-          height: 4px !important;
-          border: 2px solid #016fff !important;
-          position: absolute !important;
-          top: 0 !important;
-          font-size: 16px !important;
-          font-weight: 600 !important;
-          transform: translate(0, -3px) !important;
-          color: #fff !important;
-          line-height: 0px !important;
-          padding: 0 !important;
-          border-radius: 50% !important;
-          background-color: #fff !important;
-        }
-        &::before {
-          left: -2px !important;
-        }
-        &::after {
-          right: -2px !important;
-        }
+        // &::before,
+        // &::after {
+        //   content: "" !important;
+        //   display: block !important;
+        //   width: 4px !important;
+        //   height: 4px !important;
+        //   border: 2px solid #016fff !important;
+        //   position: absolute !important;
+        //   top: 0 !important;
+        //   font-size: 16px !important;
+        //   font-weight: 600 !important;
+        //   transform: translate(0, -3px) !important;
+        //   color: #fff !important;
+        //   line-height: 0px !important;
+        //   padding: 0 !important;
+        //   border-radius: 50% !important;
+        //   background-color: #fff !important;
+        // }
+        // &::before {
+        //   left: -2px !important;
+        // }
+        // &::after {
+        //   right: -2px !important;
+        // }
       }
 
       .edit-wrapper.ghost {

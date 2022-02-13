@@ -1,6 +1,6 @@
 <template>
   <div class="component-module-list">
-    <el-collapse v-model="activeName" accordion>
+    <el-collapse v-model="activeName">
       <el-collapse-item
         v-for="item in componentList"
         :key="item.name"
@@ -61,7 +61,7 @@
         console.log(e);
       };
       const clone = (cpn: EditorComponent): Component => {
-        console.log("drag", cpn);
+        // console.log("drag", cpn);
         return createNewComponent(cloneDeep(cpn));
       };
       return {

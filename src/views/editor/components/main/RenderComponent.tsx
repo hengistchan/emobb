@@ -11,7 +11,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    console.log(props.element, "element");
+    // console.log(props.element, "element");
 
     return componentModules[props.element.moduleName].componentMap[
       props.element.name

@@ -40,6 +40,7 @@
     reactive,
     toRefs,
     SetupContext,
+    watch,
   } from "vue";
   import draggable from "vuedraggable";
   import { useVModel } from "@vueuse/core";
@@ -75,7 +76,7 @@
         list: useVModel(props, "moduleValue", emit),
         isDrag: useVModel(props, "drag", emit),
       });
-
+      const c = computed(() => props.moduleValue);
       const dragOptions = computed(() => ({
         animation: 200,
         disabled: false,
@@ -92,8 +93,6 @@
 </script>
 
 <style lang="scss">
-  // @import "./func.scss";
-
   .flip-list-move {
     transition: transform 0.5s;
   }

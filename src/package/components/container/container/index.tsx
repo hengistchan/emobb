@@ -32,7 +32,6 @@ export default {
   preview: () => <p>普通容器</p>,
   render: ({ props, styles, component, custom }) => {
     const slots = useSlots();
-    console.log(slots);
 
     return () => (
       <div style={styles} class="container">
