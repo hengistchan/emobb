@@ -6,7 +6,7 @@
     :class="{
       active: currentComponent === element._id,
     }"
-    @click.stop="handleClick($event, element)"
+    @click.stop="handleClick($event, element, parent)"
   >
     <slot></slot>
   </div>
@@ -22,6 +22,10 @@
     props: {
       element: {
         type: Object as PropType<Component>,
+        required: true,
+      },
+      parent: {
+        type: Array as PropType<Component[]>,
         required: true,
       },
     },

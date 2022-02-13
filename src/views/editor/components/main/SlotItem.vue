@@ -17,6 +17,7 @@
           focusWithChild: innerElement.focusWithChild,
         }"
         :element="innerElement"
+        :parent="slotChildren"
       >
         <render-component
           :element="innerElement"

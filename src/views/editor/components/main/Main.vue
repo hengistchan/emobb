@@ -19,6 +19,7 @@
               drag,
               ['has-slot']: !!Object.keys(outElement.props.slots || {}).length,
             }"
+            :parent="page!.components"
           >
             <render-component
               :key="outElement._vid"
@@ -70,16 +71,13 @@
       const editorStore = useEditorStore();
       const editorRef = ref<HTMLElement | null>(null);
       const page = computed(() => editorStore.page);
-      const currentComponent = computed(() => editorStore.currentComponent);
-      const { handleClick, handleMouseOver } = useEditor();
+      const { handleClick } = useEditor();
       const state = reactive({
         drag: false,
       });
       return {
         page,
         handleClick,
-        currentComponent,
-        handleMouseOver,
         editorRef,
         ...toRefs(state),
       };

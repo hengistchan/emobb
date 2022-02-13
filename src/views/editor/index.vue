@@ -26,6 +26,7 @@
   import EditorLeftAside from "./components/leftAside/index.vue";
   import EditorRightAside from "./components/EditorRightAside.vue";
   import EditorMain from "./components/main/index.vue";
+  import useHotKey from "./hook/useHotKey";
 
   // console.log(componentModules);
 
@@ -37,6 +38,7 @@
       EditorRightAside,
     },
     setup() {
+      useHotKey();
       return {};
     },
   });

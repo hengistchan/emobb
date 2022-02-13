@@ -18,6 +18,7 @@ specifiers:
   eslint-define-config: ^1.2.4
   eslint-plugin-prettier: ^4.0.0
   eslint-plugin-vue: ^8.4.1
+  hotkeys-js: ^3.8.7
   husky: ^7.0.4
   lint-staged: ^12.3.3
   lodash-es: ^4.17.21
@@ -41,6 +42,7 @@ dependencies:
   '@element-plus/icons-vue': 0.2.7_vue@3.2.30
   '@vueuse/core': 7.6.1_vue@3.2.30
   element-plus: 2.0.1_vue@3.2.30
+  hotkeys-js: 3.8.7
   lodash-es: 4.17.21
   normalize.css: 8.0.1
   nprogress: 0.2.0
@@ -2381,6 +2383,10 @@ packages:
   /hosted-git-info/2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
     dev: true
+
+  /hotkeys-js/3.8.7:
+    resolution: {integrity: sha512-ckAx3EkUr5XjDwjEHDorHxRO2Kb7z6Z2Sxul4MbBkN8Nho7XDslQsgMJT+CiJ5Z4TgRxxvKHEpuLE3imzqy4Lg==}
+    dev: false
 
   /html-tags/3.1.0:
     resolution: {integrity: sha512-1qYz89hW3lFDEazhjW0yVAV87lw8lVkrJocr72XmBkMKsoSVJCQx3W8BXsC7hO2qAt8BoVjYjtAcZ9perqGnNg==}

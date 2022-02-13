@@ -58,10 +58,6 @@ const useEditor = () => {
     return cpn;
   };
 
-  const handleAdd = (event: any) => {
-    console.log(event);
-  };
-
   /**
    * 根据ID查找组件是否存在
    * @param componentId 组件ID
@@ -78,7 +74,7 @@ const useEditor = () => {
    * @param parent 父组件
    */
   const handleDelete = (
-    event: Event,
+    event: Event | null,
     componentId: string,
     parent: Component[],
   ) => {
@@ -87,7 +83,7 @@ const useEditor = () => {
       parent.splice(i, 1);
       delete editorStore.componentMap[componentId];
       if (editorStore.currentComponent === componentId) {
-        editorStore.currentComponent = "";
+        cancelActive();
       }
     }
   };
@@ -96,8 +92,14 @@ const useEditor = () => {
    * 设置当前点击组件
    * @param componentId 组件ID
    */
-  const setActive = (componentId: string): void => {
+  const setActive = (componentId: string, parent: Component[]): void => {
     editorStore.currentComponent = componentId;
+    editorStore.parent = parent;
+  };
+
+  const cancelActive = (): void => {
+    editorStore.currentComponent = "";
+    editorStore.parent = null;
   };
 
   /**
@@ -109,8 +111,14 @@ const useEditor = () => {
    * @param event 鼠标事件
    * @param component 组件实例
    */
-  const handleClick = (event: MouseEvent, component: Component) => {
-    component._id && setActive(component._id);
+  const handleClick = (
+    event: MouseEvent,
+    component: Component,
+    parent: Component[],
+  ) => {
+    if (component._id) {
+      setActive(component._id, parent);
+    }
   };
 
   /**
@@ -128,9 +136,9 @@ const useEditor = () => {
     setActive,
     handleClick,
     handleMouseOver,
-    handleAdd,
     checkComponentExist,
     handleDelete,
+    cancelActive,
   };
 };
 

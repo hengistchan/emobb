@@ -7,6 +7,7 @@ interface EditorState {
   page: Nullable<Page>;
   componentMap: { [componentId: string]: Component };
   tick: number;
+  parent: Nullable<Component[]>;
 }
 
 const editorStore = defineStore("editor", {
@@ -15,6 +16,7 @@ const editorStore = defineStore("editor", {
     page: null,
     componentMap: {},
     tick: 0,
+    parent: null,
   }),
   getters: {},
   actions: {
