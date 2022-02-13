@@ -44,7 +44,7 @@ export interface EditorComponent {
   }) => () => JSX.Element;
   draggable?: boolean;
   showStyleConfig?: boolean;
-  props?: Record<string, unknown>;
+  props?: Record<string, any>;
   events?: { label: string; value: string }[];
   styles?: CSSProperties;
   icon: VueComponent;

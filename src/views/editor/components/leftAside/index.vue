@@ -17,9 +17,4 @@
   const activeTab = ref("component-list");
 </script>
 
-<style lang="scss">
-  .editor-aside-container {
-    width: 100%;
-    background-color: rgba(253, 253, 253, 1);
-  }
-</style>
+<style lang="scss"></style>

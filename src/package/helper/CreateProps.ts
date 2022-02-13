@@ -50,3 +50,19 @@ export function createSelectProp({
     multiple,
   };
 }
+
+interface EditorColorProp {
+  label: string;
+  defaultValue?: string;
+}
+
+export function createColorProp({
+  label,
+  defaultValue,
+}: EditorColorProp): EditorProp {
+  return {
+    type: EditorPropType.color,
+    label,
+    defaultValue,
+  };
+}

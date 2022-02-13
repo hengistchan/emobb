@@ -1,27 +1,20 @@
-import { createInputProp } from "@/package/helper/CreateProps";
+import {
+  createColorProp,
+  createInputProp,
+  createSelectProp,
+} from "@/package/helper/CreateProps";
 import { EditorComponent } from "@/package/types/component";
 import { EditPen } from "@element-plus/icons-vue";
+import { fonts, textAlign } from "../text/props";
 
-const titleStyle = {
-  h1: {
-    fontSize: "2rem",
-  },
-  h2: {
-    fontSize: "1.5rem",
-  },
-  h3: {
-    fontSize: "1.17rem",
-  },
-  h4: {
-    fontSize: "1rem",
-  },
-  h5: {
-    fontSize: "0.83rem",
-  },
-  h6: {
-    fontSize: "0.67rem",
-  },
-};
+const titleStyle = [
+  { label: "H1", value: "2rem" },
+  { label: "H2", value: "1.5rem" },
+  { label: "H3", value: "1.17rem" },
+  { label: "H4", value: "1rem" },
+  { label: "H5", value: "0.83rem" },
+  { label: "H6", value: "0.67rem" },
+];
 
 export default {
   name: "title",
@@ -34,11 +27,10 @@ export default {
         style={{
           ...styles,
           color: props.color,
-          // fontSize: props.size,
-          fontFamily: props.font,
-          textAlign: "center",
+          fontFamily: props.fontFamily,
+          textAlign: props.textAlign,
           fontWeight: "bold",
-          fontSize: "2rem",
+          fontSize: props.fontSize,
         }}
       >
         {props.text || "默认标题"}
@@ -46,7 +38,19 @@ export default {
     );
   },
   props: {
-    color: createInputProp({ label: "颜色" }),
+    value: createInputProp({ label: "文本内容" }),
+    color: createColorProp({ label: "字体颜色" }),
+    fontSize: createInputProp({
+      label: "字体大小",
+      defaultValue: "2rem",
+      tips: "当前页面，1rem = 16px",
+    }),
+    fontFamily: createSelectProp({ label: "字体名称", options: fonts }),
+    textAlign: createSelectProp({
+      label: "对齐",
+      options: textAlign,
+      defaultValue: "center",
+    }),
   },
   icon: EditPen,
 } as EditorComponent;

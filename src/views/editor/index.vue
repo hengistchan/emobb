@@ -24,7 +24,7 @@
   import { defineComponent } from "vue";
   import EditorHeader from "./components/EditorHeader.vue";
   import EditorLeftAside from "./components/leftAside/index.vue";
-  import EditorRightAside from "./components/EditorRightAside.vue";
+  import EditorRightAside from "./components/rightAside/index.vue";
   import EditorMain from "./components/main/index.vue";
   import useHotKey from "./hook/useHotKey";
 
@@ -51,6 +51,8 @@
     overflow: hidden;
     .editor-aside-container {
       height: 100%;
+      width: 100%;
+      background-color: rgba(253, 253, 253, 1);
     }
 
     .el-main {
