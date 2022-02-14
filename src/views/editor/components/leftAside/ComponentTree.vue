@@ -2,30 +2,24 @@
   import { computed, defineComponent, ref, watch } from "vue";
   import useEditorStore from "@/store/editor";
   import { Component } from "@/package/types/component";
-  import { pickBy } from "lodash-es";
+  import { lowerFirst, pickBy } from "lodash-es";
+  import { Delete } from "@element-plus/icons-vue";
+  import useEditor from "../../hook/useEditor";
 
   interface ComponentTree {
     label: string;
     _id?: string;
     component?: Component;
     children: ComponentTree[];
+    parent?: Component[];
   }
 
   export default defineComponent({
+    components: { Delete },
     setup() {
       const editorStore = useEditorStore();
+      const { setActive, handleDelete } = useEditor();
       const topLevelComponents = computed(() => editorStore.page?.components);
-      const topLevelTree = computed(() =>
-        topLevelComponents.value?.map(
-          (cpn) =>
-            ({
-              label: cpn.label,
-              _id: cpn._id,
-              children: [],
-              component: cpn,
-            } as ComponentTree),
-        ),
-      );
       // console.log(topLevelTree.value);
 
       const generateTree = (arr: Component[] | undefined) => {
@@ -37,6 +31,7 @@
             _id: cpn._id,
             children: [],
             component: cpn,
+            parent: arr,
           });
         });
         const hasSlots = (cpn: Component) => cpn.props?.slots !== null;
@@ -64,6 +59,10 @@
         return root;
       };
       const tree = computed(() => generateTree(topLevelComponents.value));
+      const handleClick = (componentId: string | null | undefined) => {
+        if (componentId == null) return;
+        editorStore.currentComponent = componentId;
+      };
       return () => (
         <el-tree
           data={tree.value}
@@ -72,15 +71,62 @@
           check-on-click-node={true}
         >
           {{
-            default: ({ data }: { data: ComponentTree }) => (
-              <div>
-                <span>{data.label}</span>
-                {data?._id && data._id}
-              </div>
-            ),
+            default: ({ data }: { data: ComponentTree }) => {
+              console.log(data);
+
+              return (
+                <div
+                  class={"editor-component-tree"}
+                  onClick={() => {
+                    if (data._id && data.parent) {
+                      setActive(data._id, data.parent);
+                    }
+                  }}
+                >
+                  <span>{data.label}</span>
+                  {data?._id && (
+                    <div>
+                      <span>{data?._id}</span>
+                      <span>
+                        <el-icon>
+                          <delete
+                            onClick={(e: Event) => {
+                              e.stopPropagation();
+                              if (data._id && data.parent) {
+                                handleDelete(null, data._id, data.parent);
+                              }
+                            }}
+                          />
+                        </el-icon>
+                      </span>
+                    </div>
+                  )}
+                </div>
+              );
+            },
           }}
         </el-tree>
       );
     },
   });
 </script>
+
+<style lang="scss">
+  .editor-component-tree {
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+    > * {
+      display: inline-block;
+    }
+
+    i {
+      vertical-align: text-bottom;
+    }
+
+    .el-tree {
+      --el-tree-node-hover-bg-color: rgb(53, 53, 53);
+    }
+  }
+</style>
