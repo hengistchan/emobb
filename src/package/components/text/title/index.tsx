@@ -33,17 +33,17 @@ export default {
           fontSize: props.fontSize,
         }}
       >
-        {props.text || "默认标题"}
+        {props.value}
       </p>
     );
   },
   props: {
-    value: createInputProp({ label: "文本内容" }),
-    color: createColorProp({ label: "字体颜色" }),
-    fontSize: createInputProp({
-      label: "字体大小",
+    value: createInputProp({ label: "标题", defaultValue: "默认标题" }),
+    color: createColorProp({ label: "字体颜色", defaultValue: "" }),
+    fontSize: createSelectProp({
+      label: "大小",
+      options: titleStyle,
       defaultValue: "2rem",
-      tips: "当前页面，1rem = 16px",
     }),
     fontFamily: createSelectProp({ label: "字体名称", options: fonts }),
     textAlign: createSelectProp({

@@ -20,6 +20,7 @@ const editorStore = defineStore("editor", {
     parent: null,
   }),
   getters: {
+    // todo
     getComponentById: (state) => (id?: string | null) => {
       if (id == null && state.currentComponent == null) {
         return null;
@@ -27,6 +28,7 @@ const editorStore = defineStore("editor", {
       id = id || state.currentComponent;
       return find(state.componentMap, (item) => item._id === id);
     },
+    // getTree: (state) => {},
   },
   actions: {
     addComponent(cpn: Component) {

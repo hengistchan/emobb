@@ -1,10 +1,9 @@
 <template>
-  <div class="editor-aside-container">
+  <div class="editor-aside-container editor-right-aside">
     <el-tabs v-model="activeTab" class="tabs">
-      <el-tab-pane label="属性" name="attribute">
+      <el-tab-pane label="属性和样式" name="attribute">
         <attribute />
       </el-tab-pane>
-      <el-tab-pane label="样式" name="styles"> </el-tab-pane>
       <el-tab-pane label="页面" name="page"> </el-tab-pane>
     </el-tabs>
   </div>
@@ -25,4 +24,17 @@
   });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+  .editor-right-aside {
+    .el-form-item__label {
+      padding: 0 12px;
+      color: #7c848e;
+    }
+    .el-form-item__content {
+      margin-right: 20px;
+    }
+    .el-form-item--default {
+      margin-bottom: 10px;
+    }
+  }
+</style>

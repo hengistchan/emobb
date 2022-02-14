@@ -12,6 +12,7 @@ export default defineComponent({
   },
   setup(props) {
     // console.log(props.element, "element");
+    // console.log("render", props);
 
     return componentModules[props.element.moduleName].componentMap[
       props.element.name

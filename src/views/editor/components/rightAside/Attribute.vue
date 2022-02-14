@@ -27,22 +27,8 @@
         if (!!currentComponent.value?._id) {
           content.push(
             <>
-              <el-form-item label="组件ID" labelWidth={"76px"}>
+              <el-form-item label="组件ID">
                 {currentComponent.value._id}
-                <el-popover
-                  width={200}
-                  trigger="hover"
-                  effect="dark"
-                  content={`你可以利用该组件ID。对该组件进行获取和设置其属性，组件可用属性可在控制台输入：$$refs.${currentComponent.value._id} 进行查看`}
-                >
-                  {{
-                    reference: () => (
-                      <el-icon class={"ml-6px"}>
-                        <Warning />
-                      </el-icon>
-                    ),
-                  }}
-                </el-popover>
               </el-form-item>
             </>,
           );
@@ -63,7 +49,7 @@
       };
       return () => (
         <div class="editor-right-attribute">
-          <el-form labelPosition={"left"}>
+          <el-form labelPosition={"left"} label-width={90}>
             <FormEditor />
           </el-form>
         </div>

@@ -22,9 +22,44 @@
               <el-input
                 type="input"
                 v-model={props.component.props[key]}
+                placeholder={propConfig.tips || propConfig.label}
               ></el-input>
             );
           },
+          [EditorPropType.select]: () => {
+            return (
+              <el-select
+                v-model={props.component.props[key]}
+                placeholder={propConfig.tips || propConfig.label}
+              >
+                {propConfig.options?.map((option) => (
+                  <el-option
+                    label={option.label}
+                    value={option.value}
+                    style={{ fontFamily: option.value }}
+                  ></el-option>
+                ))}
+              </el-select>
+            );
+          },
+          [EditorPropType.color]: () => (
+            <el-color-picker
+              v-model={props.component.props[key]}
+              show-alpha
+              predefine={[
+                "#ffffff",
+                "#f5222d",
+                "#fa541c",
+                "#fadb14",
+                "#52c41a",
+                "#1890ff",
+                "#722ed1",
+                "#8c8c8c",
+                "rgba(255, 69, 0, 0.68)",
+                "#000000",
+              ]}
+            ></el-color-picker>
+          ),
         };
 
         return listForProp[propConfig.type]();
