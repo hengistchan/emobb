@@ -72,8 +72,6 @@
         >
           {{
             default: ({ data }: { data: ComponentTree }) => {
-              console.log(data);
-
               return (
                 <div
                   class={"editor-component-tree"}

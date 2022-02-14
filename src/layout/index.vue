@@ -1,5 +1,5 @@
 <template>
-  <div>index</div>
+  <div><router-link to="/editor">editor</router-link></div>
 </template>
 
 <script lang="ts">

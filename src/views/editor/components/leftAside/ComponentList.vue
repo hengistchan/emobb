@@ -107,16 +107,5 @@
         }
       }
     }
-
-    .el-collapse-item {
-      .el-collapse-item__header {
-        padding-left: 15px;
-        height: 30px;
-        color: #505050;
-        &.is-active {
-          color: rgb(34, 34, 34);
-        }
-      }
-    }
   }
 </style>

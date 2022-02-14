@@ -1,7 +1,7 @@
 <script lang="tsx">
   import { Component, EditorComponent } from "@/package/types/component";
   import { EditorProp, EditorPropType } from "@/package/types/prop.d";
-  import { defineComponent, PropType, toRef } from "vue";
+  import { defineComponent, PropType } from "vue";
 
   export default defineComponent({
     props: {
@@ -59,6 +59,15 @@
                 "#000000",
               ]}
             ></el-color-picker>
+          ),
+          [EditorPropType.inputNumber]: () => (
+            <el-input-number
+              v-model={props.component.props[key]}
+              placeholder={propConfig.tips || propConfig.label}
+            ></el-input-number>
+          ),
+          [EditorPropType.switch]: () => (
+            <el-switch v-model={props.component.props[key]}></el-switch>
           ),
         };
 
