@@ -27,10 +27,9 @@
               <>
                 <ElFormItem label={"布局模式"}>
                   <ElRadioGroup
-                    v-model={props.currentComponent.props["display"]}
-                    size="large"
+                    v-model={props.currentComponent.styles["display"]}
                   >
-                    <ElRadioButton label="New York">1</ElRadioButton>
+                    <ElRadioButton label="flex"></ElRadioButton>
                   </ElRadioGroup>
                 </ElFormItem>
               </>

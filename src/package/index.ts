@@ -1,5 +1,6 @@
 import { ComponentModule } from "./types/module";
 import { mapValues } from "lodash-es";
+import { computed } from "vue";
 
 const ms = import.meta.globEager("./components/*/index.ts");
 
@@ -12,12 +13,16 @@ mapValues(ms, (modules: { default: ComponentModule }) => {
 /**
  * 用于筛选除了普通属性外所有的通用样式
  */
-export const generalStyles = ["padding"];
-export const spreadGeneralStyles = (props: { [key: string]: any }) => {
-  return generalStyles.reduce((prev, next) => {
-    prev[next] = props[next];
-    return prev;
-  }, {} as { [key: string]: any });
+export const generalStyles = [
+  { label: "内边距", name: "padding", defaultValue: "0 0 0 0" },
+  { label: "布局", name: "display", defaultValue: "block" },
+];
+export const spreadGeneralStyles = (
+  props: { [key: string]: any },
+  styles: { [key: string]: any },
+) => {
+  props.display = "0";
+  styles.display = props.display;
 };
 
 export default componentModules;

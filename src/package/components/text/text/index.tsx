@@ -7,7 +7,8 @@ import { EditorComponent } from "@/package/types/component";
 import { Document } from "@element-plus/icons-vue";
 import { fonts, textAlign } from "./props";
 import useEditor from "@/views/editor/hook/useEditor";
-import { spreadGeneralStyles } from "@/package";
+import { generalStyles, spreadGeneralStyles } from "@/package";
+import { computed } from "vue";
 
 export default {
   name: "text",
@@ -16,21 +17,23 @@ export default {
   preview: () => <p>普通文本</p>,
   render: ({ props, styles, component }) => {
     const { registerRef } = useEditor();
-    return () => (
-      <p
-        ref={(el) => registerRef(el, component._id)}
-        style={{
-          ...styles,
-          color: props.color as string,
-          fontSize: props.fontSize + "rem",
-          fontFamily: props.fontFamily,
-          textAlign: props.textAlign,
-          ...spreadGeneralStyles(props),
-        }}
-      >
-        {props.value}
-      </p>
-    );
+
+    return () => {
+      return (
+        <p
+          ref={(el) => registerRef(el, component._id)}
+          style={{
+            ...styles,
+            color: props.color as string,
+            fontSize: props.fontSize + "rem",
+            fontFamily: props.fontFamily,
+            textAlign: props.textAlign,
+          }}
+        >
+          {props.value}
+        </p>
+      );
+    };
   },
   props: {
     value: createInputProp({ label: "文本内容", defaultValue: "默认文本" }),
@@ -46,7 +49,6 @@ export default {
       options: textAlign,
       defaultValue: "center",
     }),
-    padding: { label: "内边距", defaultValue: "0 0 0 0" },
   },
   icon: Document,
 } as EditorComponent;

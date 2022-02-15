@@ -42,7 +42,7 @@ export interface EditorComponent {
     styles: CSSProperties;
     component: Component;
     custom: Record<string, any>;
-  }) => () => JSX.Element;
+  }) => (props?: any) => JSX.Element;
   draggable?: boolean;
   showStyleConfig?: boolean;
   props?: Record<string, any>;

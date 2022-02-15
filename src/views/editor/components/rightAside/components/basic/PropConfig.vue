@@ -75,15 +75,11 @@
 
         return listForProp[propConfig.type]();
       };
-      console.log(omit(props.editorComponent.props, generalStyles));
 
       return () => (
         <>
           {Object.entries(
-            (omit(props.editorComponent.props, generalStyles) as Record<
-              string,
-              any
-            >) ?? {},
+            (props.editorComponent.props as Record<string, any>) ?? {},
           ).map(([propName, propConfig]) => {
             return (
               <>

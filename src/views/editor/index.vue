@@ -6,14 +6,14 @@
     </el-header>
     <el-container>
       <!-- 编辑器侧边栏 -->
-      <el-aside width="280px">
+      <el-aside width="280px" class="editor-aside">
         <editor-left-aside />
       </el-aside>
       <!-- 编辑器主编辑区 -->
       <el-main>
         <editor-main />
       </el-main>
-      <el-aside width="280px">
+      <el-aside width="280px" class="editor-aside">
         <editor-right-aside />
       </el-aside>
     </el-container>
@@ -49,6 +49,13 @@
     flex-direction: column;
     height: 100%;
     overflow: hidden;
+
+    .editor-aside {
+      height: calc(100vh - 50px);
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+
     .editor-aside-container {
       height: 100%;
       width: 100%;
