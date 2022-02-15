@@ -6,6 +6,7 @@ import { EditorComponent } from "@/package/types/component";
 import { FolderOpened } from "@element-plus/icons-vue";
 import { ElRow as Row, ElCol as Col } from "element-plus";
 import { useSlots, renderSlot } from "vue";
+import useEditor from "@/views/editor/hook/useEditor";
 
 interface SlotItem {
   value: string;
@@ -32,9 +33,13 @@ export default {
   preview: () => <p>普通容器</p>,
   render: ({ props, styles, component, custom }) => {
     const slots = useSlots();
-
+    const { registerRef } = useEditor();
     return () => (
-      <div style={styles} class="container">
+      <div
+        ref={(el) => registerRef(el, component._id)}
+        style={styles}
+        class="container"
+      >
         <Row {...custom} {...props}>
           {Object.values(
             Object.keys(props.slots).length

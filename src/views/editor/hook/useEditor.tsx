@@ -1,10 +1,11 @@
 import { Component, EditorComponent } from "@/package/types/component";
 import { Page } from "@/package/types/page.d";
 import useEditorStore from "@/store/editor";
-import { computed, defineComponent, PropType } from "vue";
+import { computed, defineComponent, PropType, Ref } from "vue";
 import { v4 as uuidv4 } from "uuid";
 import { commonComponentStyles } from "@/package/style";
 import { findKey } from "lodash-es";
+import componentModules from "@/package";
 
 const useEditor = () => {
   const editorStore = useEditorStore();
@@ -59,6 +60,29 @@ const useEditor = () => {
   };
 
   /**
+   * 在componentMap上注册组件实例
+   * @param el dom实例
+   * @param componentId 组件ID
+   */
+  const registerRef = (el: any, componentId: string) => {
+    editorStore.componentMap[componentId] &&
+      (editorStore.componentMap[componentId]["ref"] = el);
+  };
+
+  const currentId = computed(() => editorStore.currentComponent);
+  const currentComponent = computed(() =>
+    editorStore.getComponentById(currentId.value),
+  );
+  const currentEditorComponent = computed(() => {
+    if (currentComponent.value) {
+      return componentModules[currentComponent.value.moduleName].componentMap[
+        currentComponent.value.name
+      ];
+    }
+    return null;
+  });
+
+  /**
    * 根据ID查找组件是否存在
    * @param componentId 组件ID
    * @returns 布尔值
@@ -82,9 +106,7 @@ const useEditor = () => {
     if (i !== -1) {
       parent.splice(i, 1);
       delete editorStore.componentMap[componentId];
-      if (editorStore.currentComponent === componentId) {
-        cancelActive();
-      }
+      cancelActive();
     }
   };
 
@@ -139,6 +161,10 @@ const useEditor = () => {
     checkComponentExist,
     handleDelete,
     cancelActive,
+    currentId,
+    currentEditorComponent,
+    currentComponent,
+    registerRef,
   };
 };
 

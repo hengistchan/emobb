@@ -36,5 +36,8 @@
     .el-form-item--default {
       margin-bottom: 10px;
     }
+    .el-color-picker__color {
+      border: 0;
+    }
   }
 </style>

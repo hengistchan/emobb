@@ -6,7 +6,7 @@ import {
 import { EditorComponent } from "@/package/types/component";
 import { EditPen } from "@element-plus/icons-vue";
 import { fonts, textAlign } from "../text/props";
-
+import useEditor from "@/views/editor/hook/useEditor";
 const titleStyle = [
   { label: "H1", value: "2rem" },
   { label: "H2", value: "1.5rem" },
@@ -22,8 +22,10 @@ export default {
   label: "标题",
   preview: () => <h3>标题</h3>,
   render: ({ props, styles, component }) => {
+    const { registerRef } = useEditor();
     return () => (
       <p
+        ref={(el) => registerRef(el, component._id)}
         style={{
           ...styles,
           color: props.color,

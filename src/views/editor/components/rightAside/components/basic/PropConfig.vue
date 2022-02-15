@@ -2,6 +2,8 @@
   import { Component, EditorComponent } from "@/package/types/component";
   import { EditorProp, EditorPropType } from "@/package/types/prop.d";
   import { defineComponent, PropType } from "vue";
+  import { omit } from "lodash-es";
+  import { generalStyles } from "@/package";
 
   export default defineComponent({
     props: {
@@ -73,22 +75,27 @@
 
         return listForProp[propConfig.type]();
       };
+      console.log(omit(props.editorComponent.props, generalStyles));
+
       return () => (
         <>
-          {Object.entries(props.editorComponent.props ?? {}).map(
-            ([propName, propConfig]) => {
-              return (
-                <>
-                  <el-form-item key={props.component._id + "_" + propName}>
-                    {{
-                      label: () => <>{propConfig.label}</>,
-                      default: () => renderFormItem(propName, propConfig),
-                    }}
-                  </el-form-item>
-                </>
-              );
-            },
-          )}
+          {Object.entries(
+            (omit(props.editorComponent.props, generalStyles) as Record<
+              string,
+              any
+            >) ?? {},
+          ).map(([propName, propConfig]) => {
+            return (
+              <>
+                <el-form-item key={props.component._id + "_" + propName}>
+                  {{
+                    label: () => <>{propConfig.label}</>,
+                    default: () => renderFormItem(propName, propConfig),
+                  }}
+                </el-form-item>
+              </>
+            );
+          })}
         </>
       );
     },

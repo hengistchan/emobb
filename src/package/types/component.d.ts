@@ -1,7 +1,7 @@
 /**
  * 组件类型定义
  */
-import { CSSProperties } from "vue";
+import { CSSProperties, Ref } from "vue";
 import { Component as VueComponent } from "vue";
 import * as CSS from "csstype";
 
@@ -26,6 +26,7 @@ export interface Component {
   draggable: boolean;
   showStyleConfig?: boolean;
   events: { label: string; value: string }[];
+  ref?: Ref;
   [prop: string]: any;
 }
 
