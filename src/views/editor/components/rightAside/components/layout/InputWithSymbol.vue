@@ -45,11 +45,11 @@
     display: inline-block;
     .input-number {
       display: inline-block;
-      width: 50px;
+      width: 65px;
     }
     .input {
       display: inline-block;
-      width: 40px;
+      width: 45px;
     }
   }
 </style>

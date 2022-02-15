@@ -12,7 +12,7 @@
       const activeName = ref("basic");
       return () => (
         <div class={"editor-right-attribute"}>
-          <el-form labelPosition={"left"} label-width={90}>
+          <el-form labelPosition={"left"} label-width={95}>
             <el-form-item label="组件ID">
               {currentComponent.value && currentComponent.value._id}
             </el-form-item>
