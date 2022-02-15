@@ -1,5 +1,4 @@
-import { EditorComponent } from "@/package/types/component";
-import { Component } from "vue";
+import { EditorComponent, Component } from "@/package/types/component";
 import Basic from "./basic/index.vue";
 import Layout from "./layout/index.vue";
 

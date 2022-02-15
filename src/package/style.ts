@@ -21,4 +21,5 @@ export const commonComponentStyles: CommonComponentStyles = {
   left: "0",
   top: "0",
   right: "0",
+  display: "block",
 };
