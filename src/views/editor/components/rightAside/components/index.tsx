@@ -1,6 +1,10 @@
 import { EditorComponent, Component } from "@/package/types/component";
 import Basic from "./basic/index.vue";
 import Layout from "./layout/index.vue";
+import Position from "./position/index.vue";
+import Font from "./font/index.vue";
+import Background from "./background/index.vue";
+import Border from "./border/index.vue";
 
 interface Attribute {
   label: string;
@@ -41,18 +45,54 @@ const attributes: Attribute[] = [
   {
     label: "position",
     name: "定位",
+    component: (
+      currentComponent: Component,
+      currentEditorComponent: EditorComponent,
+    ) => (
+      <Position
+        currentComponent={currentComponent}
+        currentEditorComponent={currentEditorComponent}
+      />
+    ),
   },
   {
     label: "font",
     name: "字体",
+    component: (
+      currentComponent: Component,
+      currentEditorComponent: EditorComponent,
+    ) => (
+      <Font
+        currentComponent={currentComponent}
+        currentEditorComponent={currentEditorComponent}
+      />
+    ),
   },
   {
     label: "background",
     name: "背景",
+    component: (
+      currentComponent: Component,
+      currentEditorComponent: EditorComponent,
+    ) => (
+      <Background
+        currentComponent={currentComponent}
+        currentEditorComponent={currentEditorComponent}
+      />
+    ),
   },
   {
     label: "border",
     name: "边框",
+    component: (
+      currentComponent: Component,
+      currentEditorComponent: EditorComponent,
+    ) => (
+      <Border
+        currentComponent={currentComponent}
+        currentEditorComponent={currentEditorComponent}
+      />
+    ),
   },
 ];
 

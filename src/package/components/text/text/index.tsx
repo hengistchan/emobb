@@ -25,7 +25,7 @@ export default {
           style={{
             ...styles,
             color: props.color as string,
-            fontSize: props.fontSize + "rem",
+            fontSize: props.fontSize,
             fontFamily: props.fontFamily,
             textAlign: props.textAlign,
           }}
@@ -40,7 +40,7 @@ export default {
     color: createColorProp({ label: "字体颜色", defaultValue: "" }),
     fontSize: createInputProp({
       label: "字体大小",
-      defaultValue: "1",
+      defaultValue: "1px",
       tips: "当前页面，1rem = 16px",
     }),
     fontFamily: createSelectProp({ label: "字体名称", options: fonts }),
