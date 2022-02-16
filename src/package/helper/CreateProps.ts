@@ -66,3 +66,75 @@ export function createColorProp({
     defaultValue,
   };
 }
+
+interface EditorCrossSortableProp {
+  label: string;
+  labelPosition?: "top" | "";
+  multiple?: boolean;
+  showItemPropsConfig?: boolean;
+  defaultValue?: string[] | EditorSelectOptions;
+}
+
+export function createCrossSortableProp({
+  label,
+  labelPosition,
+  multiple,
+  showItemPropsConfig,
+  defaultValue,
+}: EditorCrossSortableProp): EditorProp {
+  return {
+    type: EditorPropType.crossSortable,
+    label,
+    multiple,
+    showItemPropsConfig,
+    labelPosition,
+    defaultValue,
+  };
+}
+
+export function createCrossSortableInputProp({
+  label,
+  defaultValue,
+}: EditorCrossSortableProp): EditorProp {
+  return {
+    type: EditorPropType.crossSortableInput,
+    label,
+    defaultValue,
+  };
+}
+
+interface EditorSwitchProp {
+  label: string;
+  defaultValue?: boolean;
+  tips?: string;
+}
+
+export function createSwitchProp({
+  label,
+  defaultValue,
+  tips,
+}: EditorSwitchProp): EditorProp {
+  return {
+    type: EditorPropType.switch,
+    label,
+    tips,
+    defaultValue,
+  };
+}
+
+interface EditorNumberInputProp {
+  label: string;
+  defaultValue?: any;
+  tips?: string;
+}
+
+export const createNumberInputProp = ({
+  label,
+  defaultValue,
+  tips,
+}: EditorNumberInputProp): EditorProp => ({
+  type: EditorPropType.inputNumber,
+  label,
+  tips,
+  defaultValue,
+});

@@ -2,8 +2,7 @@
   import { Component, EditorComponent } from "@/package/types/component";
   import { EditorProp, EditorPropType } from "@/package/types/prop.d";
   import { defineComponent, PropType } from "vue";
-  import { omit } from "lodash-es";
-  import { generalStyles } from "@/package";
+  import CrossSortableInput from "./CrossSortableInput.vue";
 
   export default defineComponent({
     props: {
@@ -70,6 +69,11 @@
           ),
           [EditorPropType.switch]: () => (
             <el-switch v-model={props.component.props[key]}></el-switch>
+          ),
+          [EditorPropType.crossSortableInput]: () => (
+            <CrossSortableInput
+              v-model={props.component.props[key]}
+            ></CrossSortableInput>
           ),
         };
 

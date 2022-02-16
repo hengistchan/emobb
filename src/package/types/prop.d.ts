@@ -14,6 +14,10 @@ export enum EditorPropType {
   table = "table",
   /** 开关 */
   switch = "switch",
+  /** 可拖拽项 */
+  crossSortable = "CrossSortable",
+  /** 可拖拽输入项 */
+  crossSortableInput = "CrossSortableInput",
 }
 
 export type EditorProp = {

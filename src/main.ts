@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "./assets/styles/index.scss";
+import "element-plus/dist/index.css";
 import "default-passive-events";
 import useEditorStore from "./store/editor";
 
