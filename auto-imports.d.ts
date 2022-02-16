@@ -2,6 +2,7 @@
 // We suggest you to commit this file into source control
 declare global {
   const ElCol: typeof import('element-plus/es')['ElCol']
+  const ElDivider: typeof import('element-plus/es')['ElDivider']
   const ElRow: typeof import('element-plus/es')['ElRow']
 }
 export {}

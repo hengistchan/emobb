@@ -139,3 +139,30 @@ export const createNumberInputProp = ({
   tips,
   defaultValue,
 });
+
+export type EditorTableOption = {
+  options: {
+    label: string; // 列显示文本
+    field: string; // 列绑定的字段
+  }[];
+  showKey: string;
+};
+
+interface EditorTableProp {
+  label: string;
+  option: EditorTableOption;
+  defaultValue?: { label: string; value: string }[];
+}
+
+export function createTableProp({
+  label,
+  option,
+  defaultValue,
+}: EditorTableProp): EditorProp {
+  return {
+    type: EditorPropType.table,
+    label,
+    table: option,
+    defaultValue,
+  };
+}
