@@ -4,18 +4,22 @@
       <el-tab-pane label="属性和样式" name="attribute">
         <attribute />
       </el-tab-pane>
-      <el-tab-pane label="页面" name="page"> </el-tab-pane>
+      <el-tab-pane label="页面" name="page">
+        <page />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent, ref } from "vue";
-  import Attribute from "@/views/editor/components/rightAside/Attribute.vue";
+  import Attribute from "./Attribute.vue";
+  import Page from "./Page.vue";
 
   export default defineComponent({
     components: {
       Attribute,
+      Page,
     },
     setup() {
       const activeTab = ref("attribute");

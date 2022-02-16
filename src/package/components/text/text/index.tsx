@@ -40,7 +40,7 @@ export default {
     color: createColorProp({ label: "字体颜色", defaultValue: "" }),
     fontSize: createInputProp({
       label: "字体大小",
-      defaultValue: "1px",
+      defaultValue: "16px",
       tips: "当前页面，1rem = 16px",
     }),
     fontFamily: createSelectProp({ label: "字体名称", options: fonts }),

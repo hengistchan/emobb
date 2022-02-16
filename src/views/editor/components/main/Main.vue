@@ -1,7 +1,7 @@
 /* eslint-disable vue/no-use-v-if-with-v-for */
 <template>
   <div class="simulator-container">
-    <div ref="editorRef" class="simulator-editor">
+    <render-page ref="editorRef" class="simulator-editor">
       <DraggableTransitionGroup
         v-model:drag="drag"
         v-model="page!.components"
@@ -45,20 +45,22 @@
           </EditWrapper>
         </template>
       </DraggableTransitionGroup>
-    </div>
+    </render-page>
   </div>
 </template>
 
 <!--  -->
 
 <script lang="ts">
-  import { defineComponent, computed, reactive, toRefs, ref } from "vue";
+  import { defineComponent, computed, reactive, toRefs, ref, watch } from "vue";
   import useEditorStore from "@/store/editor";
   import useEditor from "@/views/editor/hook/useEditor";
   import RenderComponent from "./RenderComponent";
+  import RenderPage from "./RenderPage";
   import EditWrapper from "./EditWrapper.vue";
   import SlotItem from "./SlotItem.vue";
   import DraggableTransitionGroup from "./draggable-transition-group.vue";
+  import { PageProps } from "@/package/types/page";
 
   export default defineComponent({
     components: {
@@ -66,12 +68,14 @@
       DraggableTransitionGroup,
       RenderComponent,
       EditWrapper,
+      RenderPage,
     },
     setup() {
       const editorStore = useEditorStore();
       const editorRef = ref<HTMLElement | null>(null);
       const page = computed(() => editorStore.page);
       const { handleClick } = useEditor();
+
       const state = reactive({
         drag: false,
       });

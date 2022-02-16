@@ -1,7 +1,14 @@
 import { Component, EditorComponent } from "@/package/types/component";
 import { Page } from "@/package/types/page.d";
 import useEditorStore from "@/store/editor";
-import { computed, defineComponent, PropType, Ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  PropType,
+  Ref,
+} from "vue";
 import { v4 as uuidv4 } from "uuid";
 import { commonComponentStyles } from "@/package/style";
 import { findKey } from "lodash-es";
@@ -9,6 +16,11 @@ import componentModules from "@/package";
 
 const useEditor = () => {
   const editorStore = useEditorStore();
+
+  onMounted(() => {});
+
+  onUnmounted(() => {});
+
   /**
    * 生成新页面
    * @param param0 页面数据

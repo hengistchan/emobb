@@ -15,7 +15,9 @@
     },
     setup(props) {
       const symbol = ref<string>(props.symbol || "px");
-      const number = ref<number | null>(null);
+      const number = ref<number | null>(
+        isNaN(parseInt(props.modelValue)) ? 0 : parseInt(props.modelValue),
+      );
       const modelValue = useVModel(props, "modelValue");
       const handleChange = () => {
         modelValue.value = number.value + symbol.value;

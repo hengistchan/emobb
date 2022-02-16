@@ -5,6 +5,7 @@
   import FormWrapper from "../FormWrapper";
   import InputWithSymbol from "../layout/InputWithSymbol.vue";
   import { useVModel } from "@vueuse/core";
+  import SliderWithSymbol from "./SliderWithSymbol.vue";
   import { fonts } from "@/package/components/text/text/props";
 
   export default defineComponent({
@@ -79,6 +80,15 @@
                               "#000000",
                             ]}
                           ></el-color-picker>
+                        </el-form-item>
+                        <el-form-item label={"边框圆角"}>
+                          <SliderWithSymbol
+                            min={0}
+                            max={50}
+                            v-model={
+                              currentComponent.value.styles["borderRadius"]
+                            }
+                          ></SliderWithSymbol>
                         </el-form-item>
                       </>
                     )}
