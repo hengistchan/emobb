@@ -4,6 +4,7 @@
 
 <script lang="tsx">
   import { useVModel } from "@vueuse/core";
+  import { ElMessage } from "element-plus/es";
   import { defineComponent, ref } from "vue";
   // import { ElMessage } from "element-plus";
 
