@@ -6,6 +6,7 @@
   import { useVModel } from "@vueuse/core";
   import { ElMessage } from "element-plus/es";
   import { defineComponent, ref } from "vue";
+  import { PictureFilled } from "@element-plus/icons-vue";
   // import { ElMessage } from "element-plus";
 
   export default defineComponent({
@@ -37,7 +38,7 @@
       return () => (
         <>
           <el-form-item label="背景图片">
-            {status.value === "success" && (
+            {
               // <el-form-item label="">
               <el-image
                 src={url.value}
@@ -45,15 +46,26 @@
                   width: "100px",
                   height: "100px",
                   border: "1px solid black",
+                  borderRadius: "5px",
                 }}
                 preview-src-list={[url.value]}
                 fit={"scale-down"}
-              ></el-image>
+              >
+                {{
+                  error: () => (
+                    <>
+                      <div class="image-upload-picture-icon">
+                        <el-icon>
+                          <PictureFilled />
+                        </el-icon>
+                      </div>
+                    </>
+                  ),
+                }}
+              </el-image>
               // </el-form-item>
-            )}
-            <div
-              style={{ marginLeft: status.value === "success" ? "5px" : "0" }}
-            >
+            }
+            <div style={{ marginLeft: "5px" }}>
               <el-upload
                 class="upload-demo"
                 action={props.action}
@@ -81,5 +93,17 @@
 
 <style lang="scss">
   .upload-demo {
+  }
+
+  .image-upload-picture-icon {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    i {
+      color: rgb(78, 78, 78);
+    }
   }
 </style>
