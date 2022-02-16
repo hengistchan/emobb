@@ -13,7 +13,7 @@
       <el-main>
         <editor-main />
       </el-main>
-      <el-aside width="340px" class="editor-aside">
+      <el-aside width="360px" class="editor-aside">
         <editor-right-aside />
       </el-aside>
     </el-container>
