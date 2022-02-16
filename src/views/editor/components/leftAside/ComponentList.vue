@@ -85,15 +85,18 @@
       display: flex;
       margin: 10px 0;
       padding: 0 20px;
-      justify-content: space-around;
+      justify-content: flex-start;
+      width: 240px;
+      flex-wrap: wrap;
 
       .component {
-        width: 50%;
+        width: 110px;
         height: 25px;
         line-height: 25px;
         display: flex;
         align-items: center;
         padding-left: 10px;
+        margin-top: 5px;
         &:hover {
           border-radius: 3px;
           background-color: #f0f0f0;

@@ -35,10 +35,13 @@
               >
                 {propConfig.options?.map((option) => (
                   <el-option
-                    label={option.label}
                     value={option.value}
                     style={{ fontFamily: option.value }}
-                  ></el-option>
+                  >
+                    {{
+                      label: () => <>{option.label}</>,
+                    }}
+                  </el-option>
                 ))}
               </el-select>
             );

@@ -21,6 +21,7 @@ interface EditorSelectProp {
   defaultValue?: any;
   multiple?: boolean;
   tips?: string;
+  render?: () => JSX.Element;
 }
 
 export const createInputProp = ({

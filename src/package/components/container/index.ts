@@ -13,7 +13,7 @@ mapValues(c, (component: { default: EditorComponent }) => {
 
 const m: ComponentModule = {
   name: "container",
-  label: "容器组件",
+  label: "展示组件",
   icon: Box,
   order: 2,
   components,
