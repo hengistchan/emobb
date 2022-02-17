@@ -4,7 +4,7 @@ import router from "./router";
 import store from "./store";
 import "./assets/styles/index.scss";
 import "element-plus/dist/index.css";
-// import "default-passive-events";
+import "default-passive-events";
 import useEditorStore from "./store/editor";
 
 const app = createApp(App);

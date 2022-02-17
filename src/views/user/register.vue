@@ -27,14 +27,18 @@
       const loadingCode = ref(false);
       const handleRegister = async () => {
         loadingSumit.value = false;
+        const v = await formRef.value?.validate();
+        if (!v) {
+          message("error", "类型验证不通过");
+        }
         const { message: msg, error } = await User.register(register);
         if (msg && !error) {
           message("success", msg + `, 3秒后跳转到登陆页`);
+          setTimeout(() => {
+            router.replace("/user/login");
+          }, 3000);
         }
         loadingSumit.value = true;
-        setTimeout(() => {
-          router.replace("/user/login");
-        }, 3000);
       };
       const handleCode = async () => {
         loadingCode.value = true;

@@ -56,6 +56,7 @@
       const componentList = computed(() =>
         Object.values(componentModules).sort((a, b) => a.order - b.order),
       );
+
       const { createNewComponent } = useEditor();
       const onDrag = (e: any) => {
         console.log(e);
