@@ -37,11 +37,8 @@
                   <el-option
                     value={option.value}
                     style={{ fontFamily: option.value }}
-                  >
-                    {{
-                      label: () => <>{option.label}</>,
-                    }}
-                  </el-option>
+                    label={option.label}
+                  ></el-option>
                 ))}
               </el-select>
             );
