@@ -10,6 +10,7 @@ import store from "store2";
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 const config: AxiosRequestConfig = {
+  // baseURL: "http://hengistchan.site:8088",
   baseURL: "http://localhost:8088",
   timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
@@ -20,7 +21,7 @@ const _axios = axios.create(config);
 _axios.interceptors.request.use(
   function (config) {
     config.headers &&
-      (config.headers["Authorization"] = "bearer " + store("token"));
+      (config.headers["Authorization"] = "bearer" + store("token"));
 
     return config;
   },

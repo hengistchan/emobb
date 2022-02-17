@@ -73,7 +73,7 @@
                   登 录
                 </el-button>
                 <el-button class="login-button" plain size="large">
-                  <router-link to="/user">注 册</router-link>
+                  <router-link to="/user/register">注 册</router-link>
                 </el-button>
               </div>
             </el-form>

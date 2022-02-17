@@ -11,3 +11,9 @@ declare module "axios" {
     ): Promise<T>;
   }
 }
+
+declare interface CommonResp {
+  code: number;
+  message: string;
+  request: string;
+}
