@@ -20,19 +20,20 @@ const useUser = () => {
       toLoginPage && router.replace("/user");
       return;
     }
+    message("success", "欢迎回来！");
     userStore.userInfo = data;
   };
 
   /**
    * 退出登录
    */
-  const unLogin = () => {
+  const logout = () => {
     store.clearAll();
     userStore.$reset();
     router.replace("/user");
   };
 
-  return { getUserInfo, unLogin };
+  return { getUserInfo, logout };
 };
 
 export default useUser;
