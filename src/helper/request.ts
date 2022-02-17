@@ -21,7 +21,7 @@ const _axios = axios.create(config);
 _axios.interceptors.request.use(
   function (config) {
     config.headers &&
-      (config.headers["Authorization"] = "bearer " + store("token"));
+      (config.headers["Authorization"] = "Bearer " + store("token"));
 
     return config;
   },

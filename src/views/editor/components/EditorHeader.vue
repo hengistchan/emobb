@@ -1,5 +1,5 @@
 <template>
-  <el-page-header class="editor-header-container">
+  <el-page-header class="editor-header-container" @back="() => router.back()">
     <template #icon>
       <el-icon><arrow-left-bold /></el-icon>
     </template>
@@ -17,13 +17,15 @@
 <script lang="ts">
   import { defineComponent } from "vue";
   import { ArrowLeftBold } from "@element-plus/icons-vue";
+  import { useRouter } from "vue-router";
 
   export default defineComponent({
     components: {
       ArrowLeftBold,
     },
     setup() {
-      return {};
+      const router = useRouter();
+      return { router };
     },
   });
 </script>

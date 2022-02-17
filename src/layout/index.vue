@@ -3,10 +3,15 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { defineComponent, onMounted } from "vue";
+  import useUser from "@/hook/useUser";
 
   export default defineComponent({
     setup() {
+      const { getUserInfo } = useUser();
+      onMounted(async () => {
+        await getUserInfo(true);
+      });
       return {};
     },
   });

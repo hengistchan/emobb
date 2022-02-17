@@ -1,4 +1,5 @@
 import _axios from "@/helper/request";
+import { UserInfo } from "@/store/user";
 import { CommonResp } from "types";
 
 enum CodeAction {
@@ -39,5 +40,9 @@ export default class User {
 
   static register(registerDTO: RegisterDTO) {
     return _axios.post<CommonResp>("/user/register", registerDTO);
+  }
+
+  static getUserInfo() {
+    return _axios.get<UserInfo>("/user");
   }
 }

@@ -3,20 +3,19 @@ declare type Nullable<T> = null | T;
 
 declare module "axios" {
   export interface AxiosInstance {
-    get<T>(
-      url: string,
-      config?: AxiosRequestConfig,
-    ): Promise<T & { error?: boolean }>;
+    get<T>(url: string, config?: AxiosRequestConfig): RespPromise<T>;
     post<T, K = any>(
       url: string,
       data: K,
       config?: AxiosRequestConfig,
-    ): Promise<T & { error?: boolean }>;
+    ): RespPromise<T>;
   }
 }
 
-declare interface CommonResp {
+type RespPromise<T> = Promise<T & Partial<CommonResp> & { error?: boolean }>;
+
+declare type CommonResp = {
   code: number;
   message: string;
   request: string;
-}
+};
