@@ -4,20 +4,25 @@
   import User from "@/api/user";
   import message from "@/helper/message";
   import store from "store2";
+  import { useRouter } from "vue-router";
 
   export default defineComponent({
     setup() {
+      const router = useRouter();
       const user = reactive({
         username: "",
         password: "",
       });
       const loading = ref(false);
       const handleLogin = async () => {
-        const { token } = await User.login(user);
-        if (token) {
+        loading.value = true;
+        const { token, error } = await User.login(user);
+        if (token && !error) {
           message("success", "登录成功");
           store("token", token);
+          router.push("/");
         }
+        loading.value = false;
       };
       return () => (
         <div class="login">

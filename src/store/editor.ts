@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { Component } from "@/package/types/component";
 import { Page } from "@/package/types/page";
 import { find } from "lodash-es";
+import { Nullable } from "types";
 
 interface EditorState {
   currentComponent: Nullable<string>;

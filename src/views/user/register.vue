@@ -27,8 +27,8 @@
       const loadingCode = ref(false);
       const handleRegister = async () => {
         loadingSumit.value = false;
-        const { message: msg } = await User.register(register);
-        if (msg) {
+        const { message: msg, error } = await User.register(register);
+        if (msg && !error) {
           message("success", msg + `, 3秒后跳转到登陆页`);
         }
         loadingSumit.value = true;
@@ -38,12 +38,12 @@
       };
       const handleCode = async () => {
         loadingCode.value = true;
-        const { message: msg } = await User.code({
+        const { message: msg, error } = await User.code({
           email: register.email,
           action: 0,
         });
         loadingCode.value = false;
-        if (msg) {
+        if (msg && !error) {
           message("success", msg);
         }
       };
