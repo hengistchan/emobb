@@ -7,3 +7,12 @@ export const registerRules = {
   code: [{ required: true, message: "验证码不能为空", trigger: "blur" }],
   email: [{ required: true, message: "邮箱不能为空", trigger: "blur" }],
 };
+
+export const findRules = {
+  password: [{ required: true, message: "密码不能为空", trigger: "blur" }],
+  confirm_password: [
+    { required: true, message: "确认密码不能为空", trigger: "blur" },
+  ],
+  code: [{ required: true, message: "验证码不能为空", trigger: "blur" }],
+  email: [{ required: true, message: "邮箱不能为空", trigger: "blur" }],
+};

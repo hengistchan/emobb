@@ -24,6 +24,13 @@ export interface RegisterDTO {
   code: string;
 }
 
+export interface ResetPasswordDTO {
+  password: string;
+  confirm_password: string;
+  email: string;
+  code: string;
+}
+
 export interface CodeDTO {
   email: string;
   action: CodeAction;
@@ -44,5 +51,9 @@ export default class User {
 
   static getUserInfo() {
     return _axios.get<UserInfo>("/user");
+  }
+
+  static resetPassword(dto: ResetPasswordDTO) {
+    return _axios.post<CommonResp>("/user/reset/password", dto);
   }
 }

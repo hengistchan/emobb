@@ -47,7 +47,7 @@
                   }}
                 </el-input>
               </el-form-item>
-              <el-form-item class="login-form-item">
+              <el-form-item class="login-form-item login-password">
                 <el-input
                   v-model={user.password}
                   placeholder="密码"
@@ -65,6 +65,13 @@
                     ),
                   }}
                 </el-input>
+                <el-button
+                  type="info"
+                  size="large"
+                  onClick={() => router.push("/user/find")}
+                >
+                  找回密码
+                </el-button>
               </el-form-item>
               <div>
                 <el-button
@@ -138,6 +145,15 @@
               margin-right: 20px;
             }
             .login-icon {
+            }
+          }
+          &.login-password {
+            .form-input {
+              width: 295px;
+            }
+            .el-form-item__content {
+              justify-content: space-between;
+              // width: 10px;
             }
           }
         }
