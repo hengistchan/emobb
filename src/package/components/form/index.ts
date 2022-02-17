@@ -3,7 +3,7 @@ import { Tickets } from "@element-plus/icons-vue";
 import { EditorComponent } from "@/package/types/component";
 import { mapValues } from "lodash-es";
 
-const c = import.meta.globEager("./*/index.tsx");
+const c = import.meta.globEager("./*/index.vue");
 const components: EditorComponent[] = [];
 const componentMap: { [key: string]: EditorComponent } = {};
 mapValues(c, (component: { default: EditorComponent }) => {

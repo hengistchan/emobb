@@ -12,6 +12,16 @@ const routes: RouteRecordRaw[] = [
     path: "/editor",
     component: () => import("@/views/editor/index.vue"),
   },
+  {
+    path: "/user",
+    component: () => import("@/views/user/index.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/user/login.vue"),
+      },
+    ],
+  },
 ];
 
 const router = createRouter({

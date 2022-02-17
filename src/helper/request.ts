@@ -1,6 +1,8 @@
 "use strict";
 
 import axios, { AxiosRequestConfig } from "axios";
+import message from "./message";
+import store from "store2";
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
@@ -8,7 +10,7 @@ import axios, { AxiosRequestConfig } from "axios";
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 const config: AxiosRequestConfig = {
-  baseURL: "http://localhost:8080",
+  baseURL: "http://localhost:8088",
   timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 };
@@ -17,7 +19,9 @@ const _axios = axios.create(config);
 
 _axios.interceptors.request.use(
   function (config) {
-    // Do something before request is sent
+    config.headers &&
+      (config.headers["Authorization"] = "bearer " + store("token"));
+
     return config;
   },
   function (error) {
@@ -30,9 +34,11 @@ _axios.interceptors.request.use(
 _axios.interceptors.response.use(
   function (response) {
     // Do something with response data
+
     return response.data;
   },
   function (error) {
+    message("error", error?.response?.data?.message || "error！！！");
     // Do something with response error
     return Promise.reject(error);
   },

@@ -31,6 +31,7 @@ specifiers:
   pinia: ^2.0.11
   prettier: ^2.5.1
   sass: ^1.49.7
+  store2: ^2.13.1
   typescript: ^4.5.4
   unplugin-auto-import: ^0.5.11
   unplugin-vue-components: ^0.17.18
@@ -53,6 +54,7 @@ dependencies:
   normalize.css: 8.0.1
   nprogress: 0.2.0
   pinia: 2.0.11_typescript@4.5.5+vue@3.2.30
+  store2: 2.13.1
   uuid: 8.3.2
   vue: 3.2.30
   vue-router: 4.0.12_vue@3.2.30
@@ -3808,6 +3810,10 @@ packages:
     resolution: {integrity: sha512-8dv+1zKgTpfTkOy8XZLFyWrfxO0NV/bj/3EaQ+hBrBxGv2DwiroljPjU8NlCr+59nLnsVm9WYT7lXKwe4TC6bw==}
     engines: {node: '>=6'}
     dev: true
+
+  /store2/2.13.1:
+    resolution: {integrity: sha512-iJtHSGmNgAUx0b/MCS6ASGxb//hGrHHRgzvN+K5bvkBTN7A9RTpPSf1WSp+nPGvWCJ1jRnvY7MKnuqfoi3OEqg==}
+    dev: false
 
   /string-argv/0.3.1:
     resolution: {integrity: sha512-a1uQGz7IyVy9YwhqjZIZu1c8JO8dNIe20xBmSS6qu9kv++k3JGzCVmprbNN5Kn+BgzD5E7YYwg1CcjuJMRNsvg==}
