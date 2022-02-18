@@ -36,6 +36,13 @@ export interface CodeDTO {
   action: CodeAction;
 }
 
+export interface updateDTO {
+  nickname?: string;
+  gender?: number;
+  picture?: string;
+  phone?: string;
+}
+
 export default class User {
   static login(loginDTO: LoginDTO) {
     return _axios.post<LoginVO>("/user/login", loginDTO);
@@ -55,5 +62,9 @@ export default class User {
 
   static resetPassword(dto: ResetPasswordDTO) {
     return _axios.post<CommonResp>("/user/reset/password", dto);
+  }
+
+  static updateUserInfo(dto: updateDTO) {
+    return _axios.put<CommonResp>("/user", dto);
   }
 }

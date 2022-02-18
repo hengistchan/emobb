@@ -5,9 +5,12 @@
   import message from "@/helper/message";
   import store from "store2";
   import { useRouter } from "vue-router";
+  import { loginRules as rules } from "./rules";
+  import type { ElForm } from "element-plus";
 
   export default defineComponent({
     setup() {
+      const loginRef = ref<InstanceType<typeof ElForm> | null>(null);
       const router = useRouter();
       const user = reactive({
         username: "",
@@ -29,8 +32,14 @@
           <div class="login-container">
             <div class="title">欢迎回来</div>
             <div class="tips">使用用户名和密码登录</div>
-            <el-form class="login-form">
-              <el-form-item class="login-form-item">
+            <el-form
+              class="login-form"
+              prop={"password"}
+              rules={rules}
+              ref={loginRef.value}
+              model={user}
+            >
+              <el-form-item class="login-form-item" prop={"username"}>
                 <el-input
                   v-model={user.username}
                   placeholder="用户名"
@@ -47,7 +56,10 @@
                   }}
                 </el-input>
               </el-form-item>
-              <el-form-item class="login-form-item login-password">
+              <el-form-item
+                class="login-form-item login-password"
+                prop={"password"}
+              >
                 <el-input
                   v-model={user.password}
                   placeholder="密码"

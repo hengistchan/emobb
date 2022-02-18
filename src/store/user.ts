@@ -2,13 +2,13 @@ import { defineStore } from "pinia";
 import { Nullable } from "types";
 
 export interface UserInfo {
-  email: Nullable<string>;
-  gender: Nullable<number>;
-  latest_login_time: Nullable<string>;
-  nickname: Nullable<string>;
-  picture: Nullable<string>;
-  username: Nullable<string>;
-  phone: Nullable<string>;
+  email: string;
+  gender: number;
+  latest_login_time: string;
+  nickname: string;
+  picture: string;
+  username: string;
+  phone: string;
 }
 
 export interface UserState {
@@ -18,13 +18,13 @@ export interface UserState {
 const userStore = defineStore("user", {
   state: (): UserState => ({
     userInfo: {
-      email: null,
-      gender: null,
-      latest_login_time: null,
-      nickname: null,
-      phone: null,
-      picture: null,
-      username: null,
+      email: "",
+      gender: 0,
+      latest_login_time: "",
+      nickname: "",
+      phone: "",
+      picture: "",
+      username: "",
     },
   }),
 });
