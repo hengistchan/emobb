@@ -14,6 +14,8 @@ import { commonComponentStyles } from "@/package/style";
 import { findKey } from "lodash-es";
 import componentModules from "@/package";
 
+type HistoryType = "edit" | "delete" | "add";
+
 const useEditor = () => {
   const editorStore = useEditorStore();
 
@@ -164,6 +166,11 @@ const useEditor = () => {
   const handleMouseOver = (event: MouseEvent, component: Component) => {
     console.log(event);
   };
+
+  /**
+   * 历史记录操作
+   */
+  const addInHistory = (type: HistoryType, parent: Component[]) => {};
 
   return {
     createNewPage,

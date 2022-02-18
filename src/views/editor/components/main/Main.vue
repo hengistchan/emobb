@@ -39,6 +39,7 @@
                   v-model:children="value.children"
                   v-model:drag="drag"
                   :slot-key="`${slotKey}`"
+                  :data-parent-id="outElement._id"
                 />
               </template>
             </render-component>

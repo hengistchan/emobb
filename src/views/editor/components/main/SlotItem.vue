@@ -36,6 +36,7 @@
               v-model:children="value.children"
               v-model:drag="isDrag"
               :slot-key="`${key}`"
+              :data-parent-id="innerElement._id"
             />
           </template>
         </render-component>

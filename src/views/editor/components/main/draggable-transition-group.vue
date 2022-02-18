@@ -14,6 +14,7 @@
     :item-key="itemKey"
     @start="isDrag = true"
     @end="isDrag = false"
+    @add="handleAdd"
   >
     <template #item="item">
       <div
@@ -83,10 +84,14 @@
         scroll: true,
         ghostClass: "ghost",
       }));
+      const handleAdd = (event: CustomEvent) => {
+        console.log(event);
+      };
 
       return {
         ...toRefs(state),
         dragOptions,
+        handleAdd,
       };
     },
   });
