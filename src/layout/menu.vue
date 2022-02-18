@@ -40,7 +40,12 @@
               ),
               default: () => (
                 <>
-                  <el-menu-item index="2-1">新建空白模板</el-menu-item>
+                  <el-menu-item
+                    index="2-1"
+                    onClick={() => router.push("/editor?id=true")}
+                  >
+                    新建空白模板
+                  </el-menu-item>
                   <el-menu-item index="2-2">从模板新建</el-menu-item>
                 </>
               ),

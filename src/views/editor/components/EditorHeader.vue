@@ -7,7 +7,7 @@
       <div
         class="editor-header-content w-full flex text-light-50 justify-center"
       >
-        <div class="page-name">test</div>
+        <div class="page-name">{{ title }}</div>
         <div class="page-actions"></div>
       </div>
     </template>
@@ -15,17 +15,20 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { defineComponent, computed } from "vue";
   import { ArrowLeftBold } from "@element-plus/icons-vue";
   import { useRouter } from "vue-router";
+  import useEditorStore from "@/store/editor";
 
   export default defineComponent({
     components: {
       ArrowLeftBold,
     },
     setup() {
+      const editorStore = useEditorStore();
+      const title = computed(() => editorStore.page?.title);
       const router = useRouter();
-      return { router };
+      return { router, title };
     },
   });
 </script>

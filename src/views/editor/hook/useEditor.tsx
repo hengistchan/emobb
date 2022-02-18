@@ -33,6 +33,7 @@ const useEditor = () => {
       backgroundImage: "",
       backgroundRepeat: "no-repeat",
       backgroundSize: "contain",
+      height: "669px",
     },
     components: [],
   });
