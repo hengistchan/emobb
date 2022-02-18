@@ -36,8 +36,9 @@
         });
         const hasSlots = (cpn: Component) => cpn.props?.slots !== null;
         const getSlots = (cpn: Component) => {
-          const slots = pickBy(cpn.props?.slots, (value, key) =>
-            key.startsWith("slot"),
+          const slots = pickBy(
+            cpn.props?.slots,
+            (value, key) => !key.startsWith("value"),
           );
           return Object.values(slots);
         };
