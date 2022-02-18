@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import { commonComponentStyles } from "@/package/style";
 import { findKey } from "lodash-es";
 import componentModules from "@/package";
+import { useDotProp } from "./useDotProp";
 
 type HistoryType = "edit" | "delete" | "add";
 
@@ -56,10 +57,10 @@ const useEditor = () => {
       },
       hasResize: false,
       props: Object.keys(component.props || {}).reduce((prev, curr) => {
-        // const { propObj, prop } = useDotProp(prev, curr);
+        const { propObj, prop } = useDotProp(prev, curr);
         if (component.props && (component.props[curr] as any)?.defaultValue) {
-          // propObj[prop] = prev[curr] = component.props![curr]?.defaultValue;
-          prev[curr] = (component.props[curr] as any)?.defaultValue;
+          propObj[prop] = prev[curr] = component.props![curr]?.defaultValue;
+          // prev[curr] = (component.props[curr] as any)?.defaultValue;
         }
         return prev;
       }, {} as { [key: string]: any }),
