@@ -1,6 +1,6 @@
 <template>
   <el-container class="layout-container">
-    <el-aside class="layout-aside">
+    <el-aside class="layout-aside" width="250px">
       <div class="logo" @click="() => router.push('/')">E M O</div>
       <Menu />
     </el-aside>
@@ -52,7 +52,7 @@
     }
     .layout-main {
       height: calc(100vh - 40px);
-      padding: 35px 0 35px 40px;
+      padding: 45px 0 35px 70px;
       background-color: #fff;
     }
   }
