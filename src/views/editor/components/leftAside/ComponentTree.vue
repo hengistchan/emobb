@@ -36,8 +36,9 @@
         });
         const hasSlots = (cpn: Component) => cpn.props?.slots !== null;
         const getSlots = (cpn: Component) => {
-          const slots = pickBy(cpn.props?.slots, (value, key) =>
-            key.startsWith("slot"),
+          const slots = pickBy(
+            cpn.props?.slots,
+            (value, key) => !key.startsWith("value"),
           );
           return Object.values(slots);
         };
@@ -48,7 +49,7 @@
             for (let j = 0; j < slots.length; j++) {
               const slot = slots[j];
               root[i].children.push({
-                label: `插槽_${slot.key}`,
+                label: `插槽_${slot.key ?? ""}`,
                 children: [],
               });
               root[i].children[root[i].children.length - 1].children =
