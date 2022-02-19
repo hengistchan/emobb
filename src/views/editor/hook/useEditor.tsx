@@ -112,9 +112,11 @@ const useEditor = () => {
    */
   const handleDelete = (
     event: Event | null,
-    componentId: string,
-    parent: Component[],
+    componentId: string | undefined | null,
+    parent: Component[] | undefined | null,
   ) => {
+    componentId = componentId || editorStore.currentComponent || "";
+    parent = parent || editorStore.parent || [];
     const i = parent.findIndex((item) => item._id === componentId);
     if (i !== -1) {
       parent.splice(i, 1);
