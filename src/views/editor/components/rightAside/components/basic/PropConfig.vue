@@ -75,6 +75,7 @@
               v-model={props.component.props[key]}
             ></CrossSortableInput>
           ),
+          [EditorPropType.table]: () => <div></div>,
         };
 
         return listForProp[propConfig.type]();
