@@ -31,5 +31,12 @@
   .context-menu-component {
     display: none;
     position: absolute;
+    background-color: #fff;
+
+    border: 1px solid black;
+    li {
+      cursor: pointer;
+      padding: 10px;
+    }
   }
 </style>
