@@ -7,6 +7,7 @@
       active: currentComponent === element._id,
     }"
     @click.stop="handleClick($event, element, parent)"
+    @contextmenu.stop="handleContextMenu($event, element._id, parent)"
   >
     <slot></slot>
   </div>
@@ -17,6 +18,7 @@
   import { defineComponent, PropType, computed } from "vue";
   import useEditor from "@/views/editor/hook/useEditor";
   import useEditorStore from "@/store/editor";
+  import useContextMenu from "../../hook/useContentMenu";
 
   export default defineComponent({
     props: {
@@ -32,10 +34,12 @@
     setup() {
       const editorStore = useEditorStore();
       const currentComponent = computed(() => editorStore.currentComponent);
+      const { handleContextMenu } = useContextMenu();
       const { handleClick } = useEditor();
       return {
         handleClick,
         currentComponent,
+        handleContextMenu,
       };
     },
   });

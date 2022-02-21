@@ -61,7 +61,7 @@
   import EditWrapper from "./EditWrapper.vue";
   import SlotItem from "./SlotItem.vue";
   import DraggableTransitionGroup from "./draggable-transition-group.vue";
-  import { PageProps } from "@/package/types/page";
+  import useContextMenu from "../../hook/useContentMenu";
 
   export default defineComponent({
     components: {
@@ -76,7 +76,8 @@
       const editorRef = ref<HTMLElement | null>(null);
       const page = computed(() => editorStore.page);
       const { handleClick } = useEditor();
-
+      const { initContextMenu } = useContextMenu();
+      initContextMenu();
       const state = reactive({
         drag: false,
       });
