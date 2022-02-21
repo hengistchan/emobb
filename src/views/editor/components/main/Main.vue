@@ -7,12 +7,13 @@
         v-model="page!.components"
         draggable=".item-drag"
         item-key="_id"
+        @add.stop.prevent="handleAdd($event, 'add')"
+        @end.stop.prevent="handleAdd($event, 'edit')"
       >
         <template #item="{ element: outElement }">
           <EditWrapper
             class="list-group-item"
             :element="outElement"
-            :data-label="outElement.label"
             :class="{
               focus: outElement.focus,
               focusWithChild: outElement.focusWithChild,
@@ -74,6 +75,7 @@
       const editorStore = useEditorStore();
       const editorRef = ref<HTMLElement | null>(null);
       const page = computed(() => editorStore.page);
+      const { handleAdd } = useEditor();
       const { handleClick } = useEditor();
       const { initContextMenu } = useContextMenu();
       initContextMenu();
@@ -85,6 +87,7 @@
         handleClick,
         editorRef,
         ...toRefs(state),
+        handleAdd,
       };
     },
   });

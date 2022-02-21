@@ -1,6 +1,6 @@
 import { Component, EditorComponent } from "@/package/types/component";
 import { Page } from "@/package/types/page.d";
-import useEditorStore from "@/store/editor";
+import useEditorStore, { EditorHistory } from "@/store/editor";
 import {
   computed,
   defineComponent,
@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import { commonComponentStyles } from "@/package/style";
 import { findKey } from "lodash-es";
 import componentModules from "@/package";
+import { getParentElement } from "@/helper";
 
 const useEditor = () => {
   const editorStore = useEditorStore();
@@ -119,6 +120,15 @@ const useEditor = () => {
     parent = parent || editorStore.parent || [];
     const i = parent.findIndex((item) => item._id === componentId);
     if (i !== -1) {
+      const history: EditorHistory = {
+        type: "delete",
+        fromIndex: -1,
+        toIndex: i,
+        from: null,
+        to: parent,
+        component: parent[i],
+      };
+      editorStore.histories.push(history);
       parent.splice(i, 1);
       delete editorStore.componentMap[componentId];
       cancelActive();
@@ -167,6 +177,78 @@ const useEditor = () => {
     console.log(event);
   };
 
+  const addInHistory = (
+    type: "add" | "delete" | "edit",
+    event: CustomEvent,
+    parent: "page" | "slot",
+  ) => {
+    console.log(type, event, parent);
+  };
+
+  const handleAdd = (event: any, type: string) => {
+    console.log(event);
+
+    // 判断组件添加事件
+    if (type === "add") {
+      // 判断组件是被添加还是被移动
+      const history: EditorHistory = {
+        type: "add",
+        fromIndex: event.oldDraggableIndex,
+        toIndex: event.newDraggableIndex,
+        from: null,
+        to: event.to["__draggable_component__"].modelValue,
+        component:
+          event.to["__draggable_component__"].modelValue[
+            event.newDraggableIndex
+          ],
+      };
+      editorStore.histories.push(history);
+    } else if (type === "edit") {
+      console.log("edit");
+      const history: EditorHistory = {
+        type: "edit",
+        fromIndex: event.oldDraggableIndex,
+        toIndex: event.newDraggableIndex,
+        from: event.from["__draggable_component__"].modelValue,
+        to: event.to["__draggable_component__"].modelValue,
+        component:
+          event.to["__draggable_component__"].modelValue[
+            event.newDraggableIndex
+          ],
+      };
+      editorStore.histories.push(history);
+    }
+  };
+
+  const historyNext = () => {};
+  const historyPrev = () => {
+    // 向前
+    if (editorStore.historyIndex === -1) {
+      editorStore.historyIndex = editorStore.histories.length - 1;
+    } else {
+      editorStore.historyIndex--;
+    }
+    const history = editorStore.histories[editorStore.historyIndex];
+    console.log(history.to);
+
+    switch (history.type) {
+      case "add": {
+        const i = history.to.findIndex((item) => {
+          return item._id === history.component._id;
+        });
+        console.log(i);
+
+        if (i !== -1) {
+          console.log(i, "inner");
+          console.log(editorStore.page?.components, history.to);
+
+          editorStore.page?.components.splice(i, 1);
+        }
+        break;
+      }
+    }
+  };
+
   return {
     createNewPage,
     createNewComponent,
@@ -180,6 +262,10 @@ const useEditor = () => {
     currentEditorComponent,
     currentComponent,
     registerRef,
+    addInHistory,
+    handleAdd,
+    historyNext,
+    historyPrev,
   };
 };
 

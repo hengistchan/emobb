@@ -4,12 +4,23 @@ import { Page } from "@/package/types/page";
 import { find } from "lodash-es";
 import { Nullable } from "types";
 
+export interface EditorHistory {
+  type: "edit" | "add" | "delete";
+  fromIndex: number;
+  toIndex: number;
+  from: Component[] | null;
+  to: Component[];
+  component: Component;
+}
+
 interface EditorState {
   currentComponent: Nullable<string>;
   page: Nullable<Page>;
   componentMap: { [componentId: string]: Component };
   tick: number;
   parent: Nullable<Component[]>;
+  histories: EditorHistory[];
+  historyIndex: number;
 }
 
 const editorStore = defineStore("editor", {
@@ -19,9 +30,10 @@ const editorStore = defineStore("editor", {
     componentMap: {},
     tick: 0,
     parent: null,
+    histories: [],
+    historyIndex: -1,
   }),
   getters: {
-    // todo
     getComponentById: (state) => (id?: string | null) => {
       if (id == null && state.currentComponent == null) {
         return null;

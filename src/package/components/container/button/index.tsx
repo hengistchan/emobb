@@ -17,7 +17,6 @@ export default {
   preview: () => <p>普通容器</p>,
   render: ({ props, styles, component, custom }) => {
     const { registerRef } = useEditor();
-    console.log(props);
 
     return () => (
       <div

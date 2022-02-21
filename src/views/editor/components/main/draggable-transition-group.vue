@@ -13,7 +13,8 @@
     v-bind="{ ...dragOptions, ...$attrs }"
     :item-key="itemKey"
     @start="isDrag = true"
-    @end="isDrag = false"
+    @end="handleEnd"
+    @add="handleAdd"
   >
     <template #item="item">
       <div
@@ -40,7 +41,6 @@
     reactive,
     toRefs,
     SetupContext,
-    watch,
   } from "vue";
   import draggable from "vuedraggable";
   import { useVModel } from "@vueuse/core";
@@ -70,13 +70,12 @@
         default: "",
       },
     },
-    emits: ["update:moduleValue", "update:drag"],
+    emits: ["update:moduleValue", "update:drag", "add", "end"],
     setup(props, { emit }: SetupContext) {
       const state = reactive({
         list: useVModel(props, "moduleValue", emit),
         isDrag: useVModel(props, "drag", emit),
       });
-      const c = computed(() => props.moduleValue);
       const dragOptions = computed(() => ({
         animation: 200,
         disabled: false,
@@ -84,9 +83,20 @@
         ghostClass: "ghost",
       }));
 
+      const handleAdd = (e: CustomEvent) => {
+        emit("add", e);
+      };
+
+      const handleEnd = (e: CustomEvent) => {
+        state.isDrag = false;
+        emit("end", e);
+      };
+
       return {
         ...toRefs(state),
         dragOptions,
+        handleAdd,
+        handleEnd,
       };
     },
   });

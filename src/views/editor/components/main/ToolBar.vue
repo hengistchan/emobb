@@ -7,7 +7,7 @@
   export default defineComponent({
     setup() {
       const editorStore = useEditorStore();
-      const { handleDelete } = useEditor();
+      const { handleDelete, historyNext, historyPrev } = useEditor();
       const parent = computed(() => editorStore.parent);
       const currentComponent = computed(() => editorStore.currentComponent);
       return () => (
@@ -15,7 +15,11 @@
           <div class="toolbar-left"></div>
           <div class="toolbar-right">
             <div class="toolbar-history">
-              <el-button plain={true} icon={DArrowLeft}></el-button>
+              <el-button
+                plain={true}
+                icon={DArrowLeft}
+                onClick={() => historyPrev()}
+              ></el-button>
               <el-button plain={true} icon={DArrowRight}></el-button>
               <el-button
                 disabled={
@@ -45,6 +49,7 @@
     justify-content: space-between;
     height: 100%;
     .toolbar-right {
+      margin-right: 10px;
       height: 100%;
       // background-color: #000;
       .toolbar-history {
