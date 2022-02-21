@@ -27,7 +27,6 @@
   import EditorRightAside from "./components/rightAside/index.vue";
   import EditorMain from "./components/main/index.vue";
   import useHotKey from "./hook/useHotKey";
-  import useContextMenu from "./hook/useContentMenu";
 
   // console.log(componentModules);
 
