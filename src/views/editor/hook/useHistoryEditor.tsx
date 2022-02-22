@@ -110,7 +110,6 @@ const useHistoryEditor = () => {
     pushHistory(history as EditorHistory);
   };
 
-  const handleDelete = () => {};
   const historyNext = () => {
     // 向后
     if (editorStore.historyIndex === -1) {
@@ -241,7 +240,6 @@ const useHistoryEditor = () => {
     historyNext,
     historyPrev,
     handleEnd,
-    handleDelete,
     pushHistory,
   };
 };
