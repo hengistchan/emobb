@@ -37,6 +37,9 @@
     li {
       cursor: pointer;
       padding: 10px;
+      &:hover {
+        background-color: #f0f0f0;
+      }
     }
   }
 </style>
