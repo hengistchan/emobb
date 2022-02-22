@@ -18,7 +18,7 @@
     components: { Delete },
     setup() {
       const editorStore = useEditorStore();
-      const { setActive, handleDelete } = useEditor();
+      const { handleDelete } = useEditor();
       const topLevelComponents = computed(() => editorStore.page?.components);
       // console.log(topLevelTree.value);
 
@@ -74,7 +74,7 @@
                   class={"editor-component-tree"}
                   onClick={() => {
                     if (data._id && data.parent) {
-                      setActive(data._id, data.parent);
+                      editorStore.setActive(data._id, data.parent);
                     }
                   }}
                 >

@@ -14,7 +14,7 @@ const registerHotKey = (keys: string, callback: KeyHandler): void => {
 };
 
 const useHotKey = () => {
-  const { handleDelete, cancelActive } = useEditor();
+  const { handleDelete } = useEditor();
   const editorStore = useEditorStore();
   const currentComponent = computed(() => editorStore.currentComponent);
   const parent = computed(() => editorStore.parent);
@@ -26,7 +26,7 @@ const useHotKey = () => {
   });
 
   registerHotKey("esc", () => {
-    cancelActive();
+    editorStore.cancelActive();
   });
 };
 export default useHotKey;

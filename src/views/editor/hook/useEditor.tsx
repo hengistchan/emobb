@@ -23,10 +23,6 @@ const useEditor = () => {
   const editorStore = useEditorStore();
   const { pushHistory } = useHistoryEditor();
 
-  onMounted(() => {});
-
-  onUnmounted(() => {});
-
   /**
    * 生成新页面
    * @param param0 页面数据
@@ -85,29 +81,7 @@ const useEditor = () => {
    */
   const registerRef = (el: any, componentId: string) => {
     editorStore.componentMap[componentId] &&
-      (editorStore.componentMap[componentId]["ref"] = el);
-  };
-
-  const currentId = computed(() => editorStore.currentComponent);
-  const currentComponent = computed(() =>
-    editorStore.getComponentById(currentId.value),
-  );
-  const currentEditorComponent = computed(() => {
-    if (currentComponent.value) {
-      return componentModules[currentComponent.value.moduleName].componentMap[
-        currentComponent.value.name
-      ];
-    }
-    return null;
-  });
-
-  /**
-   * 根据ID查找组件是否存在
-   * @param componentId 组件ID
-   * @returns 布尔值
-   */
-  const checkComponentExist = (componentId: string) => {
-    return !!findKey(editorStore.componentMap, componentId);
+      (editorStore.refs[componentId] = el);
   };
 
   /**
@@ -147,7 +121,7 @@ const useEditor = () => {
       pushHistory(history);
       parent.splice(i, 1);
       delete editorStore.componentMap[componentId];
-      cancelActive();
+      editorStore.cancelActive();
     }
   };
 
@@ -201,20 +175,6 @@ const useEditor = () => {
   };
 
   /**
-   * 设置当前点击组件
-   * @param componentId 组件ID
-   */
-  const setActive = (componentId: string, parent: Component[]): void => {
-    editorStore.currentComponent = componentId;
-    editorStore.parent = parent;
-  };
-
-  const cancelActive = (): void => {
-    editorStore.currentComponent = "";
-    editorStore.parent = null;
-  };
-
-  /**
    * 各种组件事件
    */
 
@@ -229,7 +189,7 @@ const useEditor = () => {
     parent: Component[],
   ) => {
     if (component._id) {
-      setActive(component._id, parent);
+      editorStore.setActive(component._id, parent);
     }
   };
 
@@ -245,15 +205,9 @@ const useEditor = () => {
   return {
     createNewPage,
     createNewComponent,
-    setActive,
     handleClick,
     handleMouseOver,
-    checkComponentExist,
     handleDelete,
-    cancelActive,
-    currentId,
-    currentEditorComponent,
-    currentComponent,
     registerRef,
   };
 };

@@ -1,14 +1,23 @@
 <script lang="tsx">
   import { defineComponent, computed, ref } from "vue";
-  import useEditor from "../../hook/useEditor";
   import { Warning } from "@element-plus/icons-vue";
   import PropConfig from "./components/basic/PropConfig.vue";
   import attributes from "./components/index";
+  import useEditorStore from "@/store/editor";
+  import componentModules from "@/package";
 
   export default defineComponent({
     components: { Warning, PropConfig },
     setup() {
-      const { currentComponent, currentEditorComponent } = useEditor();
+      const editorStore = useEditorStore();
+      const currentComponent = computed(() => editorStore.getComponentById());
+      const currentEditorComponent = computed(() => {
+        if (currentComponent.value) {
+          return componentModules[currentComponent.value.moduleName]
+            .componentMap[currentComponent.value.name];
+        }
+        return null;
+      });
       const activeName = ref("basic");
       return () => (
         <div class={"editor-right-attribute"}>

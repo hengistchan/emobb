@@ -2,6 +2,7 @@ import { getParentElement } from "@/helper";
 import { Component } from "@/package/types/component";
 import useEditorStore, { EditorHistory } from "@/store/editor";
 import { HtmlAttributes } from "csstype";
+import useEditor from "./useEditor";
 
 const useHistoryEditor = () => {
   const editorStore = useEditorStore();
@@ -111,6 +112,7 @@ const useHistoryEditor = () => {
   };
 
   const historyNext = () => {
+    editorStore.cancelActive();
     // 向后
     if (editorStore.historyIndex === -1) {
       return;
@@ -170,6 +172,7 @@ const useHistoryEditor = () => {
     editorStore.historyIndex++;
   };
   const historyPrev = () => {
+    editorStore.cancelActive();
     // 向前
     if (editorStore.historyIndex === -1) {
       editorStore.historyIndex = editorStore.histories.length - 1;

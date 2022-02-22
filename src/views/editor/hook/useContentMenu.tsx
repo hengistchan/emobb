@@ -2,6 +2,7 @@ import { Component } from "@/package/types/component";
 import { createVNode, render } from "vue";
 import ContextMenu from "../components/main/components/ContextMenu.vue";
 import useEditor from "./useEditor";
+import useEditorStore from "@/store/editor";
 
 export interface ActionItem {
   action: (cid?: string, parent?: Component[]) => void;
@@ -10,7 +11,8 @@ export interface ActionItem {
 }
 let dom: HTMLDivElement | null = null;
 const useContextMenu = () => {
-  const { handleDelete, setActive } = useEditor();
+  const { handleDelete } = useEditor();
+  const editorStore = useEditorStore();
 
   const actions: ActionItem[] = [
     {
@@ -48,7 +50,7 @@ const useContextMenu = () => {
       domElement.style.display = "block";
       domElement.style.top = event.pageY + "px";
       domElement.style.left = event.pageX + "px";
-      setActive(componentId, parent);
+      editorStore.setActive(componentId, parent);
     }
     event.preventDefault();
   };

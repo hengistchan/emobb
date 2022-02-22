@@ -36,9 +36,9 @@
               <el-tooltip effect="light" placement="top-start" content="删除">
                 <el-button
                   disabled={
-                    parent.value == null &&
-                    (currentComponent.value == null ||
-                      currentComponent.value === "")
+                    parent.value == null ||
+                    currentComponent.value == null ||
+                    currentComponent.value === ""
                   }
                   plain={true}
                   icon={Delete}

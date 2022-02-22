@@ -1,7 +1,6 @@
 <script lang="tsx">
   import { useVModel } from "@vueuse/core";
   import { computed, defineComponent, PropType, reactive } from "vue";
-  import useEditor from "@/views/editor/hook/useEditor";
   import draggable from "vuedraggable";
   import { Rank, Remove, CirclePlus } from "@element-plus/icons-vue";
 
@@ -33,8 +32,6 @@
         const newItem = "";
         state.list.splice(index + 1, 0, newItem);
       };
-
-      const { currentComponent } = useEditor();
       return () => (
         <div class="sortable-prop">
           <draggable

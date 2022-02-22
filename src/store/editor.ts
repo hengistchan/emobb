@@ -35,6 +35,7 @@ interface EditorState {
   historyIndex: number;
   historyLength: number;
   componentTree: ComponentTree[] | undefined;
+  refs: { [key: string]: any };
 }
 
 const editorStore = defineStore("editor", {
@@ -48,6 +49,7 @@ const editorStore = defineStore("editor", {
     historyIndex: -1,
     historyLength: 10,
     componentTree: [],
+    refs: {},
   }),
   getters: {
     getComponentById: (state) => (id?: string | null) => {
@@ -67,6 +69,14 @@ const editorStore = defineStore("editor", {
   actions: {
     addComponent(cpn: Component) {
       this.componentMap[cpn._id] = cpn;
+    },
+    cancelActive() {
+      this.currentComponent = "";
+      this.parent = null;
+    },
+    setActive(componentId: string, parent: Component[]) {
+      this.currentComponent = componentId;
+      this.parent = parent;
     },
   },
 });
