@@ -8,7 +8,7 @@
         draggable=".item-drag"
         item-key="_id"
         @add.stop.prevent="handleAdd($event)"
-        @end.stop.prevent="handleAdd($event)"
+        @end.stop.prevent="handleEnd($event)"
       >
         <template #item="{ element: outElement }">
           <EditWrapper
@@ -76,7 +76,7 @@
       const editorStore = useEditorStore();
       const editorRef = ref<HTMLElement | null>(null);
       const page = computed(() => editorStore.page);
-      const { handleAdd } = useHistoryEditor();
+      const { handleAdd, handleEnd } = useHistoryEditor();
       const { handleClick } = useEditor();
       const { initContextMenu } = useContextMenu();
       initContextMenu();
@@ -89,6 +89,7 @@
         editorRef,
         ...toRefs(state),
         handleAdd,
+        handleEnd,
       };
     },
   });

@@ -9,7 +9,7 @@
     item-key="_id"
     :data-key="slotKey"
     @add.stop.prevent="handleAdd($event)"
-    @end.stop.prevent="handleAdd($event)"
+    @end.stop.prevent="handleEnd($event)"
   >
     <template #item="{ element: innerElement }">
       <edit-wrapper
@@ -75,11 +75,12 @@
     },
     emits: ["update:children", "on-selected", "update:drag"],
     setup(props, { emit }) {
-      const { handleAdd } = useHistoryEditor();
+      const { handleAdd, handleEnd } = useHistoryEditor();
       return {
         isDrag: useVModel(props, "drag", emit),
         slotChildren: useVModel(props, "children", emit),
         handleAdd,
+        handleEnd,
       };
     },
   });

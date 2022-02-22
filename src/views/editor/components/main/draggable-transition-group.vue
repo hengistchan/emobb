@@ -15,7 +15,6 @@
     @start="isDrag = true"
     @end="handleEnd"
     @add="handleAdd"
-    @move="handleMove"
   >
     <template #item="item">
       <div

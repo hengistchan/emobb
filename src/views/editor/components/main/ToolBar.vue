@@ -21,8 +21,14 @@
                 plain={true}
                 icon={DArrowLeft}
                 onClick={() => historyPrev()}
+                disabled={editorStore.checkHistoryPrev}
               ></el-button>
-              <el-button plain={true} icon={DArrowRight}></el-button>
+              <el-button
+                plain={true}
+                icon={DArrowRight}
+                onClick={() => historyNext()}
+                disabled={editorStore.checkHistpryNext}
+              ></el-button>
               <el-button
                 disabled={
                   parent.value == null &&

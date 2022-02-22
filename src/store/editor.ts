@@ -4,6 +4,14 @@ import { Page } from "@/package/types/page";
 import { find } from "lodash-es";
 import { Nullable } from "types";
 
+interface ComponentTree {
+  label: string;
+  _id?: string;
+  component?: Component;
+  children: ComponentTree[];
+  parent?: Component[];
+}
+
 export interface EditorHistory {
   type: "edit" | "add" | "delete";
   fromIndex: number;
@@ -11,6 +19,10 @@ export interface EditorHistory {
   from: Component[] | null;
   to: Component[];
   component: Component;
+  toSlot?: string;
+  toRootId?: string;
+  fromSlot?: string;
+  fromRootId?: string;
 }
 
 interface EditorState {
@@ -21,6 +33,8 @@ interface EditorState {
   parent: Nullable<Component[]>;
   histories: EditorHistory[];
   historyIndex: number;
+  historyLength: number;
+  componentTree: ComponentTree[] | undefined;
 }
 
 const editorStore = defineStore("editor", {
@@ -32,6 +46,8 @@ const editorStore = defineStore("editor", {
     parent: null,
     histories: [],
     historyIndex: -1,
+    historyLength: 10,
+    componentTree: [],
   }),
   getters: {
     getComponentById: (state) => (id?: string | null) => {
@@ -41,7 +57,12 @@ const editorStore = defineStore("editor", {
       id = id || state.currentComponent;
       return find(state.componentMap, (item) => item._id === id);
     },
-    // getTree: (state) => {},
+    checkHistoryPrev: (state) =>
+      state.histories.length === 0 || state.historyIndex === 0,
+    checkHistpryNext: (state) =>
+      state.histories.length === 0 ||
+      state.historyIndex === state.histories.length ||
+      state.historyIndex === -1,
   },
   actions: {
     addComponent(cpn: Component) {
