@@ -17,32 +17,38 @@
           <div class="toolbar-left"></div>
           <div class="toolbar-right">
             <div class="toolbar-history">
-              <el-button
-                plain={true}
-                icon={DArrowLeft}
-                onClick={() => historyPrev()}
-                disabled={editorStore.checkHistoryPrev}
-              ></el-button>
-              <el-button
-                plain={true}
-                icon={DArrowRight}
-                onClick={() => historyNext()}
-                disabled={editorStore.checkHistpryNext}
-              ></el-button>
-              <el-button
-                disabled={
-                  parent.value == null &&
-                  (currentComponent.value == null ||
-                    currentComponent.value === "")
-                }
-                plain={true}
-                icon={Delete}
-                type="danger"
-                onClick={(e: Event) => {
-                  e.stopPropagation();
-                  handleDelete(e, null, null);
-                }}
-              ></el-button>
+              <el-tooltip effect="light" placement="top-start" content="撤销">
+                <el-button
+                  plain={true}
+                  icon={DArrowLeft}
+                  onClick={() => historyPrev()}
+                  disabled={editorStore.checkHistoryPrev}
+                ></el-button>
+              </el-tooltip>
+              <el-tooltip effect="light" placement="top-start" content="恢复">
+                <el-button
+                  plain={true}
+                  icon={DArrowRight}
+                  onClick={() => historyNext()}
+                  disabled={editorStore.checkHistpryNext}
+                ></el-button>
+              </el-tooltip>
+              <el-tooltip effect="light" placement="top-start" content="删除">
+                <el-button
+                  disabled={
+                    parent.value == null &&
+                    (currentComponent.value == null ||
+                      currentComponent.value === "")
+                  }
+                  plain={true}
+                  icon={Delete}
+                  type="danger"
+                  onClick={(e: Event) => {
+                    e.stopPropagation();
+                    handleDelete(e, null, null);
+                  }}
+                ></el-button>
+              </el-tooltip>
             </div>
           </div>
         </div>
