@@ -55,7 +55,7 @@
   import RenderComponent from "./RenderComponent";
   import { Component } from "@/package/types/component";
   import EditWrapper from "./EditWrapper.vue";
-  import useHistoryEditor from "../../hook/useHistoryEditor";
+  import useHistoryEditor from "../../../hook/useHistoryEditor";
 
   export default defineComponent({
     name: "SlotItem",

@@ -1,6 +1,6 @@
 <script lang="tsx">
   import { defineComponent, PropType, ref } from "vue";
-  import { ActionItem } from "../../hook/useContentMenu";
+  import { ActionItem } from "../../../hook/useContentMenu";
   export default defineComponent({
     props: {
       actions: {

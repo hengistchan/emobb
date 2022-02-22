@@ -57,11 +57,11 @@
   import { defineComponent, computed, reactive, toRefs, ref, watch } from "vue";
   import useEditorStore from "@/store/editor";
   import useEditor from "@/views/editor/hook/useEditor";
-  import RenderComponent from "./RenderComponent";
-  import RenderPage from "./RenderPage";
-  import EditWrapper from "./EditWrapper.vue";
-  import SlotItem from "./SlotItem.vue";
-  import DraggableTransitionGroup from "./draggable-transition-group.vue";
+  import RenderComponent from "./components/RenderComponent";
+  import RenderPage from "./components/RenderPage";
+  import EditWrapper from "./components/EditWrapper.vue";
+  import SlotItem from "./components/SlotItem.vue";
+  import DraggableTransitionGroup from "./components/draggable-transition-group.vue";
   import useContextMenu from "../../hook/useContentMenu";
   import useHistoryEditor from "../../hook/useHistoryEditor";
 

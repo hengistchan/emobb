@@ -18,7 +18,7 @@
   import { defineComponent, PropType, computed } from "vue";
   import useEditor from "@/views/editor/hook/useEditor";
   import useEditorStore from "@/store/editor";
-  import useContextMenu from "../../hook/useContentMenu";
+  import useContextMenu from "../../../hook/useContentMenu";
 
   export default defineComponent({
     props: {

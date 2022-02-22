@@ -1,6 +1,6 @@
 import { Component } from "@/package/types/component";
 import { createVNode, render } from "vue";
-import ContextMenu from "../components/main/ContextMenu.vue";
+import ContextMenu from "../components/main/components/ContextMenu.vue";
 import useEditor from "./useEditor";
 
 export interface ActionItem {
