@@ -7,12 +7,13 @@
         v-model="page!.components"
         draggable=".item-drag"
         item-key="_id"
+        @add.stop.prevent="handleAdd($event)"
+        @end.stop.prevent="handleEnd($event)"
       >
         <template #item="{ element: outElement }">
           <EditWrapper
             class="list-group-item"
             :element="outElement"
-            :data-label="outElement.label"
             :class="{
               focus: outElement.focus,
               focusWithChild: outElement.focusWithChild,
@@ -62,6 +63,7 @@
   import SlotItem from "./SlotItem.vue";
   import DraggableTransitionGroup from "./draggable-transition-group.vue";
   import useContextMenu from "../../hook/useContentMenu";
+  import useHistoryEditor from "../../hook/useHistoryEditor";
 
   export default defineComponent({
     components: {
@@ -75,6 +77,7 @@
       const editorStore = useEditorStore();
       const editorRef = ref<HTMLElement | null>(null);
       const page = computed(() => editorStore.page);
+      const { handleAdd, handleEnd } = useHistoryEditor();
       const { handleClick } = useEditor();
       const { initContextMenu } = useContextMenu();
       initContextMenu();
@@ -86,6 +89,8 @@
         handleClick,
         editorRef,
         ...toRefs(state),
+        handleAdd,
+        handleEnd,
       };
     },
   });

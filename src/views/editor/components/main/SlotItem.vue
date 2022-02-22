@@ -7,6 +7,9 @@
     draggable=".item-drag"
     :data-slot="`插槽（${slotKey}）\n 拖拽组件到此处`"
     item-key="_id"
+    :data-key="slotKey"
+    @add.stop.prevent="handleAdd($event)"
+    @end.stop.prevent="handleEnd($event)"
   >
     <template #item="{ element: innerElement }">
       <edit-wrapper
@@ -52,6 +55,7 @@
   import RenderComponent from "./RenderComponent";
   import { Component } from "@/package/types/component";
   import EditWrapper from "./EditWrapper.vue";
+  import useHistoryEditor from "../../hook/useHistoryEditor";
 
   export default defineComponent({
     name: "SlotItem",
@@ -72,9 +76,12 @@
     },
     emits: ["update:children", "on-selected", "update:drag"],
     setup(props, { emit }) {
+      const { handleAdd, handleEnd } = useHistoryEditor();
       return {
         isDrag: useVModel(props, "drag", emit),
         slotChildren: useVModel(props, "children", emit),
+        handleAdd,
+        handleEnd,
       };
     },
   });

@@ -3,11 +3,13 @@
   import { DArrowLeft, DArrowRight, Delete } from "@element-plus/icons-vue";
   import useEditorStore from "@/store/editor";
   import useEditor from "../../hook/useEditor";
+  import useHistoryEditor from "../../hook/useHistoryEditor";
 
   export default defineComponent({
     setup() {
       const editorStore = useEditorStore();
       const { handleDelete } = useEditor();
+      const { historyNext, historyPrev } = useHistoryEditor();
       const parent = computed(() => editorStore.parent);
       const currentComponent = computed(() => editorStore.currentComponent);
       return () => (
@@ -15,8 +17,18 @@
           <div class="toolbar-left"></div>
           <div class="toolbar-right">
             <div class="toolbar-history">
-              <el-button plain={true} icon={DArrowLeft}></el-button>
-              <el-button plain={true} icon={DArrowRight}></el-button>
+              <el-button
+                plain={true}
+                icon={DArrowLeft}
+                onClick={() => historyPrev()}
+                disabled={editorStore.checkHistoryPrev}
+              ></el-button>
+              <el-button
+                plain={true}
+                icon={DArrowRight}
+                onClick={() => historyNext()}
+                disabled={editorStore.checkHistpryNext}
+              ></el-button>
               <el-button
                 disabled={
                   parent.value == null &&
@@ -45,6 +57,7 @@
     justify-content: space-between;
     height: 100%;
     .toolbar-right {
+      margin-right: 10px;
       height: 100%;
       // background-color: #000;
       .toolbar-history {

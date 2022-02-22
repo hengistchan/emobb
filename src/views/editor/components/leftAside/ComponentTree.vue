@@ -60,10 +60,6 @@
         return root;
       };
       const tree = computed(() => generateTree(topLevelComponents.value));
-      const handleClick = (componentId: string | null | undefined) => {
-        if (componentId == null) return;
-        editorStore.currentComponent = componentId;
-      };
       return () => (
         <el-tree
           data={tree.value}
