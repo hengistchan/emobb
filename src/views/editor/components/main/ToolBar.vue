@@ -3,11 +3,13 @@
   import { DArrowLeft, DArrowRight, Delete } from "@element-plus/icons-vue";
   import useEditorStore from "@/store/editor";
   import useEditor from "../../hook/useEditor";
+  import useHistoryEditor from "../../hook/useHistoryEditor";
 
   export default defineComponent({
     setup() {
       const editorStore = useEditorStore();
-      const { handleDelete, historyNext, historyPrev } = useEditor();
+      const { handleDelete } = useEditor();
+      const { historyNext, historyPrev } = useHistoryEditor();
       const parent = computed(() => editorStore.parent);
       const currentComponent = computed(() => editorStore.currentComponent);
       return () => (

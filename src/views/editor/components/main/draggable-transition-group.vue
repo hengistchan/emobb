@@ -15,6 +15,7 @@
     @start="isDrag = true"
     @end="handleEnd"
     @add="handleAdd"
+    @move="handleMove"
   >
     <template #item="item">
       <div
@@ -92,11 +93,16 @@
         emit("end", e);
       };
 
+      const handleMove = (e: any) => {
+        console.log(e);
+      };
+
       return {
         ...toRefs(state),
         dragOptions,
         handleAdd,
         handleEnd,
+        handleMove,
       };
     },
   });

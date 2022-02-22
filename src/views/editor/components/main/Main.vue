@@ -7,8 +7,8 @@
         v-model="page!.components"
         draggable=".item-drag"
         item-key="_id"
-        @add.stop.prevent="handleAdd($event, 'add')"
-        @end.stop.prevent="handleAdd($event, 'edit')"
+        @add.stop.prevent="handleAdd($event)"
+        @end.stop.prevent="handleAdd($event)"
       >
         <template #item="{ element: outElement }">
           <EditWrapper
@@ -62,6 +62,7 @@
   import SlotItem from "./SlotItem.vue";
   import DraggableTransitionGroup from "./draggable-transition-group.vue";
   import useContextMenu from "../../hook/useContentMenu";
+  import useHistoryEditor from "../../hook/useHistoryEditor";
 
   export default defineComponent({
     components: {
@@ -75,7 +76,7 @@
       const editorStore = useEditorStore();
       const editorRef = ref<HTMLElement | null>(null);
       const page = computed(() => editorStore.page);
-      const { handleAdd } = useEditor();
+      const { handleAdd } = useHistoryEditor();
       const { handleClick } = useEditor();
       const { initContextMenu } = useContextMenu();
       initContextMenu();
