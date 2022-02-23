@@ -92,9 +92,6 @@
 </script>
 
 <style lang="scss">
-  .upload-demo {
-  }
-
   .image-upload-picture-icon {
     display: flex;
     width: 100%;

@@ -35,7 +35,6 @@ interface EditorState {
   histories: EditorHistory[];
   historyIndex: number;
   historyLength: number;
-  componentTree: ComponentTree[] | undefined;
   refs: { [key: string]: any };
 }
 
@@ -49,7 +48,6 @@ const editorStore = defineStore("editor", {
     histories: [],
     historyIndex: -1,
     historyLength: 10,
-    componentTree: [],
     refs: {},
   }),
   getters: {
@@ -85,7 +83,7 @@ const editorStore = defineStore("editor", {
         this.page = createNewPage({ title: "新页面" });
         return;
       }
-      let tick = 0;
+      let tick = 1;
       const registerComponents = (arr: Component[]): any => {
         const root: any[] = [];
         if (arr == null) return;

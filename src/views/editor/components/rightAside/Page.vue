@@ -1,5 +1,5 @@
 <script lang="tsx">
-  import { computed, defineComponent } from "vue";
+  import { defineComponent, watch } from "vue";
   import useEditorStore from "@/store/editor";
   import { useVModel } from "@vueuse/core";
   import ImageUpload from "./components/ImageUpload.vue";
@@ -16,6 +16,27 @@
         { name: "no-repeat", label: "不重复" },
       ];
       const page = useVModel(editorStore, "page");
+      watch(
+        () => page.value?.props?.backgroundImage,
+        (n) => {
+          if (n) {
+            let url: RegExpExecArray | null | string =
+              /url\(['"](.*)['"]\)/g.exec(n);
+            if (url && url.length >= 1 && url[1] !== "") {
+              url = url[1];
+              const image = new Image();
+              image.src = url;
+              image.onload = () => {
+                editorStore.page &&
+                  editorStore.page.props &&
+                  editorStore.page.props.height &&
+                  (editorStore.page.props.height =
+                    Math.floor((image.height * 377) / image.width) + "px");
+              };
+            }
+          }
+        },
+      );
       return () => (
         <>
           {page.value && page.value.props && (
