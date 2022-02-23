@@ -39,6 +39,7 @@
   import { useRoute, useRouter } from "vue-router";
   import Work from "@/api/work";
   import { Page } from "@/package/types/page";
+  import { getCurrentUUID } from "./hook/useEditorInit";
 
   // console.log(componentModules);
 
@@ -61,14 +62,10 @@
           L 15 15
         " style="stroke-width: 4px; fill: rgba(0, 0, 0, 0)"/>`;
       const editorStore = useEditorStore();
-      const route = useRoute();
       const router = useRouter();
-      const uuid = route.query?.id as string;
-      if (uuid == null) {
-        message("error", "请求的id不存在！");
-      }
+      const uuid = getCurrentUUID();
       onMounted(async () => {
-        const { error, ...data } = await Work.getDetailByUUID(uuid);
+        const { error, ...data } = await Work.getDetailByUUID(uuid ?? "");
         if (error) {
           router.push("/");
         } else {

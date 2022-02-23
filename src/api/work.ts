@@ -1,4 +1,6 @@
 import _axios from "@/helper/request";
+import { Page } from "@/package/types/page";
+import { CommonResp } from "types";
 
 interface WorkDTO {
   id: number;
@@ -16,7 +18,11 @@ interface WorkDTO {
 }
 
 interface WorkDetailDTO extends WorkDTO {
-  page: object;
+  page: Page;
+}
+
+interface WorkContent {
+  page: Page;
 }
 
 class Work {
@@ -26,6 +32,10 @@ class Work {
 
   static getDetailByUUID(uuid: string) {
     return _axios.get<WorkDetailDTO>(`/work/detail/${uuid}`);
+  }
+
+  static saveWorkContent(uuid: string, data: WorkContent) {
+    return _axios.put(`/work/content/${uuid}`, data);
   }
 }
 

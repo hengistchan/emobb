@@ -9,6 +9,7 @@ declare module "axios" {
       data: K,
       config?: AxiosRequestConfig,
     ): RespPromise<T>;
+
     put<T, K = any>(
       url: string,
       data: K,

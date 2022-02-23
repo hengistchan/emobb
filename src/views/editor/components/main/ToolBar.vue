@@ -1,9 +1,13 @@
 <script lang="tsx">
-  import { computed, defineComponent } from "vue";
+  import { computed, defineComponent, ref } from "vue";
   import { DArrowLeft, DArrowRight, Delete } from "@element-plus/icons-vue";
   import useEditorStore from "@/store/editor";
   import useEditor from "../../hook/useEditor";
   import useHistoryEditor from "../../hook/useHistoryEditor";
+  import Work from "@/api/work";
+  import { getCurrentUUID } from "../../hook/useEditorInit";
+  import { Page } from "@/package/types/page";
+  import message from "@/helper/message";
 
   export default defineComponent({
     setup() {
@@ -12,11 +16,30 @@
       const { historyNext, historyPrev } = useHistoryEditor();
       const parent = computed(() => editorStore.parent);
       const currentComponent = computed(() => editorStore.currentComponent);
+      const uuid = getCurrentUUID();
+      const saveLoading = ref(false);
+      const saveWorkContent = async () => {
+        saveLoading.value = true;
+        const { error } = await Work.saveWorkContent(uuid ?? "", {
+          page: editorStore.page as Page,
+        });
+        if (!error) {
+          message("success", "保存成功");
+        }
+        saveLoading.value = false;
+      };
       return () => (
         <div class="editor-toolbar">
           <div class="toolbar-left"></div>
           <div class="toolbar-right">
             <div class="toolbar-history">
+              <el-button
+                type="primary"
+                onClick={() => saveWorkContent()}
+                loading={saveLoading.value}
+              >
+                保存
+              </el-button>
               <el-tooltip effect="light" placement="top-start" content="撤销">
                 <el-button
                   plain={true}

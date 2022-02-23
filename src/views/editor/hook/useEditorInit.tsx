@@ -1,8 +1,10 @@
+import message from "@/helper/message";
 import { commonComponentStyles } from "@/package/style";
 import { Component, EditorComponent } from "@/package/types/component";
 import { Page } from "@/package/types/page";
 import useEditorStore from "@/store/editor";
 import { v4 as uuidv4 } from "uuid";
+import { useRoute } from "vue-router";
 import { useDotProp } from "./useDotProp";
 
 /**
@@ -54,4 +56,14 @@ export const createNewComponent = (component: EditorComponent): Component => {
   // 防止删除组件时删除不干净产生的情况
   editorStore.tick++;
   return cpn;
+};
+
+export const getCurrentUUID = () => {
+  const route = useRoute();
+  const uuid = route.query?.id as string;
+  if (uuid == null) {
+    message("error", "请求的id不存在！");
+    return null;
+  }
+  return uuid;
 };

@@ -20,6 +20,9 @@
         <>
           {page.value && page.value.props && (
             <el-form labelPosition={"left"} label-width={95}>
+              <el-form-item label="页面标题">
+                <el-input v-model={page.value.title} />
+              </el-form-item>
               <el-form-item label="页面高度">
                 <InputWithSymbol v-model={page.value.props.height} />
               </el-form-item>
