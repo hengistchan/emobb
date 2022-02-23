@@ -68,14 +68,9 @@
         message("error", "请求的id不存在！");
       }
       onMounted(async () => {
-        const {
-          error,
-          message: msg,
-          ...data
-        } = await Work.getDetailByUUID(uuid);
-        if (error && msg) {
-          message("error", msg);
-          router.back();
+        const { error, ...data } = await Work.getDetailByUUID(uuid);
+        if (error) {
+          router.push("/");
         } else {
           editorStore.registerStore(data.page as Page);
         }
