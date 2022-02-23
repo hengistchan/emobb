@@ -66,6 +66,7 @@
           default-expand-all={true}
           expand-on-click-node={false}
           check-on-click-node={true}
+          class="tree-conatiner"
         >
           {{
             default: ({ data }: { data: ComponentTree }) => {
@@ -80,7 +81,7 @@
                 >
                   <span>{data.label}</span>
                   {data?._id && (
-                    <div>
+                    <div class="tools">
                       <span>{data?._id}</span>
                       <span>
                         <el-icon>
@@ -107,21 +108,32 @@
 </script>
 
 <style lang="scss">
-  .editor-component-tree {
-    width: 100%;
-    height: 25px;
-    line-height: 25px;
-    font-size: 13px;
-    > * {
-      display: inline-block;
-    }
+  .tree-conatiner {
+    margin-top: 20px;
+    .editor-component-tree {
+      width: 100%;
+      height: 25px;
+      line-height: 25px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      > * {
+        display: inline-block;
+      }
 
-    i {
-      vertical-align: text-bottom;
-    }
+      i {
+        vertical-align: text-bottom;
+      }
 
-    .el-tree {
-      --el-tree-node-hover-bg-color: rgb(53, 53, 53);
+      .el-tree {
+        --el-tree-node-hover-bg-color: rgb(53, 53, 53);
+      }
+      .tools {
+        margin-right: 40px;
+        span {
+          margin-left: 10px;
+        }
+      }
     }
   }
 </style>
