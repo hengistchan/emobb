@@ -1,5 +1,5 @@
 <script lang="tsx">
-  import { defineComponent, ref } from "vue";
+  import { defineComponent, ref, watch } from "vue";
   import { useVModel } from "@vueuse/core";
 
   export default defineComponent({
@@ -22,6 +22,13 @@
       const handleChange = () => {
         modelValue.value = number.value + symbol.value;
       };
+      watch(
+        () => modelValue.value,
+        (n) => {
+          number.value = parseInt(n.replace(/[^0-9]/gi, ""));
+          symbol.value = n.replace(/[^a-zA-Z]/gi, "");
+        },
+      );
       return () => (
         <div class={"component-input-with-symbol"}>
           <el-input-number
