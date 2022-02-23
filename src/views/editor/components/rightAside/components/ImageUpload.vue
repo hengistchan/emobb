@@ -5,7 +5,7 @@
 <script lang="tsx">
   import { useVModel } from "@vueuse/core";
   import { ElMessage } from "element-plus/es";
-  import { defineComponent, ref } from "vue";
+  import { defineComponent, ref, watch } from "vue";
   import { PictureFilled } from "@element-plus/icons-vue";
   // import { ElMessage } from "element-plus";
 
@@ -35,6 +35,14 @@
         url.value = "url('')";
         ElMessage.success({ message: "删除成功" });
       };
+      watch(
+        () => model.value,
+        (m) => {
+          const p = /url\(['"](.*)['"]\)/g.exec(m);
+          url.value = (p && (p[1] as string)) || "";
+        },
+        { immediate: true },
+      );
       return () => (
         <>
           <el-form-item label="背景图片">
