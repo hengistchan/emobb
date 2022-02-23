@@ -1,9 +1,9 @@
 <script lang="tsx">
-  import { computed, defineComponent, ref, watch } from "vue";
+  import { computed, defineComponent, ref } from "vue";
   import useEditorStore from "@/store/editor";
   import { Component } from "@/package/types/component";
-  import { lowerFirst, pickBy } from "lodash-es";
-  import { Delete } from "@element-plus/icons-vue";
+  import { pickBy } from "lodash-es";
+  import { Delete, Operation } from "@element-plus/icons-vue";
   import useEditor from "../../hook/useEditor";
 
   interface ComponentTree {
@@ -60,78 +60,112 @@
         return root;
       };
       const tree = computed(() => generateTree(topLevelComponents.value));
+      const itemModel = ref("tree");
       return () => (
-        <el-tree
-          data={tree.value}
-          default-expand-all={true}
-          expand-on-click-node={false}
-          check-on-click-node={true}
-          class="tree-conatiner"
-        >
-          {{
-            default: ({ data }: { data: ComponentTree }) => {
-              return (
-                <div
-                  class={"editor-component-tree"}
-                  onClick={() => {
-                    if (data._id && data.parent) {
-                      editorStore.setActive(data._id, data.parent);
-                    }
-                  }}
+        <el-collapse v-model={itemModel.value} class="item-tree">
+          <el-collapse-item name="tree" title="组件树">
+            {{
+              title: () => (
+                <>
+                  <el-icon size={20}>
+                    <Operation />
+                  </el-icon>
+                  <div
+                    class="component-module-label"
+                    style={{ paddingLeft: "8px", fontWeight: 600 }}
+                  >
+                    组件树
+                  </div>
+                </>
+              ),
+              default: () => (
+                <el-tree
+                  data={tree.value}
+                  default-expand-all={true}
+                  expand-on-click-node={false}
+                  check-on-click-node={true}
+                  class="tree-conatiner"
                 >
-                  <span>{data.label}</span>
-                  {data?._id && (
-                    <div class="tools">
-                      <span>{data?._id}</span>
-                      <span>
-                        <el-icon>
-                          <delete
-                            onClick={(e: Event) => {
-                              e.stopPropagation();
-                              if (data._id && data.parent) {
-                                handleDelete(null, data._id, data.parent);
-                              }
-                            }}
-                          />
-                        </el-icon>
-                      </span>
-                    </div>
-                  )}
-                </div>
-              );
-            },
-          }}
-        </el-tree>
+                  {{
+                    default: ({ data }: { data: ComponentTree }) => {
+                      return (
+                        <div
+                          class={"editor-component-tree"}
+                          onClick={() => {
+                            if (data._id && data.parent) {
+                              editorStore.setActive(data._id, data.parent);
+                            }
+                          }}
+                        >
+                          <span>{data.label}</span>
+                          {data?._id && (
+                            <div class="tools">
+                              <span>{data?._id}</span>
+                              <span>
+                                <el-icon>
+                                  <delete
+                                    onClick={(e: Event) => {
+                                      e.stopPropagation();
+                                      if (data._id && data.parent) {
+                                        handleDelete(
+                                          null,
+                                          data._id,
+                                          data.parent,
+                                        );
+                                      }
+                                    }}
+                                  />
+                                </el-icon>
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    },
+                  }}
+                </el-tree>
+              ),
+            }}
+          </el-collapse-item>
+        </el-collapse>
       );
     },
   });
 </script>
 
 <style lang="scss">
-  .tree-conatiner {
-    margin-top: 20px;
-    .editor-component-tree {
-      width: 100%;
-      height: 25px;
-      line-height: 25px;
-      font-size: 13px;
-      display: flex;
-      justify-content: space-between;
-      > * {
-        display: inline-block;
-      }
+  .item-tree {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    // max-height: 350px;
+    .tree-conatiner {
+      position: relative;
+      // overflow-y: auto;
+      // max-height: 350px;
+      .editor-component-tree {
+        width: 100%;
+        height: 25px;
+        line-height: 25px;
+        font-size: 13px;
+        display: flex;
+        justify-content: space-between;
+        > * {
+          display: inline-block;
+        }
 
-      i {
-        vertical-align: text-bottom;
-      }
+        i {
+          vertical-align: text-bottom;
+        }
 
-      .el-tree {
-        --el-tree-node-hover-bg-color: rgb(53, 53, 53);
-      }
-      .tools {
-        margin-right: 20px;
-        span {
-          margin-left: 10px;
+        .el-tree {
+          --el-tree-node-hover-bg-color: rgb(53, 53, 53);
+        }
+        .tools {
+          margin-right: 20px;
+          span {
+            margin-left: 10px;
+          }
         }
       }
     }

@@ -17,4 +17,8 @@
   const activeTab = ref("component-list");
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+  .editor-aside-container {
+    position: relative;
+  }
+</style>

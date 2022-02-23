@@ -61,7 +61,6 @@
         console.log(e);
       };
       const clone = (cpn: EditorComponent): Component => {
-        // console.log("drag", cpn);
         return createNewComponent(cloneDeep(cpn));
       };
       return {
@@ -76,6 +75,8 @@
 
 <style lang="scss">
   .component-module-list {
+    margin-bottom: 35px;
+    overflow-y: auto;
     .component-module-label {
       padding-left: 8px;
       font-weight: 600;
