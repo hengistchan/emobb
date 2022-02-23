@@ -90,6 +90,34 @@
 <style lang="scss">
   .mine {
     width: 600px;
+    .avatar-uploader {
+      position: relative;
+      .el-image {
+        position: relative;
+        &:hover {
+          &::before {
+            content: "点击上传";
+            display: block;
+            position: absolute;
+            color: #fff;
+            left: calc(50% - 30px);
+            top: calc(50% - 15px);
+            z-index: 99999;
+          }
+          &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #000;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+          }
+        }
+      }
+    }
     .el-form-item__label {
       font-size: 15px;
       font-weight: 600;
