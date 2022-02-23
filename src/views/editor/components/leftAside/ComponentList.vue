@@ -44,7 +44,7 @@
   import draggable from "vuedraggable";
   import { cloneDeep } from "lodash-es";
   import { EditorComponent } from "@/package/types/component";
-  import useEditor from "../../hook/useEditor";
+  import { createNewComponent } from "./../../hook/useEditorInit";
 
   export default defineComponent({
     components: {
@@ -57,7 +57,6 @@
         Object.values(componentModules).sort((a, b) => a.order - b.order),
       );
 
-      const { createNewComponent } = useEditor();
       const onDrag = (e: any) => {
         console.log(e);
       };

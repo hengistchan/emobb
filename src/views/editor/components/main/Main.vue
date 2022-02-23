@@ -3,6 +3,7 @@
   <div class="simulator-container">
     <render-page ref="editorRef" class="simulator-editor">
       <DraggableTransitionGroup
+        v-if="page && page.components"
         v-model:drag="drag"
         v-model="page!.components"
         draggable=".item-drag"
