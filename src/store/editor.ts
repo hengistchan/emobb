@@ -1,8 +1,9 @@
 import { defineStore } from "pinia";
 import { Component } from "@/package/types/component";
 import { Page } from "@/package/types/page";
-import { find } from "lodash-es";
+import { find, pickBy } from "lodash-es";
 import { Nullable } from "types";
+import { createNewPage } from "@/views/editor/hook/useEditorInit";
 
 interface ComponentTree {
   label: string;
@@ -77,6 +78,55 @@ const editorStore = defineStore("editor", {
     setActive(componentId: string, parent: Component[]) {
       this.currentComponent = componentId;
       this.parent = parent;
+    },
+    registerStore(page: Page) {
+      // 遍历page，注册组件
+      if (page == null) {
+        this.page = createNewPage({ title: "新页面" });
+        return;
+      }
+      let tick = 0;
+      const registerComponents = (arr: Component[]): any => {
+        const root: any[] = [];
+        if (arr == null) return;
+        for (let i = 0; i < arr.length; i++) {
+          tick++;
+          root.push({
+            label: arr[i].label,
+            _id: arr[i]._id,
+            children: [],
+            component: arr[i],
+            parent: arr,
+          });
+          this.componentMap[arr[i]._id] = arr[i];
+        }
+        const hasSlots = (cpn: Component) => cpn.props?.slots !== null;
+        const getSlots = (cpn: Component) => {
+          const slots = pickBy(
+            cpn.props?.slots,
+            (value, key) => !key.startsWith("value"),
+          );
+          return Object.values(slots);
+        };
+        for (let i = 0; i < root.length; i++) {
+          if (hasSlots(root[i].component as Component)) {
+            const slots = getSlots(root[i].component as Component);
+            root[i].children = root[i].children ?? [];
+
+            for (let j = 0; j < slots.length; j++) {
+              const slot = slots[j];
+              root[i].children.push({
+                label: `插槽_${slot.key}`,
+                children: [],
+              });
+              registerComponents(slot.children);
+            }
+          }
+        }
+      };
+      registerComponents(page.components);
+      this.page = page;
+      this.tick = tick;
     },
   },
 });

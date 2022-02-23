@@ -24,57 +24,6 @@ const useEditor = () => {
   const { pushHistory } = useHistoryEditor();
 
   /**
-   * 生成新页面
-   * @param param0 页面数据
-   * @returns 页面实例
-   */
-  const createNewPage = ({ title = "页面" }: { title: string }): Page => ({
-    title,
-    props: {
-      backgroundColor: "#ffffff",
-      backgroundImage: "",
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "contain",
-      height: "669px",
-    },
-    components: [],
-  });
-
-  /**
-   * 生成新组件
-   * @param component 编辑器组件实例
-   * @returns 组件实例
-   */
-  const createNewComponent = (component: EditorComponent): Component => {
-    const cpn = {
-      _id: `${uuidv4().slice(0, 5)}_${editorStore.tick || 0}`,
-      moduleName: component.moduleName,
-      name: component.name,
-      label: component.label,
-      styles: {
-        ...commonComponentStyles,
-      },
-      hasResize: false,
-      props: Object.keys(component.props || {}).reduce((prev, curr) => {
-        const { propObj, prop } = useDotProp(prev, curr);
-        if (component.props && (component.props[curr] as any)?.defaultValue) {
-          propObj[prop] = prev[curr] = component.props![curr]?.defaultValue;
-          // prev[curr] = (component.props[curr] as any)?.defaultValue;
-        }
-        return prev;
-      }, {} as { [key: string]: any }),
-      draggable: component.draggable ?? true, // 是否可以拖拽
-      showStyleConfig: component.showStyleConfig ?? true, // 是否显示组件样式配置
-      events: component.events || [], // 事件集合
-      model: {},
-    };
-    editorStore.addComponent(cpn);
-    // 防止删除组件时删除不干净产生的情况
-    editorStore.tick++;
-    return cpn;
-  };
-
-  /**
    * 在componentMap上注册组件实例
    * @param el dom实例
    * @param componentId 组件ID
@@ -146,8 +95,9 @@ const useEditor = () => {
     }
     const hasSlots = (cpn: Component) => cpn.props?.slots !== null;
     const getSlots = (cpn: Component) => {
-      const slots = pickBy(cpn.props?.slots, (value, key) =>
-        key.startsWith("slot"),
+      const slots = pickBy(
+        cpn.props?.slots,
+        (value, key) => !key.startsWith("value"),
       );
       return Object.values(slots);
     };
@@ -203,8 +153,6 @@ const useEditor = () => {
   };
 
   return {
-    createNewPage,
-    createNewComponent,
     handleClick,
     handleMouseOver,
     handleDelete,

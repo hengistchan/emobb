@@ -52,7 +52,7 @@
     }
 
     .page-name {
-      transform: translateX(-50px);
+      transform: translateX(-95px);
     }
   }
 </style>

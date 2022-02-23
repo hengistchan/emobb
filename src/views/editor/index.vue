@@ -1,5 +1,12 @@
 <template>
-  <el-container class="editor-container">
+  <el-container
+    v-loading.body="loading"
+    element-loading-text="Loading..."
+    :element-loading-spinner="svg"
+    element-loading-svg-view-box="-10, -10, 50, 50"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
+    class="editor-container"
+  >
     <el-header height="50px">
       <!-- 编辑器头部 -->
       <editor-header></editor-header>
@@ -21,12 +28,17 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { defineComponent, onMounted, ref } from "vue";
   import EditorHeader from "./components/EditorHeader.vue";
   import EditorLeftAside from "./components/leftAside/index.vue";
   import EditorRightAside from "./components/rightAside/index.vue";
   import EditorMain from "./components/main/index.vue";
   import useHotKey from "./hook/useHotKey";
+  import message from "@/helper/message";
+  import useEditorStore from "@/store/editor";
+  import { useRoute, useRouter } from "vue-router";
+  import Work from "@/api/work";
+  import { Page } from "@/package/types/page";
 
   // console.log(componentModules);
 
@@ -39,7 +51,40 @@
     },
     setup() {
       useHotKey();
-      return {};
+      const loading = ref(true);
+      const svg = `<path class="path" d="
+          M 30 15
+          L 28 17
+          M 25.61 25.61
+          A 15 15, 0, 0, 1, 15 30
+          A 15 15, 0, 1, 1, 27.99 7.5
+          L 15 15
+        " style="stroke-width: 4px; fill: rgba(0, 0, 0, 0)"/>`;
+      const editorStore = useEditorStore();
+      const route = useRoute();
+      const router = useRouter();
+      const uuid = route.query?.id as string;
+      if (uuid == null) {
+        message("error", "请求的id不存在！");
+      }
+      onMounted(async () => {
+        const {
+          error,
+          message: msg,
+          ...data
+        } = await Work.getDetailByUUID(uuid);
+        if (error && msg) {
+          message("error", msg);
+          router.back();
+        } else {
+          editorStore.registerStore(data.page as Page);
+        }
+        loading.value = false;
+      });
+      return {
+        loading,
+        svg,
+      };
     },
   });
 </script>

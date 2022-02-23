@@ -8,9 +8,9 @@
   import useEditor from "@/views/editor/hook/useEditor";
 
   // 初始化数据
-  const editorStore = useEditorStore();
-  const { createNewPage } = useEditor();
-  editorStore.page = createNewPage({ title: "新页面" });
+  // const editorStore = useEditorStore();
+  // const { createNewPage } = useEditor();
+  // editorStore.page = createNewPage({ title: "新页面" });
 </script>
 
 <style lang="scss">
