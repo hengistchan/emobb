@@ -129,7 +129,7 @@
         --el-tree-node-hover-bg-color: rgb(53, 53, 53);
       }
       .tools {
-        margin-right: 40px;
+        margin-right: 20px;
         span {
           margin-left: 10px;
         }
