@@ -30,7 +30,7 @@
         <el-radio-button :label="1">女</el-radio-button>
       </el-radio-group>
     </el-form-item>
-    <el-form-item>
+    <el-form-item class="button">
       <el-button type="primary" @click="handleClick">提交</el-button>
     </el-form-item>
   </el-form>
@@ -90,6 +90,14 @@
 <style lang="scss">
   .mine {
     width: 600px;
+    margin: 0 auto;
+    margin-top: 40px;
+    .button {
+      margin-top: 30px;
+      .el-button {
+        width: 90px;
+      }
+    }
     .avatar-uploader {
       position: relative;
       .el-image {

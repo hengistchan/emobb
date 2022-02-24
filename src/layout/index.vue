@@ -57,7 +57,7 @@
     }
     .layout-main {
       height: calc(100vh - 40px);
-      padding: 150px 150px 0 300px;
+      padding: 20px 0 0 0;
       background-color: #fff;
     }
   }
