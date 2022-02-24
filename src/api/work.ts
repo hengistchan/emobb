@@ -1,6 +1,6 @@
 import _axios from "@/helper/request";
 import { Page } from "@/package/types/page";
-import { CommonResp } from "types";
+import { CommonResp, Nullable } from "types";
 
 interface WorkDTO {
   id: number;
@@ -25,6 +25,16 @@ interface WorkContent {
   page: Page;
 }
 
+interface WorkCreateDTO {
+  title?: Nullable<string>;
+  description?: Nullable<string>;
+}
+
+interface WortCreateSuccess {
+  uuid: string;
+  title: string;
+}
+
 class Work {
   static getByUUID(uuid: string) {
     return _axios.get<WorkDTO>(`/work/${uuid}`);
@@ -36,6 +46,10 @@ class Work {
 
   static saveWorkContent(uuid: string, data: WorkContent) {
     return _axios.put(`/work/content/${uuid}`, data);
+  }
+
+  static createWork(data: WorkCreateDTO) {
+    return _axios.post<WortCreateSuccess>(`/work`, data);
   }
 }
 

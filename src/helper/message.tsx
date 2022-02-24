@@ -1,10 +1,10 @@
 import { ElMessage } from "element-plus/es";
 const message = (
   type: "info" | "success" | "warning" | "error",
-  message: string,
+  message: string | undefined | null,
 ) => {
   ElMessage({
-    message: message,
+    message: message || "error",
     type: type ?? "success",
   });
 };

@@ -70,6 +70,7 @@
           router.push("/");
         } else {
           editorStore.registerStore(data.page as Page);
+          editorStore.page && (editorStore.page.title = data.title);
         }
         loading.value = false;
       });
