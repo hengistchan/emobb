@@ -90,7 +90,7 @@ const editorStore = defineStore("editor", {
         const root: any[] = [];
         if (arr == null) return;
         for (let i = 0; i < arr.length; i++) {
-          tick++;
+          tick = Math.max(tick, parseInt(arr[i]._id.split("_")[1]));
           root.push({
             label: arr[i].label,
             _id: arr[i]._id,
@@ -126,7 +126,7 @@ const editorStore = defineStore("editor", {
       };
       registerComponents(page.components);
       this.page = page;
-      this.tick = tick;
+      this.tick = ++tick;
     },
   },
 });
