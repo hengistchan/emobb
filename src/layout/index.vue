@@ -5,7 +5,9 @@
       <Menu />
     </el-aside>
     <el-container>
-      <el-header class="layout-header"></el-header>
+      <el-header class="layout-header">
+        <Header />
+      </el-header>
       <el-main class="layout-main"><router-view></router-view></el-main>
     </el-container>
   </el-container>
@@ -16,9 +18,10 @@
   import useUser from "@/hook/useUser";
   import Menu from "./menu.vue";
   import { useRouter } from "vue-router";
+  import Header from "./header.vue";
 
   export default defineComponent({
-    components: { Menu },
+    components: { Menu, Header },
     setup() {
       const { getUserInfo } = useUser();
       const router = useRouter();

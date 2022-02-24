@@ -3,7 +3,12 @@
 
   export default defineComponent({
     setup() {
-      return () => <div class="layout-header-container"></div>;
+      return () => (
+        <el-container class="layout-header-container">
+          <el-aside class="left"></el-aside>
+          <el-aside class="right"></el-aside>
+        </el-container>
+      );
     },
   });
 </script>
@@ -13,5 +18,12 @@
     width: 100%;
     height: 100%;
     display: flex;
+    justify-content: space-between;
+    .left {
+      width: 50%;
+    }
+    .right {
+      width: 50%;
+    }
   }
 </style>

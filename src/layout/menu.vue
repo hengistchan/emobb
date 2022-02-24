@@ -14,7 +14,7 @@
     setup(props, { emit }) {
       const activeIndex = ref("1");
       const router = useRouter();
-      const showCreateDrawer = ref(true);
+      const showCreateDrawer = ref(false);
       return () => (
         <div>
           <CreateDrawer v-model:modelValue={showCreateDrawer.value} />

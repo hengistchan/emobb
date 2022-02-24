@@ -19,7 +19,7 @@
       },
     },
     setup(props, { emit }) {
-      const model = useVModel(props, "modelValue");
+      const model = useVModel(props, "modelValue", emit);
       const form = reactive<Form>({
         title: null,
         description: null,
@@ -34,6 +34,7 @@
         }
         message("success", "创建成功");
         router.push("/editor?id=" + data.uuid);
+        model.value = false;
       };
       return () => (
         <>
