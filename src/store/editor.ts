@@ -36,6 +36,7 @@ interface EditorState {
   historyIndex: number;
   historyLength: number;
   refs: { [key: string]: any };
+  uuid: Nullable<string>;
 }
 
 const editorStore = defineStore("editor", {
@@ -49,6 +50,7 @@ const editorStore = defineStore("editor", {
     historyIndex: -1,
     historyLength: 10,
     refs: {},
+    uuid: null,
   }),
   getters: {
     getComponentById: (state) => (id?: string | null) => {

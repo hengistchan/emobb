@@ -141,8 +141,9 @@
     // max-height: 350px;
     .tree-conatiner {
       position: relative;
-      // overflow-y: auto;
-      // max-height: 350px;
+      overflow-y: auto;
+      max-height: 300px;
+      min-height: 150px;
       .editor-component-tree {
         width: 100%;
         height: 25px;

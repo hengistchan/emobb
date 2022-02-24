@@ -64,6 +64,7 @@
       const editorStore = useEditorStore();
       const router = useRouter();
       const uuid = getCurrentUUID();
+      editorStore.uuid = uuid;
       onMounted(async () => {
         const { error, ...data } = await Work.getDetailByUUID(uuid ?? "");
         if (error) {

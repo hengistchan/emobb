@@ -1,5 +1,5 @@
 <script lang="tsx">
-  import { computed, defineComponent, ref } from "vue";
+  import { computed, defineComponent, onUnmounted, ref } from "vue";
   import { DArrowLeft, DArrowRight, Delete } from "@element-plus/icons-vue";
   import useEditorStore from "@/store/editor";
   import useEditor from "../../hook/useEditor";
@@ -8,6 +8,7 @@
   import { getCurrentUUID } from "../../hook/useEditorInit";
   import { Page } from "@/package/types/page";
   import message from "@/helper/message";
+  import useAutoSaveWork from "../../hook/useAutoSaveWork";
 
   export default defineComponent({
     setup() {
@@ -18,6 +19,10 @@
       const currentComponent = computed(() => editorStore.currentComponent);
       const uuid = getCurrentUUID();
       const saveLoading = ref(false);
+      const autoSave = useAutoSaveWork(saveLoading, 60000);
+      onUnmounted(() => {
+        autoSave();
+      });
       const saveWorkContent = async () => {
         saveLoading.value = true;
         const { error } = await Work.saveWorkContent(uuid ?? "", {
