@@ -18,6 +18,7 @@
     width: 100%;
     height: 100%;
     display: flex;
+    background-color: #1e222d;
     justify-content: space-between;
     .left {
       width: 50%;

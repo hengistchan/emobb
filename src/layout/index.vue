@@ -1,6 +1,6 @@
 <template>
   <el-container class="layout-container">
-    <el-aside class="layout-aside" width="250px">
+    <el-aside class="layout-aside" width="210px">
       <div class="logo" @click="() => router.push('/')">E M O</div>
       <Menu />
     </el-aside>
@@ -8,7 +8,9 @@
       <el-header class="layout-header">
         <Header />
       </el-header>
-      <el-main class="layout-main"><router-view></router-view></el-main>
+      <el-main class="layout-main">
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -55,7 +57,7 @@
     }
     .layout-main {
       height: calc(100vh - 40px);
-      padding: 45px 0 35px 70px;
+      padding: 150px 150px 0 300px;
       background-color: #fff;
     }
   }
