@@ -1,8 +1,8 @@
+import { queryUrlHelpper } from "@/helper";
 import _axios from "@/helper/request";
-import { Page } from "@/package/types/page";
-import { CommonResp, Nullable } from "types";
+import { Page, Nullable, PageResp, CommonResp } from "types";
 
-interface WorkDTO {
+export interface WorkDTO {
   id: number;
   uuid: string;
   title: string;
@@ -50,6 +50,16 @@ class Work {
 
   static createWork(data: WorkCreateDTO) {
     return _axios.post<WortCreateSuccess>(`/work`, data);
+  }
+
+  static getInRecycler(search: string | null, page: Page) {
+    return _axios.get<PageResp<WorkDTO>>(
+      queryUrlHelpper(`/work/can`, { search, ...page }),
+    );
+  }
+
+  static recover(uuid: string) {
+    return _axios.post<CommonResp>(`/work/recover/${uuid}`, null);
   }
 }
 

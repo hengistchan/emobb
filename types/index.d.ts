@@ -26,4 +26,16 @@ declare type CommonResp = {
   request: string;
 };
 
+declare interface Page {
+  page: number;
+  count: number;
+}
+
+declare type PageResp<T> = {
+  total: number;
+  items: T[];
+  page: number;
+  count: number;
+};
+
 declare type Headers = { [key: string]: string };

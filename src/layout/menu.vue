@@ -69,7 +69,7 @@
               </el-icon>
               <span>模板管理</span>
             </el-menu-item>
-            <el-menu-item index="5" onClick={() => router.push("/mine")}>
+            <el-menu-item index="5" onClick={() => router.push("/recycler")}>
               <el-icon size={iconSize}>
                 <Delete />
               </el-icon>
