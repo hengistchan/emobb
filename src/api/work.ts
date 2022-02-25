@@ -1,6 +1,7 @@
 import { queryUrlHelpper } from "@/helper";
 import _axios from "@/helper/request";
-import { Page, Nullable, PageResp, CommonResp } from "types";
+import { Page as PageRest, Nullable, PageResp, CommonResp } from "types";
+import { Page } from "@/package/types/page";
 
 export interface WorkDTO {
   id: number;
@@ -52,7 +53,7 @@ class Work {
     return _axios.post<WortCreateSuccess>(`/work`, data);
   }
 
-  static getInRecycler(search: string | null, page: Page) {
+  static getInRecycler(search: string | null, page: PageRest) {
     return _axios.get<PageResp<WorkDTO>>(
       queryUrlHelpper(`/work/can`, { search, ...page }),
     );
