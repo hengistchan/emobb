@@ -13,7 +13,7 @@ const chunks = Object.entries(dependencies as { [key: string]: string }).map(
 );
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "./",
+  base: "/",
   plugins: [
     vue(),
     vueJsx({
