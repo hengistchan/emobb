@@ -41,21 +41,43 @@
                 ></el-input>
               </el-form-item>
             </el-form>
-            <el-table data={data.value?.items} class="table">
-              <el-table-column label="ID" prop="id"></el-table-column>
-              <el-table-column label="UUID" prop="uuid"></el-table-column>
-              <el-table-column label="标题" prop="title"></el-table-column>
-              <el-table-column label="封面" prop="cover_img"></el-table-column>
+            <el-table data={data.value?.items} class="table" stripe={true}>
+              <el-table-column
+                label="ID"
+                prop="id"
+                align="center"
+              ></el-table-column>
+              <el-table-column
+                label="UUID"
+                prop="uuid"
+                align="center"
+              ></el-table-column>
+              <el-table-column
+                label="标题"
+                prop="title"
+                align="center"
+              ></el-table-column>
+              <el-table-column
+                label="封面"
+                prop="cover_img"
+                align="center"
+              ></el-table-column>
               <el-table-column
                 label="是否模板"
                 prop="is_template"
+                align="center"
               ></el-table-column>
-              <el-table-column label="状态" prop="status"></el-table-column>
+              <el-table-column
+                label="状态"
+                prop="status"
+                align="center"
+              ></el-table-column>
               <el-table-column
                 label="发布时间"
                 prop="last_publish_time"
+                align="center"
               ></el-table-column>
-              <el-table-column label="操作">
+              <el-table-column label="操作" align="center">
                 {{
                   default: (data: { row: WorkDTO }) => (
                     <el-button
