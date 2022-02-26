@@ -6,6 +6,8 @@ import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+// import { dependencies } from "./package.json";
+const { dependencies } = require("./package.json");
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -22,6 +24,37 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
   ],
+  build: {
+    cssCodeSplit: true,
+    target: "modules",
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, "index.html"),
+        preview: resolve(__dirname, "preview/index.html"),
+      },
+      output: {
+        manualChunks(id) {
+          const chunks = Object.entries(
+            dependencies as { [key: string]: string },
+          ).map(([key, value]) => key);
+          if (id.includes("node_modules")) {
+            for (let i = 0; i < chunks.length; i++) {
+              if (id.includes(chunks[i])) {
+                return chunks[i];
+              }
+            }
+          }
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),

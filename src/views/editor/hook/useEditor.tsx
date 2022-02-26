@@ -69,7 +69,8 @@ const useEditor = () => {
       }
       pushHistory(history);
       parent.splice(i, 1);
-      delete editorStore.componentMap[componentId];
+      // delete editorStore.componentMap[componentId];
+      // delete editorStore.refs[componentId];
       editorStore.cancelActive();
     }
   };

@@ -9,15 +9,15 @@ import { EditorComponent } from "@/package/types/component";
 import useEditor from "@/views/editor/hook/useEditor";
 import { SwitchButton } from "@element-plus/icons-vue";
 import { ElButton, ElCarouselItem, ElImage } from "element-plus";
+import { onMounted } from "vue";
 
 export default {
   name: "button",
   moduleName: "container",
   label: "按钮",
   preview: () => <p>普通容器</p>,
-  render: ({ props, styles, component, custom }) => {
+  render: ({ props, styles, component }) => {
     const { registerRef } = useEditor();
-
     return () => (
       <div
         style={styles}
@@ -64,4 +64,10 @@ export default {
   },
   icon: SwitchButton,
   draggable: true,
+  events: [
+    {
+      label: "点击按钮",
+      value: "click",
+    },
+  ],
 } as EditorComponent;
