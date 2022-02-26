@@ -8,7 +8,9 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 // import { dependencies } from "./package.json";
 const { dependencies } = require("./package.json");
-
+const chunks = Object.entries(dependencies as { [key: string]: string }).map(
+  ([key, value]) => key,
+);
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "./",
@@ -41,9 +43,6 @@ export default defineConfig({
       },
       output: {
         manualChunks(id) {
-          const chunks = Object.entries(
-            dependencies as { [key: string]: string },
-          ).map(([key, value]) => key);
           if (id.includes("node_modules")) {
             for (let i = 0; i < chunks.length; i++) {
               if (id.includes(chunks[i])) {
