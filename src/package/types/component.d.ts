@@ -26,8 +26,16 @@ export interface Component {
   draggable: boolean;
   showStyleConfig?: boolean;
   events: { label: string; value: string }[];
+  actions: Action[];
   ref?: Ref;
   [prop: string]: any;
+}
+
+interface Action {
+  key: string; // 事件唯一标识符
+  event: string; // 该action属于哪一个event
+  name: string; // 动作名称
+  code: string; // 动作代码
 }
 
 export interface EditorComponent {

@@ -42,7 +42,10 @@ export const createNewComponent = (component: EditorComponent): Component => {
     hasResize: false,
     props: Object.keys(component.props || {}).reduce((prev, curr) => {
       const { propObj, prop } = useDotProp(prev, curr);
-      if (component.props && (component.props[curr] as any)?.defaultValue) {
+      if (
+        component.props &&
+        (component.props[curr] as any)?.defaultValue != null
+      ) {
         propObj[prop] = prev[curr] = component.props![curr]?.defaultValue;
       }
       return prev;
@@ -50,6 +53,7 @@ export const createNewComponent = (component: EditorComponent): Component => {
     draggable: component.draggable ?? true, // 是否可以拖拽
     showStyleConfig: component.showStyleConfig ?? true, // 是否显示组件样式配置
     events: component.events || [], // 事件集合
+    actions: [], // 动作集合
     model: {},
   };
   editorStore.addComponent(cpn);

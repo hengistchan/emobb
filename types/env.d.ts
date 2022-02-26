@@ -13,3 +13,8 @@ declare module "*.ts" {
     globEager: (path: string) => Record<string, any>;
   }
 }
+
+declare module "*.json" {
+  const value: any;
+  export default value;
+}
