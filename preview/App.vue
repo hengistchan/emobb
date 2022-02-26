@@ -1,9 +1,32 @@
-<script lang="tsx">
-  import { defineComponent } from "vue";
+<template>
+  <RenderPage v-if="page" :props="page.props">
+    <template v-for="outElement in page.components" :key="outElement._id">
+      <SlotItem :element="outElement"></SlotItem>
+    </template>
+  </RenderPage>
+</template>
 
+<script lang="ts">
+  import { defineComponent, onMounted, ref } from "vue";
+  import { getURLParam, getPage } from "./helper/index";
+  import RenderPage from "./views/RenderPage";
+  import { Page } from "@/package/types/page";
+  import SlotItem from "./views/SlotItem.vue";
   export default defineComponent({
+    components: {
+      RenderPage,
+      SlotItem,
+    },
     setup() {
-      return () => <h1>Hello World</h1>;
+      const page = ref<Page | null>(null);
+      onMounted(async () => {
+        const uuid = getURLParam("id") as string;
+        const data = await getPage(uuid);
+        page.value = data.page;
+      });
+      return {
+        page,
+      };
     },
   });
 </script>
