@@ -23,6 +23,7 @@
         const uuid = getURLParam("id") as string;
         const data = await getPage(uuid);
         page.value = data.page;
+        document.title = page.value?.title || "Vite";
       });
       return {
         page,

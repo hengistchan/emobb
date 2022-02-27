@@ -33,59 +33,105 @@
         }
         saveLoading.value = false;
       };
+      const showPreview = ref(true);
+      const onPreview = async () => {
+        await saveWorkContent();
+        showPreview.value = true;
+      };
       return () => (
-        <div class="editor-toolbar">
-          <div class="toolbar-left"></div>
-          <div class="toolbar-right">
-            <div class="toolbar-history">
-              <el-button
-                type="primary"
-                onClick={() => saveWorkContent()}
-                loading={saveLoading.value}
-              >
-                保存
-              </el-button>
-              <el-tooltip effect="light" placement="top-start" content="撤销">
+        <>
+          <el-dialog
+            title="预览页面"
+            center={true}
+            v-model={showPreview.value}
+            width={"70%"}
+            top={"3%"}
+            append-to-body={true}
+            destroy-on-close={true}
+          >
+            <div
+              class="editor-preview"
+              style={{
+                height: editorStore.page?.props?.height ?? "670px",
+              }}
+            >
+              <iframe
+                src={`/preview/#/?id=${editorStore.uuid}`}
+                frameborder="0"
+                width="100%"
+                height="100%"
+              ></iframe>
+            </div>
+          </el-dialog>
+          <div class="editor-toolbar">
+            <div class="toolbar-left"></div>
+            <div class="toolbar-right">
+              <div class="toolbar-history">
                 <el-button
-                  plain={true}
-                  icon={DArrowLeft}
-                  onClick={() => historyPrev()}
-                  disabled={editorStore.checkHistoryPrev}
-                ></el-button>
-              </el-tooltip>
-              <el-tooltip effect="light" placement="top-start" content="恢复">
+                  type="primary"
+                  plain
+                  loading={saveLoading.value}
+                  onClick={() => onPreview()}
+                >
+                  预览
+                </el-button>
                 <el-button
-                  plain={true}
-                  icon={DArrowRight}
-                  onClick={() => historyNext()}
-                  disabled={editorStore.checkHistpryNext}
-                ></el-button>
-              </el-tooltip>
-              <el-tooltip effect="light" placement="top-start" content="删除">
-                <el-button
-                  disabled={
-                    parent.value == null ||
-                    currentComponent.value == null ||
-                    currentComponent.value === ""
-                  }
-                  plain={true}
-                  icon={Delete}
-                  type="danger"
-                  onClick={(e: Event) => {
-                    e.stopPropagation();
-                    handleDelete(e, null, null);
-                  }}
-                ></el-button>
-              </el-tooltip>
+                  type="primary"
+                  onClick={() => saveWorkContent()}
+                  loading={saveLoading.value}
+                >
+                  保存
+                </el-button>
+                <el-tooltip effect="light" placement="top-start" content="撤销">
+                  <el-button
+                    plain={true}
+                    icon={DArrowLeft}
+                    onClick={() => historyPrev()}
+                    disabled={editorStore.checkHistoryPrev}
+                  ></el-button>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top-start" content="恢复">
+                  <el-button
+                    plain={true}
+                    icon={DArrowRight}
+                    onClick={() => historyNext()}
+                    disabled={editorStore.checkHistpryNext}
+                  ></el-button>
+                </el-tooltip>
+                <el-tooltip effect="light" placement="top-start" content="删除">
+                  <el-button
+                    disabled={
+                      parent.value == null ||
+                      currentComponent.value == null ||
+                      currentComponent.value === ""
+                    }
+                    plain={true}
+                    icon={Delete}
+                    type="danger"
+                    onClick={(e: Event) => {
+                      e.stopPropagation();
+                      handleDelete(e, null, null);
+                    }}
+                  ></el-button>
+                </el-tooltip>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       );
     },
   });
 </script>
 
 <style lang="scss">
+  .editor-preview {
+    width: 337px;
+    margin: 0 auto;
+    border: 1px solid black;
+    .el-dialog__body {
+      padding: 0;
+    }
+  }
   .editor-toolbar {
     display: flex;
     justify-content: space-between;

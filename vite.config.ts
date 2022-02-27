@@ -6,7 +6,6 @@ import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
-// import { dependencies } from "./package.json";
 const { dependencies } = require("./package.json");
 const chunks = Object.entries(dependencies as { [key: string]: string }).map(
   ([key, value]) => key,
