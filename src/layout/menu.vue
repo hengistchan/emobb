@@ -57,13 +57,13 @@
                 ),
               }}
             </el-sub-menu>
-            <el-menu-item index="3" onClick={() => router.push("/mine")}>
+            <el-menu-item index="3" onClick={() => router.push("/work")}>
               <el-icon size={iconSize}>
                 <TrendCharts />
               </el-icon>
               <span>作品管理</span>
             </el-menu-item>
-            <el-menu-item index="4" onClick={() => router.push("/work")}>
+            <el-menu-item index="4" onClick={() => router.push("/template")}>
               <el-icon size={iconSize}>
                 <Tools />
               </el-icon>

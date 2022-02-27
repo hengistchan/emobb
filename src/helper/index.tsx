@@ -12,7 +12,7 @@ export const getParentElement = (element: HTMLElement, className: string) => {
 
 export const queryUrlHelpper = (
   url: string,
-  data: { [key: string]: string | null | number },
+  data: { [key: string]: string | null | number | boolean },
 ) => {
   let temp = "?",
     flag = false;

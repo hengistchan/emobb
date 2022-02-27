@@ -13,7 +13,7 @@
       const page = pageHelper();
       const router = useRouter();
       const handleSearch = async () => {
-        const { error, ...v } = await Work.getList(search.value, false, page);
+        const { error, ...v } = await Work.getList(search.value, true, page);
         if (error) return;
         data.value = v;
       };

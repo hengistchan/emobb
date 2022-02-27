@@ -63,9 +63,9 @@ class Work {
     return _axios.post<CommonResp>(`/work/recover/${uuid}`, null);
   }
 
-  static getList(search: string | null, page: PageRest) {
+  static getList(search: string | null, isTemplate: boolean, page: PageRest) {
     return _axios.get<PageResp<WorkDTO>>(
-      queryUrlHelpper(`/work`, { search, ...page }),
+      queryUrlHelpper(`/work`, { search, template: isTemplate, ...page }),
     );
   }
 }
