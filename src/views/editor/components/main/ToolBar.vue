@@ -33,7 +33,7 @@
         }
         saveLoading.value = false;
       };
-      const showPreview = ref(true);
+      const showPreview = ref(false);
       const onPreview = async () => {
         await saveWorkContent();
         showPreview.value = true;

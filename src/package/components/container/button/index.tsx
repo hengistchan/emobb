@@ -1,9 +1,7 @@
 import {
   createInputProp,
   createSelectProp,
-  createCrossSortableInputProp,
   createSwitchProp,
-  createNumberInputProp,
 } from "@/package/helper/CreateProps";
 import { EditorComponent } from "@/package/types/component";
 import useEditor from "@/views/editor/hook/useEditor";
@@ -20,14 +18,14 @@ export default {
     const { registerRef } = useEditor();
     return () => (
       <div
-        style={styles}
         class="container"
-        ref={(el) => registerRef(el, component._id)}
+        style={styles}
+        ref={(el: any) => registerRef(el, component._id)}
       >
         <ElButton
           type={props.type}
           size={props.size}
-          // plain={props.plain}
+          plain={props.plain}
           round={props.round}
           disabled={props.disabled}
         >
@@ -58,7 +56,7 @@ export default {
         { label: "小", value: "small" },
       ],
     }),
-    // plain: createSwitchProp({ label: "朴素按钮", defaultValue: false }),
+    plain: createSwitchProp({ label: "朴素按钮", defaultValue: false }),
     round: createSwitchProp({ label: "圆角按钮", defaultValue: false }),
     disabled: createSwitchProp({ label: "禁用", defaultValue: false }),
   },
