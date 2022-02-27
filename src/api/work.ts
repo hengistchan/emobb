@@ -62,6 +62,12 @@ class Work {
   static recover(uuid: string) {
     return _axios.post<CommonResp>(`/work/recover/${uuid}`, null);
   }
+
+  static getList(search: string | null, page: PageRest) {
+    return _axios.get<PageResp<WorkDTO>>(
+      queryUrlHelpper(`/work`, { search, ...page }),
+    );
+  }
 }
 
 export default Work;

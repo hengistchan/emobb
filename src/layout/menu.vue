@@ -63,7 +63,7 @@
               </el-icon>
               <span>作品管理</span>
             </el-menu-item>
-            <el-menu-item index="4" onClick={() => router.push("/mine")}>
+            <el-menu-item index="4" onClick={() => router.push("/work")}>
               <el-icon size={iconSize}>
                 <Tools />
               </el-icon>

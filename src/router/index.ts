@@ -13,6 +13,10 @@ const routes: RouteRecordRaw[] = [
         path: "recycler",
         component: () => import("@/views/index/recycler/index.vue"),
       },
+      {
+        path: "work",
+        component: () => import("@/views/index/work/index.vue"),
+      },
     ],
   },
   {

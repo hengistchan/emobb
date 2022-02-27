@@ -11,7 +11,7 @@ import store from "store2";
 
 const config: AxiosRequestConfig = {
   baseURL: import.meta.env.VITE_BASE_URL as string,
-  // baseURL: "http://hengistchan.site:8088",
+  // baseURL: "http://localhost:8088",
   timeout: 60 * 1000, // Timeout
 };
 
