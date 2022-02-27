@@ -17,17 +17,21 @@ export default {
   render: ({ props, styles, component }) => {
     const { registerRef } = useEditor();
     return () => (
-      <ElButton
-        ref={(el: any) => registerRef(el, component._id)}
+      <div
+        class="container"
         style={styles}
-        type={props.type}
-        size={props.size}
-        plain={props.plain}
-        round={props.round}
-        disabled={props.disabled}
+        ref={(el: any) => registerRef(el, component._id)}
       >
-        {props.value}
-      </ElButton>
+        <ElButton
+          type={props.type}
+          size={props.size}
+          plain={props.plain}
+          round={props.round}
+          disabled={props.disabled}
+        >
+          {props.value}
+        </ElButton>
+      </div>
     );
   },
   props: {
