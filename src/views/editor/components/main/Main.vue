@@ -111,7 +111,7 @@
       margin: 20px auto 0;
       background-color: #fff;
       box-shadow: 0 8px 12px #ebedf0;
-      // overflow-y: auto;
+      overflow-y: auto;
       // overflow-x: hidden;
 
       .edit-wrapper {
