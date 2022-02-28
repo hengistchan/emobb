@@ -15,7 +15,7 @@ export default {
   moduleName: "container",
   label: "轮播图",
   preview: () => <p>普通容器</p>,
-  render: ({ props, styles, component, custom }) => {
+  render: ({ props, styles, component }) => {
     const { registerRef } = useEditor();
     return () => (
       <div

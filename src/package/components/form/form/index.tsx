@@ -14,7 +14,7 @@ export default {
   moduleName: "form",
   label: "表单容器",
   preview: () => <p>普通容器</p>,
-  render: ({ props, styles, component, custom }) => {
+  render: ({ props, styles, component }) => {
     const slots = useSlots();
     const { registerRef } = useEditor();
     return () => (

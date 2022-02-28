@@ -31,7 +31,7 @@ export default {
   moduleName: "container",
   label: "普通容器",
   preview: () => <p>普通容器</p>,
-  render: ({ props, styles, component, custom }) => {
+  render: ({ props, styles, component }) => {
     const slots = useSlots();
     const { registerRef } = useEditor();
     return () => (
@@ -40,7 +40,7 @@ export default {
         style={styles}
         class="container"
       >
-        <Row {...custom} {...props}>
+        <Row {...props}>
           {Object.values(
             Object.keys(props.slots).length
               ? props.slots

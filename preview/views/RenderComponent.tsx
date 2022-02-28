@@ -11,8 +11,6 @@ export default defineComponent({
     },
   },
   setup(props) {
-    // console.log(props.element, "element");
-    // console.log("render", props);
     const editorComponent =
       componentModules[props.element.moduleName].componentMap[
         props.element.name
@@ -20,9 +18,8 @@ export default defineComponent({
     return editorComponent.render({
       styles: props.element.styles,
       props: props.element.props || {},
-      model: {},
       component: props.element,
-      custom: {},
+      actions: props.element.actions,
     });
   },
 });

@@ -26,7 +26,7 @@ export interface Component {
   draggable: boolean;
   showStyleConfig?: boolean;
   events: { label: string; value: string }[];
-  actions: Action[];
+  actions: Actions;
   ref?: Ref;
   [prop: string]: any;
 }
@@ -38,6 +38,8 @@ interface Action {
   code: string; // 动作代码
 }
 
+export type Actions = { [key: string]: { [kkey: string]: Action } };
+
 export interface EditorComponent {
   _id?: string;
   name: string;
@@ -46,10 +48,9 @@ export interface EditorComponent {
   preview: () => JSX.Element;
   render: (data: {
     props: any;
-    model: any;
     styles: CSSProperties;
     component: Component;
-    custom: Record<string, any>;
+    actions?: Actions;
   }) => (props?: any) => JSX.Element;
   draggable?: boolean;
   showStyleConfig?: boolean;
