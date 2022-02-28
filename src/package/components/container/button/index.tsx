@@ -3,18 +3,17 @@ import {
   createSelectProp,
   createSwitchProp,
 } from "@/package/helper/CreateProps";
-import { EditorComponent } from "@/package/types/component";
+import { EditorComponent, Actions } from "@/package/types/component";
 import useEditor from "@/views/editor/hook/useEditor";
 import { SwitchButton } from "@element-plus/icons-vue";
-import { ElButton, ElCarouselItem, ElImage } from "element-plus";
-import { onMounted } from "vue";
+import { ElButton } from "element-plus";
 
 export default {
   name: "button",
   moduleName: "container",
   label: "按钮",
   preview: () => <p>普通容器</p>,
-  render: ({ props, styles, component }) => {
+  render: ({ props, styles, component, actions }) => {
     const { registerRef } = useEditor();
     return () => (
       <div
@@ -23,6 +22,12 @@ export default {
         ref={(el: any) => registerRef(el, component._id)}
       >
         <ElButton
+          onClick={() => {
+            actions &&
+              Object.entries(actions.click).forEach(([key, value]) => {
+                eval(`(${value.code})()`);
+              });
+          }}
           type={props.type}
           size={props.size}
           plain={props.plain}

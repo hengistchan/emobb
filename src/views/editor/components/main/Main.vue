@@ -55,7 +55,7 @@
 <!--  -->
 
 <script lang="ts">
-  import { defineComponent, computed, reactive, toRefs, ref, watch } from "vue";
+  import { defineComponent, computed, reactive, toRefs, ref } from "vue";
   import useEditorStore from "@/store/editor";
   import useEditor from "@/views/editor/hook/useEditor";
   import RenderComponent from "./components/RenderComponent";

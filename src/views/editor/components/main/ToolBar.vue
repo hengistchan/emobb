@@ -125,7 +125,7 @@
 
 <style lang="scss">
   .editor-preview {
-    width: 337px;
+    width: 340px;
     margin: 0 auto;
     border: 1px solid black;
     .el-dialog__body {
