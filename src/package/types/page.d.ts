@@ -7,6 +7,7 @@ export interface Page {
   title: string;
   props?: PageProps;
   components: Component[];
+  models: { [key: string]: any };
 }
 
 export interface PageProps {

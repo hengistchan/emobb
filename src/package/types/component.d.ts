@@ -21,7 +21,7 @@ export interface Component {
   // data props
   props: Record<string, any>;
   // v-model
-  model: Record<string, string>;
+  models: Record<string, any>;
   // draggable
   draggable: boolean;
   showStyleConfig?: boolean;

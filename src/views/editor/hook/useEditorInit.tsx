@@ -22,6 +22,7 @@ export const createNewPage = ({ title = "页面" }: { title: string }): Page => 
     height: "669px",
   },
   components: [],
+  models: {},
 });
 
 /**
@@ -63,7 +64,7 @@ export const createNewComponent = (component: EditorComponent): Component => {
         },
       },
     }, // 动作集合
-    model: {},
+    models: {},
   };
   editorStore.addComponent(cpn);
   // 防止删除组件时删除不干净产生的情况
