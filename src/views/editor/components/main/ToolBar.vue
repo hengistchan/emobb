@@ -9,6 +9,7 @@
   import { Page } from "@/package/types/page";
   import message from "@/helper/message";
   import useAutoSaveWork from "../../hook/useAutoSaveWork";
+  import { useQRCode } from "@vueuse/integrations/useQRCode";
 
   export default defineComponent({
     setup() {
@@ -20,9 +21,16 @@
       const uuid = getCurrentUUID();
       const saveLoading = ref(false);
       const autoSave = useAutoSaveWork(saveLoading, 60000);
+      const url = ref(
+        `${import.meta.env.VITE_BASE_PREVIEW}/preview/#/?id=${
+          editorStore.uuid
+        }`,
+      );
+      const qrc = useQRCode(url);
       onUnmounted(() => {
         autoSave();
       });
+      // const = use
       const saveWorkContent = async () => {
         saveLoading.value = true;
         const { error } = await Work.saveWorkContent(uuid ?? "", {
@@ -49,19 +57,28 @@
             append-to-body={true}
             destroy-on-close={true}
           >
-            <div
-              class="editor-preview"
-              style={{
-                height: editorStore.page?.props?.height ?? "670px",
-              }}
-            >
-              <iframe
-                src={`/preview/#/?id=${editorStore.uuid}`}
-                frameborder="0"
-                width="100%"
-                height="100%"
-              ></iframe>
-            </div>
+            {{
+              default: () => (
+                <>
+                  <div class="editor-qrc">
+                    <img src={qrc.value} alt="qrc" />
+                  </div>
+                  <div
+                    class="editor-preview"
+                    style={{
+                      height: editorStore.page?.props?.height ?? "670px",
+                    }}
+                  >
+                    <iframe
+                      src={`/preview/#/?id=${editorStore.uuid}`}
+                      frameborder="0"
+                      width="100%"
+                      height="100%"
+                    ></iframe>
+                  </div>
+                </>
+              ),
+            }}
           </el-dialog>
           <div class="editor-toolbar">
             <div class="toolbar-left"></div>
@@ -125,6 +142,13 @@
 
 <style lang="scss">
   // .editor-preview-conatiner {
+  .editor-qrc {
+    position: absolute;
+    img {
+      width: 180px;
+      height: 180px;
+    }
+  }
   .editor-preview {
     width: 340px;
     margin: 0 auto;
