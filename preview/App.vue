@@ -8,10 +8,11 @@
 
 <script lang="ts">
   import { defineComponent, onMounted, ref } from "vue";
-  import { getURLParam, getPage } from "./helper/index";
+  import { getPage } from "./helper/index";
   import RenderPage from "./views/RenderPage";
   import { Page } from "@/package/types/page";
   import SlotItem from "./views/SlotItem.vue";
+  import { useTitle, useUrlSearchParams } from "@vueuse/core";
   export default defineComponent({
     components: {
       RenderPage,
@@ -19,11 +20,13 @@
     },
     setup() {
       const page = ref<Page | null>(null);
+      const title = useTitle();
+      const params = useUrlSearchParams("hash");
       onMounted(async () => {
-        const uuid = getURLParam("id") as string;
+        const uuid = params.id as string;
         const data = await getPage(uuid);
         page.value = data.page;
-        document.title = page.value?.title || "Vite";
+        title.value = page.value?.title || "Vite";
       });
       return {
         page,

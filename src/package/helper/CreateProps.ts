@@ -150,19 +150,19 @@ export type EditorTableOption = {
 
 interface EditorTableProp {
   label: string;
-  option: EditorTableOption;
-  defaultValue?: { label: string; value: string }[];
+  // option: EditorTableOption;
+  // defaultValue?: { label: string; value: string }[];
 }
 
 export function createTableProp({
   label,
-  option,
-  defaultValue,
-}: EditorTableProp): EditorProp {
+}: // option,
+// defaultValue,
+EditorTableProp): EditorProp {
   return {
     type: EditorPropType.table,
     label,
-    table: option,
-    defaultValue,
+    // table: option,
+    // defaultValue,
   };
 }

@@ -7,6 +7,7 @@ import { EditorComponent, Actions } from "@/package/types/component";
 import useEditor from "@/views/editor/hook/useEditor";
 import { SwitchButton } from "@element-plus/icons-vue";
 import { ElButton } from "element-plus";
+import { inject, watch } from "vue";
 
 export default {
   name: "button",

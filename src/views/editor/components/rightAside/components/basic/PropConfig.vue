@@ -1,8 +1,10 @@
 <script lang="tsx">
   import { Component, EditorComponent } from "@/package/types/component";
   import { EditorProp, EditorPropType } from "@/package/types/prop.d";
+  import { useDotProp } from "@/views/editor/hook/useDotProp";
   import { defineComponent, PropType } from "vue";
   import CrossSortableInput from "./CrossSortableInput.vue";
+  import FormPropEditor from "./FormPropEditor.vue";
 
   export default defineComponent({
     props: {
@@ -17,12 +19,16 @@
     },
     setup(props) {
       const renderFormItem = (key: string, propConfig: EditorProp) => {
+        const { propObj, prop } = useDotProp(props.component.props, key);
+        propObj[prop] ??= propConfig.defaultValue;
+
         const listForProp: { [k: string]: () => JSX.Element } = {
           [EditorPropType.input]: () => {
             return (
               <el-input
                 type="input"
                 v-model={props.component.props[key]}
+                onChange={(s: string) => console.log}
                 placeholder={propConfig.tips || propConfig.label}
               ></el-input>
             );
@@ -75,7 +81,9 @@
               v-model={props.component.props[key]}
             ></CrossSortableInput>
           ),
-          [EditorPropType.table]: () => <div></div>,
+          [EditorPropType.table]: () => (
+            <FormPropEditor modelValue={propObj[prop]}></FormPropEditor>
+          ),
         };
 
         return listForProp[propConfig.type]();
