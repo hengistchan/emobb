@@ -5,6 +5,15 @@ import { CSSProperties, Ref } from "vue";
 import { Component as VueComponent } from "vue";
 import * as CSS from "csstype";
 
+export type Model = {
+  // 需要绑定的组件ID
+  name: string;
+  // 绑定字段值
+  key: string;
+  // 默认值
+  defaultValue?: number | string;
+};
+
 export interface Component {
   // component ID
   _id: string;
@@ -21,13 +30,12 @@ export interface Component {
   // data props
   props: Record<string, any>;
   // v-model
-  models: Record<string, any>;
+  models: { [key: string]: Model };
   // draggable
   draggable: boolean;
   showStyleConfig?: boolean;
   events: { label: string; value: string }[];
   actions: Actions;
-  ref?: Ref;
   [prop: string]: any;
 }
 
@@ -50,7 +58,9 @@ export interface EditorComponent {
     props: any;
     styles: CSSProperties;
     component: Component;
-    actions?: Actions;
+    actions: Actions;
+    models: { [key: string]: Model };
+    id: string;
   }) => (props?: any) => JSX.Element;
   draggable?: boolean;
   showStyleConfig?: boolean;

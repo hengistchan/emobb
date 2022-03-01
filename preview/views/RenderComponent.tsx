@@ -20,6 +20,8 @@ export default defineComponent({
       props: props.element.props || {},
       component: props.element,
       actions: props.element.actions,
+      models: props.element.models,
+      id: props.element._id,
     });
   },
 });

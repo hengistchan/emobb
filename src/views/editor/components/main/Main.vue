@@ -136,13 +136,13 @@
           position: absolute;
           font-size: 12px;
           font-weight: 600;
-          transform: translate(-100%, 0);
+          transform: translate(0, 100%);
           color: #fff;
           height: 18px;
           line-height: 18px;
           padding: 0 6px;
-          top: 0;
-          left: -2px;
+          bottom: -1px;
+          left: 0;
           border-radius: 3px;
           content: attr(data-label);
         }

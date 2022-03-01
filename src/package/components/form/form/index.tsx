@@ -6,41 +6,53 @@ import {
 import { EditorComponent } from "@/package/types/component";
 import { Tickets } from "@element-plus/icons-vue";
 import { ElForm } from "element-plus";
-import { useSlots, renderSlot } from "vue";
+import {
+  useSlots,
+  renderSlot,
+  provide,
+  ref,
+  InjectionKey,
+  Ref,
+  reactive,
+  watch,
+} from "vue";
 import useEditor from "@/views/editor/hook/useEditor";
+import { Nullable } from "types";
+
+export type FormRef = Ref<InstanceType<typeof ElForm>>;
 
 export default {
   name: "container",
   moduleName: "form",
   label: "表单容器",
   preview: () => <p>普通容器</p>,
-  render: ({ props, styles, component }) => {
+  render: ({ props, styles, component, models }) => {
     const slots = useSlots();
-    const { registerRef } = useEditor();
+
+    const formRef = ref<InstanceType<typeof ElForm> | null>(null);
+    const model = reactive({});
+    Object.values(models).reduce((prev, next) => {
+      prev[next.name] = next.defaultValue ?? undefined;
+      return prev;
+    }, model as { [key: string]: any });
+    provide("$$fromRef", formRef);
+    provide("$$formModels", models);
+    provide("$$model", model);
     return () => (
-      <div
-        ref={(el) => registerRef(el, component._id)}
-        style={styles}
+      <ElForm
+        {...props}
+        style={{ ...styles, width: "100%" }}
         class="form form-container"
+        ref={(el: InstanceType<typeof ElForm>) => (formRef.value = el)}
+        model={model}
       >
-        <ElForm {...props} style={{ width: "100%" }}>
-          {renderSlot(slots, "default")}
-        </ElForm>
-      </div>
+        {renderSlot(slots, "default")}
+      </ElForm>
     );
   },
   props: {
     "slots.default.children": createTableProp({
-      label: "表单项",
-      option: {
-        options: [
-          { label: "显示值", field: "label" },
-          { label: "绑定值", field: "value" },
-          { label: "备注", field: "comments" },
-        ],
-        showKey: "label",
-      },
-      defaultValue: [],
+      label: "子组件ID",
     }),
   },
   icon: Tickets,
