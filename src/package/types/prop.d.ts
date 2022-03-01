@@ -18,6 +18,8 @@ export enum EditorPropType {
   crossSortable = "CrossSortable",
   /** 可拖拽输入项 */
   crossSortableInput = "CrossSortableInput",
+  /** 带单位的输入框 */
+  inputSymbol = "InputSymbol",
 }
 
 export type EditorProp = {
@@ -28,6 +30,7 @@ export type EditorProp = {
   labelPosition?: string;
   /** 表单项默认值 */
   defaultValue?: any;
+  required?: boolean;
 } & {
   /** 可选项 */
   options?: SelectOptions;

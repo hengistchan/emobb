@@ -7,18 +7,22 @@ const useFormItem = (props: any, id: string) => {
   const formModels = inject("$$formModels") as any;
   const model = inject("$$model") as any;
   watch(
-    () => props.prop,
-    (newProp, oldProp) => {
+    () => props,
+    (newProp) => {
       if (!formModels[id]) {
         formModels[id] = {
           name: props.prop,
           key: id,
-          defaultValue: undefined,
+          defaultValue: null ? undefined : newProp.default,
         } as Model;
       } else {
-        formModels[id].name = newProp;
+        console.log(newProp);
+        formModels[id].name = newProp.prop;
+        formModels[id].defaultValue =
+          newProp.default == null ? undefined : newProp.default;
       }
     },
+    { deep: true },
   );
   return {
     formRef,

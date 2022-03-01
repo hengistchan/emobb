@@ -145,6 +145,7 @@
           left: 0;
           border-radius: 3px;
           content: attr(data-label);
+          z-index: 999;
         }
 
         &:hover::before {
