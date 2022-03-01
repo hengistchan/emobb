@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
+import { DefineComponent } from "vue";
 declare type Nullable<T> = null | T;
-
 declare module "axios" {
   export interface AxiosInstance {
     get<T>(url: string, config?: AxiosRequestConfig): RespPromise<T>;
@@ -39,3 +39,5 @@ declare type PageResp<T> = {
 };
 
 declare type Headers = { [key: string]: string };
+
+// declare type Icon
