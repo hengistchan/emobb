@@ -23,7 +23,9 @@ export default defineComponent({
     //   }
     // });
     return () => (
-      <div style={props.props}>{slots.default && slots.default()}</div>
+      <div class="page" style={props.props}>
+        {slots.default && slots.default()}
+      </div>
     );
   },
 });
