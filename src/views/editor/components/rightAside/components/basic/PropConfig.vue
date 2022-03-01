@@ -3,6 +3,7 @@
   import { EditorProp, EditorPropType } from "@/package/types/prop.d";
   import { useDotProp } from "@/views/editor/hook/useDotProp";
   import { defineComponent, PropType } from "vue";
+  import InputWithSymbol from "../layout/InputWithSymbol.vue";
   import CrossSortableInput from "./CrossSortableInput.vue";
   import FormPropEditor from "./FormPropEditor.vue";
 
@@ -84,6 +85,9 @@
           [EditorPropType.table]: () => (
             <FormPropEditor modelValue={propObj[prop]}></FormPropEditor>
           ),
+          [EditorPropType.inputSymbol]: () => (
+            <InputWithSymbol v-model={propObj[prop]}></InputWithSymbol>
+          ),
         };
 
         return listForProp[propConfig.type]();
@@ -96,7 +100,10 @@
           ).map(([propName, propConfig]) => {
             return (
               <>
-                <el-form-item key={props.component._id + "_" + propName}>
+                <el-form-item
+                  key={props.component._id + "_" + propName}
+                  required={propConfig.required ?? false}
+                >
                   {{
                     label: () => <>{propConfig.label}</>,
                     default: () => renderFormItem(propName, propConfig),

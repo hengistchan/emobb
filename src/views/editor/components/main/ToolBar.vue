@@ -124,14 +124,17 @@
 </script>
 
 <style lang="scss">
+  // .editor-preview-conatiner {
   .editor-preview {
     width: 340px;
     margin: 0 auto;
     border: 1px solid black;
+    z-index: 9999;
     .el-dialog__body {
       padding: 0;
     }
   }
+  // }
   .editor-toolbar {
     display: flex;
     justify-content: space-between;

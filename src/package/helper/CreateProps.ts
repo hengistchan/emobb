@@ -7,6 +7,7 @@ interface EditorInputProp {
   label: string;
   defaultValue?: any;
   tips?: string;
+  required?: boolean;
 }
 
 export type EditorSelectOptions = {
@@ -28,11 +29,13 @@ export const createInputProp = ({
   label,
   defaultValue,
   tips,
+  required,
 }: EditorInputProp): EditorProp => ({
   type: EditorPropType.input,
   label,
   tips,
   defaultValue,
+  required,
 });
 
 export function createSelectProp({
@@ -164,5 +167,21 @@ EditorTableProp): EditorProp {
     label,
     // table: option,
     // defaultValue,
+  };
+}
+
+interface InputWithSymbolProp {
+  label: string;
+  defaultValue?: string;
+}
+
+export function createInputWithSymbolProp({
+  label,
+  defaultValue,
+}: InputWithSymbolProp): EditorProp {
+  return {
+    type: EditorPropType.inputSymbol,
+    label,
+    defaultValue,
   };
 }
