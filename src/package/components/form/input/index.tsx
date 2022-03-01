@@ -1,9 +1,10 @@
 import { createInputProp } from "@/package/helper/CreateProps";
 import { EditorComponent, Model } from "@/package/types/component";
-import { Tickets } from "@element-plus/icons-vue";
 import { ElInput } from "element-plus";
 import { v4 as uuidv4 } from "uuid";
 import useFormItem, { formItemProps } from "@/package/helper/useFormItem";
+import { Icon } from "@iconify/vue";
+import IconHelper from "@/package/helper/IconHelper";
 
 export default {
   name: "input",
@@ -30,6 +31,6 @@ export default {
     }),
     ...formItemProps,
   },
-  icon: Tickets,
+  icon: IconHelper("mdi:card-text-outline"),
   draggable: true,
 } as EditorComponent;

@@ -6,6 +6,7 @@ import "./assets/styles/index.scss";
 import "element-plus/dist/index.css";
 import "default-passive-events";
 import useEditorStore from "./store/editor";
+import { Icon } from "@iconify/vue";
 
 const app = createApp(App);
 app.use(router).use(store);
