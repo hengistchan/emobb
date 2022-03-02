@@ -108,6 +108,8 @@
           display: inline-block;
           vertical-align: top;
           padding-left: 5px;
+          line-height: 26px;
+          height: 25px;
         }
       }
     }

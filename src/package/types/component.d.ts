@@ -68,6 +68,7 @@ export interface EditorComponent {
   events?: { label: string; value: string }[];
   styles?: CSSProperties;
   icon: VueComponent;
+  order?: number;
 }
 
 export interface CommonComponentStyles extends Record<string, string> {

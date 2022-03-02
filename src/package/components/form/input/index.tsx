@@ -11,10 +11,10 @@ export default {
   moduleName: "form",
   label: "输入框",
   preview: () => <p>输入框</p>,
-  render: ({ props, id }) => {
+  render: ({ props, id, styles }) => {
     const { model, FormItemWrapper } = useFormItem(props, id);
     return () => (
-      <FormItemWrapper props={props}>
+      <FormItemWrapper props={props} style={styles}>
         <ElInput v-model={model[props.prop]}></ElInput>
       </FormItemWrapper>
     );
@@ -33,4 +33,5 @@ export default {
   },
   icon: IconHelper("mdi:card-text-outline"),
   draggable: true,
+  order: 2,
 } as EditorComponent;

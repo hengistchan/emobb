@@ -8,6 +8,7 @@ const components: EditorComponent[] = [];
 const componentMap: { [key: string]: EditorComponent } = {};
 mapValues(c, (component: { default: EditorComponent }) => {
   components.push(component.default);
+  components.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   componentMap[component.default.name] = component.default;
 });
 

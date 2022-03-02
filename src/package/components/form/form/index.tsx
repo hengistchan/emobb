@@ -86,4 +86,5 @@ export default {
   },
   icon: Tickets,
   draggable: true,
+  order: 1,
 } as EditorComponent;

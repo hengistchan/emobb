@@ -7,6 +7,7 @@ import { EditorComponent } from "@/package/types/component";
 import { EditPen } from "@element-plus/icons-vue";
 import { fonts, textAlign } from "../text/props";
 import useEditor from "@/views/editor/hook/useEditor";
+import IconHelper from "@/package/helper/IconHelper";
 const titleStyle = [
   { label: "H1", value: "2rem" },
   { label: "H2", value: "1.5rem" },
@@ -54,5 +55,5 @@ export default {
       defaultValue: "center",
     }),
   },
-  icon: EditPen,
+  icon: IconHelper("mdi:format-title"),
 } as EditorComponent;

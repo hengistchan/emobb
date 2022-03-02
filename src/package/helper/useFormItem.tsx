@@ -52,6 +52,7 @@ const useFormItem = (props: any, id: string) => {
   const FormItemWrapper = (props: any, { slots }: SetupContext) => (
     <>
       <ElFormItem
+        // style={props.style}
         prop={props.props.prop}
         label={props.props.label}
         labelWidth={props.props.labelWidth}
