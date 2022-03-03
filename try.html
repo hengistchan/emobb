@@ -1,89 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-</head>
-<body>
-<script type="module">
-	import pickBy from "./node_modules/lodash-es/pickBy.js";
-
-	const arr = [
-		{
-			_id: "5a99a_0",
-			label: "普通容器",
-			moduleName: "container",
-			name: "container",
-			props: {
-				slots: {
-					value: "12:12",
-					slot0: {
-						key: "slot0",
-						span: "12",
-						children: [
-							{
-								_id: "0787d_1",
-								moduleName: "text",
-								name: "text",
-								label: "普通文本",
-								props: { value: "默认文本", fontSize: "1", textAlign: "center" },
-							},
-						],
-					},
-					slot1: { key: "slot1", span: "12", children: [] },
-				},
-			},
-		},
-		{
-			_id: "cee73_2",
-			moduleName: "container",
-			name: "container",
-			label: "普通容器",
-			props: {
-				slots: {
-					value: "12:12",
-					slot0: { key: "slot0", span: "12", children: [] },
-					slot1: { key: "slot1", span: "12", children: [] },
-				},
-			},
-		},
-	];
-
-	const root = [];
-	const gTree = (arr, root) => {
-		if (arr == null) return;
-		arr.forEach(cpn => {
-			root.push({
-				label: cpn.label,
-				_id: cpn._id,
-				children: [],
-				component: cpn
-			})
-		})
-		const hasSlots = (cpn) => cpn.props?.slots !== null;
-		const getSlots = (cpn) => {
-			const slots = pickBy(cpn.props?.slots, (value, key) =>
-				key.startsWith("slot"),
-			);
-			return Object.values(slots);
-		};
-		for(let i = 0 ; i < root.length ; i++) {
-			if(hasSlots(root[i].component)) {
-				const slots = getSlots(root[i].component)
-				root[i].children = root[i].children ?? []
-				for(let j = 0 ; j < slots.length ; j++) {
-					const slot = slots[j]
-					root[i].children.push({
-						label: `插槽_${slot.key}`,
-						children: []
-					})
-					gTree(slot.children, root[i].children[root[i].children.length - 1].children)
-				}
-			}
-		}
-	}
-	gTree(arr, root)
-	console.log(root)
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script type="module">
+      const func = `function() {
+					console.log(123);
+				}`;
+      const f = new Function(`return ${func}`)();
+      console.log(f);
+    </script>
+  </body>
 </html>

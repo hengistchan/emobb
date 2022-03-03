@@ -3,6 +3,7 @@ import {
   createSelectProp,
   createSwitchProp,
 } from "@/package/helper/CreateProps";
+import { doActions } from "@/package/helper/doActions";
 import { EditorComponent, Actions } from "@/package/types/component";
 import useEditor from "@/views/editor/hook/useEditor";
 import { SwitchButton } from "@element-plus/icons-vue";
@@ -24,10 +25,7 @@ export default {
       >
         <ElButton
           onClick={() => {
-            actions &&
-              Object.entries(actions.click).forEach(([key, value]) => {
-                eval(`(${value.code})()`);
-              });
+            actions && doActions(actions.click ?? {}, { window });
           }}
           type={props.type}
           size={props.size}

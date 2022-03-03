@@ -1,7 +1,7 @@
 <script lang="tsx">
   import { computed, defineComponent, nextTick, reactive, ref } from "vue";
   import useEditorStore from "@/store/editor";
-  import IconHelper from "@/package/helper/IconHelper";
+  import IconHelper from "@/helper/IconHelper";
   import useMonacoEditor from "@/hook/useMonacoEditor";
   import { Action } from "@/package/types/component";
   import { v4 as uuidv4 } from "uuid";

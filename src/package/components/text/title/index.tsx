@@ -7,7 +7,7 @@ import { EditorComponent } from "@/package/types/component";
 import { EditPen } from "@element-plus/icons-vue";
 import { fonts, textAlign } from "../text/props";
 import useEditor from "@/views/editor/hook/useEditor";
-import IconHelper from "@/package/helper/IconHelper";
+import IconHelper from "@/helper/IconHelper";
 const titleStyle = [
   { label: "H1", value: "2rem" },
   { label: "H2", value: "1.5rem" },

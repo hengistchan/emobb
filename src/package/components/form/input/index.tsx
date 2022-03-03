@@ -4,7 +4,7 @@ import { ElInput } from "element-plus";
 import { v4 as uuidv4 } from "uuid";
 import useFormItem, { formItemProps } from "@/package/helper/useFormItem";
 import { Icon } from "@iconify/vue";
-import IconHelper from "@/package/helper/IconHelper";
+import IconHelper from "@/helper/IconHelper";
 
 export default {
   name: "input",
