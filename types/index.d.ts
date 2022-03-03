@@ -40,4 +40,6 @@ declare type PageResp<T> = {
 
 declare type Headers = { [key: string]: string };
 
+declare type self = Window & typeof globalThis & { MonacoEnvironment: any };
+
 // declare type Icon

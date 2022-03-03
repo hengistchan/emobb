@@ -4,6 +4,9 @@
       <el-tab-pane label="属性和样式" name="attribute">
         <attribute />
       </el-tab-pane>
+      <el-tab-pane label="事件" name="event">
+        <event />
+      </el-tab-pane>
       <el-tab-pane label="页面" name="page">
         <page />
       </el-tab-pane>
@@ -15,11 +18,13 @@
   import { defineComponent, ref } from "vue";
   import Attribute from "./Attribute.vue";
   import Page from "./Page.vue";
+  import Event from "./CEvent.vue";
 
   export default defineComponent({
     components: {
       Attribute,
       Page,
+      Event,
     },
     setup() {
       const activeTab = ref("attribute");

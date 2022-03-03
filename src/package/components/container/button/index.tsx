@@ -70,7 +70,7 @@ export default {
   draggable: true,
   events: [
     {
-      label: "点击按钮",
+      label: "点击按钮时",
       value: "click",
     },
   ],

@@ -32,6 +32,7 @@
     display: none;
     position: absolute;
     background-color: #fff;
+    z-index: 1100;
 
     border: 1px solid black;
     li {

@@ -27,22 +27,26 @@
             </el-form-item>
           </el-form>
           <el-collapse v-model={activeName.value}>
-            {attributes.map(
-              (attribute, index) =>
-                currentComponent.value &&
-                currentEditorComponent.value && (
-                  <el-collapse-item
-                    key={index}
-                    name={attribute.label}
-                    title={attribute.name}
-                  >
-                    {attribute?.component &&
-                      attribute?.component(
-                        currentComponent.value,
-                        currentEditorComponent.value,
-                      )}
-                  </el-collapse-item>
-                ),
+            {currentComponent.value && currentEditorComponent.value ? (
+              attributes.map(
+                (attribute, index) =>
+                  currentComponent.value &&
+                  currentEditorComponent.value && (
+                    <el-collapse-item
+                      key={index}
+                      name={attribute.label}
+                      title={attribute.name}
+                    >
+                      {attribute?.component &&
+                        attribute?.component(
+                          currentComponent.value,
+                          currentEditorComponent.value,
+                        )}
+                    </el-collapse-item>
+                  ),
+              )
+            ) : (
+              <el-empty></el-empty>
             )}
           </el-collapse>
         </div>

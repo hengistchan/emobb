@@ -28,6 +28,7 @@ specifiers:
   husky: ^7.0.4
   lint-staged: ^12.3.3
   lodash-es: ^4.17.21
+  monaco-editor: 0.32.1
   mrm: ^3.0.10
   normalize.css: ^8.0.1
   nprogress: ^0.2.0
@@ -56,6 +57,7 @@ dependencies:
   element-plus: 2.0.1_vue@3.2.30
   hotkeys-js: 3.8.7
   lodash-es: 4.17.21
+  monaco-editor: 0.32.1
   normalize.css: 8.0.1
   nprogress: 0.2.0
   pinia: 2.0.11_typescript@4.5.5+vue@3.2.30
@@ -3102,6 +3104,10 @@ packages:
   /minimist/1.2.5:
     resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
     dev: true
+
+  /monaco-editor/0.32.1:
+    resolution: {integrity: sha512-LUt2wsUvQmEi2tfTOK+tjAPvt7eQ+K5C4rZPr6SeuyzjAuAHrIvlUloTcOiGjZW3fn3a/jFQCONrEJbNOaCqbA==}
+    dev: false
 
   /mrm-core/6.1.7:
     resolution: {integrity: sha512-jLGWrkupcgGIsLerrI/xmM/dFHbaoehRsuVbgYBrxYKXNMRBHN3Mgkd8cw+/ZCCoiZEXF8/SaZol0GCp6oBQ9g==}
