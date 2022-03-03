@@ -30,16 +30,16 @@
         }
         return {};
       });
-      const currentAction = ref<Action | null>(null);
+      let currentAction: Action | null = null;
       const handleOpenDialog = async (
         edit: boolean,
         event: string | null,
         action?: Action,
       ) => {
+        // 判断是否是编辑
         if (edit) {
-          currentAction.value = action as Action;
-          form.value = currentAction.value;
-          delete actions.value[form.value.event][form.value.name];
+          currentAction = { ...(action as Action) };
+          form.value = action as Action;
         } else {
           form.value = {
             key: uuidv4().slice(0, 5),
@@ -58,7 +58,12 @@
       const handleCloseDialog = () => {
         const code = getEditor()?.getValue();
         form.value.code = code ?? form.value.code;
+        if (isEdit.value) {
+          currentAction &&
+            delete actions.value[currentAction.event][currentAction.name];
+        }
         actions.value[form.value.event][form.value.name] = form.value;
+        dialogVisible.value = false;
       };
       return () => (
         <>
@@ -66,7 +71,7 @@
             v-model={dialogVisible.value}
             title={isEdit.value ? "编辑行为" : "添加行为"}
             width="900px"
-            onClose={() => handleCloseDialog()}
+            top={"3vh"}
           >
             {{
               default: () => (
@@ -81,6 +86,19 @@
                     <div class="editor-manaco"></div>
                   </el-form-item>
                 </el-form>
+              ),
+              footer: () => (
+                <>
+                  <el-button
+                    type="danger"
+                    onClick={() => (dialogVisible.value = false)}
+                  >
+                    取消
+                  </el-button>
+                  <el-button type="primary" onClick={() => handleCloseDialog()}>
+                    保存
+                  </el-button>
+                </>
               ),
             }}
           </el-dialog>
@@ -145,7 +163,7 @@
 <style lang="scss">
   .editor-manaco {
     width: 100%;
-    height: 600px;
+    height: 50vh;
     * {
       // touch-action: none;
     }
@@ -211,5 +229,11 @@
         }
       }
     }
+  }
+</style>
+
+<style lang="scss" scoped>
+  .el-dialog__body {
+    padding-bottom: 3px;
   }
 </style>
