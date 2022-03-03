@@ -34,9 +34,8 @@
   import EditorRightAside from "./components/rightAside/index.vue";
   import EditorMain from "./components/main/index.vue";
   import useHotKey from "./hook/useHotKey";
-  import message from "@/helper/message";
   import useEditorStore from "@/store/editor";
-  import { useRoute, useRouter } from "vue-router";
+  import { useRouter } from "vue-router";
   import Work from "@/api/work";
   import { Page } from "@/package/types/page";
   import { getCurrentUUID } from "./hook/useEditorInit";

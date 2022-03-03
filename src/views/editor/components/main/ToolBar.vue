@@ -10,6 +10,7 @@
   import message from "@/helper/message";
   import useAutoSaveWork from "../../hook/useAutoSaveWork";
   import { useQRCode } from "@vueuse/integrations/useQRCode";
+  import domtoimg from "@/helper/domToImage";
 
   export default defineComponent({
     setup() {
