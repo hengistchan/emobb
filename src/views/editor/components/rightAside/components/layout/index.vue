@@ -98,6 +98,16 @@
                     ))}
                   </el-radio-group>
                 </el-form-item>
+                <el-form-item label={"宽度"}>
+                  <el-input
+                    v-model={currentComponent.value.styles["width"]}
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label={"高度"}>
+                  <el-input
+                    v-model={currentComponent.value.styles["height"]}
+                  ></el-input>
+                </el-form-item>
                 <el-form-item label={"内边距"}></el-form-item>
                 <el-form-item
                   label-width="0"
