@@ -11,6 +11,6 @@ export const doActions = (
 ) => {
   actions &&
     Object.values(actions).forEach((action) => {
-      new Function(`return ${action.code}`)()({ obj });
+      new Function(`return ${action.code}`)()(obj);
     });
 };

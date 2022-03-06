@@ -7,21 +7,13 @@ import {
 } from "@/package/helper/CreateProps";
 import { EditorComponent } from "@/package/types/component";
 import { Tickets } from "@element-plus/icons-vue";
-import { ElForm } from "element-plus";
-import {
-  useSlots,
-  renderSlot,
-  provide,
-  ref,
-  InjectionKey,
-  Ref,
-  reactive,
-  watch,
-} from "vue";
+import { Form, CellGroup } from "vant";
+import type { FormInstance } from "vant";
+import { useSlots, renderSlot, provide, ref, Ref, reactive } from "vue";
 import useEditor from "@/views/editor/hook/useEditor";
 import { Nullable } from "types";
 
-export type FormRef = Ref<InstanceType<typeof ElForm>>;
+export type FormRef = Ref<FormInstance>;
 
 export default {
   name: "container",
@@ -31,7 +23,7 @@ export default {
   render: ({ props, styles, component, models }) => {
     const slots = useSlots();
 
-    const formRef = ref<InstanceType<typeof ElForm> | null>(null);
+    const formRef = ref<FormInstance | null>(null);
     const model = reactive({});
     Object.values(models).reduce((prev, next) => {
       prev[next.name] = next.defaultValue ?? undefined;
@@ -41,47 +33,63 @@ export default {
     provide("$$formModels", models); // 表单上的model
     provide("$$model", model); // 真实的model
     return () => (
-      <ElForm
+      <Form
         {...props}
         style={{ ...styles, width: "100%" }}
         class="form form-container"
-        ref={(el: InstanceType<typeof ElForm>) => (formRef.value = el)}
+        ref={(el: FormInstance) => (formRef.value = el)}
         model={model}
-        inline={props.inline}
       >
         {renderSlot(slots, "default")}
-      </ElForm>
+      </Form>
     );
   },
   props: {
     "slots.default.children": createTableProp({
       label: "子组件ID",
     }),
-    inline: createSwitchProp({
-      label: "行内表单",
-      defaultValue: false,
+    labelWidth: createInputWithSymbolProp({
+      label: "表单宽度",
+      defaultValue: "6em",
     }),
-    labelPosition: createSelectProp({
-      label: "标签位置",
+    labelAlign: createSelectProp({
+      label: "表单项对齐",
       options: [
-        { label: "左对齐", value: "left" },
-        { label: "上对齐", value: "top" },
-        { label: "右对齐", value: "right" },
+        { label: "左", value: "left" },
+        { label: "居中", value: "center" },
+        { label: "右", value: "right" },
       ],
       defaultValue: "left",
     }),
-    labelSuffix: createInputProp({
-      label: "标签后缀",
-      defaultValue: "",
-    }),
-    size: createSelectProp({
-      label: "表单尺寸",
+    inputAlign: createSelectProp({
+      label: "输入框对齐",
       options: [
-        { label: "大", value: "large" },
-        { label: "默认", value: "default" },
-        { label: "小", value: "small" },
+        { label: "左", value: "left" },
+        { label: "居中", value: "center" },
+        { label: "右", value: "right" },
       ],
-      defaultValue: "large",
+      defaultValue: "left",
+    }),
+    errorMessageAlign: createSelectProp({
+      label: "错误消息对齐",
+      options: [
+        { label: "左", value: "left" },
+        { label: "居中", value: "center" },
+        { label: "右", value: "right" },
+      ],
+      defaultValue: "left",
+    }),
+    colon: createSwitchProp({
+      label: "label添加冒号",
+      defaultValue: false,
+    }),
+    disabled: createSwitchProp({
+      label: "禁用输入",
+      defaultValue: false,
+    }),
+    readonly: createSwitchProp({
+      label: "只读",
+      defaultValue: false,
     }),
   },
   icon: Tickets,

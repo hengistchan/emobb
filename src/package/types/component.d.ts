@@ -14,6 +14,12 @@ export type Model = {
   defaultValue?: number | string;
 };
 
+export interface Event {
+  label: string;
+  value: string;
+  code?: string;
+}
+
 export interface Component {
   // component ID
   _id: string;
@@ -34,7 +40,7 @@ export interface Component {
   // draggable
   draggable: boolean;
   showStyleConfig?: boolean;
-  events: { label: string; value: string }[];
+  events: Event[];
   actions: Actions;
   [prop: string]: any;
 }
@@ -65,7 +71,7 @@ export interface EditorComponent {
   draggable?: boolean;
   showStyleConfig?: boolean;
   props?: Record<string, any>;
-  events?: { label: string; value: string }[];
+  events?: Event[];
   styles?: CSSProperties;
   icon: VueComponent;
   order?: number;

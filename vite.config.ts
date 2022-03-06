@@ -7,6 +7,7 @@ import Components from "unplugin-vue-components/vite";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 const { dependencies } = require("./package.json");
+import styleImport, { VantResolve } from "vite-plugin-style-import";
 
 const chunks = Object.entries(dependencies as { [key: string]: string }).map(
   ([key, value]) => key,
@@ -24,6 +25,9 @@ export default defineConfig({
     }),
     Components({
       resolvers: [ElementPlusResolver()],
+    }),
+    styleImport({
+      resolves: [VantResolve()],
     }),
   ],
   build: {

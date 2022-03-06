@@ -27,6 +27,7 @@
     "qrcode": "^1.5.0",
     "store2": "^2.13.1",
     "uuid": "^8.3.2",
+    "vant": "^3.4.5",
     "vue": "^3.2.31",
     "vue-router": "^4.0.13",
     "vuedraggable": "^4.1.0"
@@ -58,6 +59,7 @@
     "unplugin-auto-import": "^0.5.11",
     "unplugin-vue-components": "^0.17.21",
     "vite": "^2.8.6",
+    "vite-plugin-style-import": "1.4.1",
     "vue-tsc": "^0.29.8"
   },
   "husky": {

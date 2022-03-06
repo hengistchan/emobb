@@ -4,11 +4,9 @@ import {
   createSelectProp,
 } from "@/package/helper/CreateProps";
 import { EditorComponent } from "@/package/types/component";
-import { Document } from "@element-plus/icons-vue";
 import { fonts, textAlign } from "./props";
 import useEditor from "@/views/editor/hook/useEditor";
-import { generalStyles, spreadGeneralStyles } from "@/package";
-import { computed } from "vue";
+import IconHelper from "@/helper/IconHelper";
 
 export default {
   name: "text",
@@ -50,5 +48,5 @@ export default {
       defaultValue: "center",
     }),
   },
-  icon: Document,
+  icon: IconHelper("mdi:format-color-text"),
 } as EditorComponent;

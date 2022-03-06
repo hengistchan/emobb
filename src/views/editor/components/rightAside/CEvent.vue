@@ -1,9 +1,9 @@
 <script lang="tsx">
-  import { computed, defineComponent, nextTick, reactive, ref } from "vue";
+  import { computed, defineComponent, nextTick, ref } from "vue";
   import useEditorStore from "@/store/editor";
   import IconHelper from "@/helper/IconHelper";
   import useMonacoEditor from "@/hook/useMonacoEditor";
-  import { Action } from "@/package/types/component";
+  import { Action, Event } from "@/package/types/component";
   import { v4 as uuidv4 } from "uuid";
 
   export default defineComponent({
@@ -33,7 +33,7 @@
       let currentAction: Action | null = null;
       const handleOpenDialog = async (
         edit: boolean,
-        event: string | null,
+        event: Event | null,
         action?: Action,
       ) => {
         // 判断是否是编辑
@@ -43,9 +43,9 @@
         } else {
           form.value = {
             key: uuidv4().slice(0, 5),
-            event: event as string,
+            event: event?.value ?? "click",
             name: "",
-            code: "",
+            code: event?.code ?? "",
           };
         }
         dialogVisible.value = true;
@@ -62,6 +62,8 @@
           currentAction &&
             delete actions.value[currentAction.event][currentAction.name];
         }
+        !actions.value[form.value.event] &&
+          (actions.value[form.value.event] = {});
         actions.value[form.value.event][form.value.name] = form.value;
         dialogVisible.value = false;
       };
@@ -112,7 +114,7 @@
                       <el-button
                         type="primary"
                         size="small"
-                        onClick={() => handleOpenDialog(false, event.value)}
+                        onClick={() => handleOpenDialog(false, event)}
                       >
                         添加行为
                       </el-button>

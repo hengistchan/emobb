@@ -1,10 +1,15 @@
-import { createInputProp } from "@/package/helper/CreateProps";
+import {
+  createInputProp,
+  createNumberInputProp,
+  createSelectProp,
+  createSwitchProp,
+} from "@/package/helper/CreateProps";
 import { EditorComponent, Model } from "@/package/types/component";
-import { ElInput } from "element-plus";
-import { v4 as uuidv4 } from "uuid";
-import useFormItem, { formItemProps } from "@/package/helper/useFormItem";
-import { Icon } from "@iconify/vue";
+import useVantFormItem, {
+  createCommonFormProps,
+} from "@/package/helper/useVantFormItem";
 import IconHelper from "@/helper/IconHelper";
+import { Field } from "vant";
 
 export default {
   name: "input",
@@ -12,24 +17,25 @@ export default {
   label: "输入框",
   preview: () => <p>输入框</p>,
   render: ({ props, id, styles }) => {
-    const { model, FormItemWrapper } = useFormItem(props, id);
+    const { model } = useVantFormItem(props, id);
     return () => (
-      <FormItemWrapper props={props} style={styles}>
-        <ElInput v-model={model[props.prop]}></ElInput>
-      </FormItemWrapper>
+      <Field v-model={model[props.prop]} name={props.prop} {...props}></Field>
     );
   },
   props: {
-    prop: createInputProp({
-      label: "字段绑定",
-      defaultValue: uuidv4().slice(0, 5),
-      required: true,
-    }),
     default: createInputProp({
       label: "默认值",
       defaultValue: "",
     }),
-    ...formItemProps,
+    ...createCommonFormProps("字段", "请输入内容"),
+    readonly: createSwitchProp({
+      label: "是否只读",
+      defaultValue: false,
+    }),
+    clearable: createSwitchProp({
+      label: "清除图标",
+      defaultValue: false,
+    }),
   },
   icon: IconHelper("mdi:card-text-outline"),
   draggable: true,

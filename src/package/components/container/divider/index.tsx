@@ -8,7 +8,7 @@ import {
 import { EditorComponent } from "@/package/types/component";
 import useEditor from "@/views/editor/hook/useEditor";
 import { Minus } from "@element-plus/icons-vue";
-import { ElDivider as Divider } from "element-plus";
+import { Divider } from "vant";
 
 export default {
   name: "divider",
@@ -19,22 +19,13 @@ export default {
     const { registerRef } = useEditor();
 
     return () => (
-      <div
-        style={styles}
-        class="container"
-        ref={(el) => registerRef(el, component._id)}
-      >
-        <Divider
-          contentPosition={props["content-position"]}
-          direction={props.direction}
-        >
-          {props.value}
-        </Divider>
+      <div class="container" ref={(el) => registerRef(el, component._id)}>
+        <Divider {...props}>{props.value}</Divider>
       </div>
     );
   },
   props: {
-    value: createInputProp({ label: "文案", defaultValue: "" }),
+    value: createInputProp({ label: "文字", defaultValue: "" }),
     "content-position": createSelectProp({
       label: "文案位置",
       defaultValue: "center",
@@ -44,13 +35,13 @@ export default {
         { label: "center", value: "center" },
       ],
     }),
-    direction: createSelectProp({
-      label: "分割方向",
-      defaultValue: "horizontal ",
-      options: [
-        { label: "水平", value: "horizontal " },
-        { label: "垂直", value: "vertical" },
-      ],
+    dashed: createSwitchProp({
+      label: "是否虚线",
+      defaultValue: false,
+    }),
+    hairline: createSwitchProp({
+      label: "0.5px 线",
+      defaultValue: true,
     }),
   },
   icon: Minus,
