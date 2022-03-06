@@ -6,7 +6,6 @@
         action="http://hengistchan.site:8088/file"
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload"
         :multiple="false"
         :headers="headers"
       >
@@ -40,7 +39,6 @@
   import { computed, defineComponent } from "vue";
   import useUserStore from "@/store/user";
   import { Plus } from "@element-plus/icons-vue";
-  import { UploadFile } from "element-plus/es/components/upload/src/upload.type";
   import User from "@/api/user";
   import message from "@/helper/message";
   import store from "store2";
@@ -53,7 +51,7 @@
       const token = `Bearer ${store("token")}`;
       const headers = new Headers();
       headers.append("Authorization", token);
-      const handleAvatarSuccess = async (res: any, file: UploadFile) => {
+      const handleAvatarSuccess = async (res: any) => {
         userInfo.value.picture = res[0].path;
         if (userInfo.value.picture) {
           const { error, message: errMsg } = await User.updateUserInfo({
@@ -62,9 +60,6 @@
           !error && message("success", "用户头像更新成功");
           error && message("error", errMsg);
         }
-      };
-      const beforeAvatarUpload = (file: UploadFile, fileList: UploadFile[]) => {
-        return true;
       };
       const handleClick = async () => {
         const { error, message: errMsg } = await User.updateUserInfo({
@@ -79,7 +74,6 @@
       return {
         userInfo,
         handleAvatarSuccess,
-        beforeAvatarUpload,
         headers,
         handleClick,
       };
