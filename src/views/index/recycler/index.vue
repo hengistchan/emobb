@@ -2,7 +2,7 @@
   import Work, { WorkDTO } from "@/api/work";
   import { defineComponent, onMounted, ref } from "vue";
   import type { PageResp, Nullable } from "types";
-  import { pageHelper } from "@/helper/index";
+  import { dateFormat, pageHelper } from "@/helper/index";
   import message from "@/helper/message";
 
   export default defineComponent({
@@ -57,26 +57,55 @@
                 prop="title"
                 align="center"
               ></el-table-column>
-              <el-table-column
-                label="封面"
-                prop="cover_img"
-                align="center"
-              ></el-table-column>
-              <el-table-column
-                label="是否模板"
-                prop="is_template"
-                align="center"
-              ></el-table-column>
-              <el-table-column
-                label="状态"
-                prop="status"
-                align="center"
-              ></el-table-column>
-              <el-table-column
-                label="发布时间"
-                prop="last_publish_time"
-                align="center"
-              ></el-table-column>
+              <el-table-column label="封面" prop="cover_img" align="center">
+                {{
+                  default: ({ row }: { row: WorkDTO }) =>
+                    row.cover_img ? (
+                      <el-image
+                        style={{ width: "100px", height: "100px" }}
+                        src={row.cover_img}
+                      ></el-image>
+                    ) : (
+                      "无"
+                    ),
+                }}
+              </el-table-column>
+              <el-table-column label="是否热门" align="center">
+                {{
+                  default: ({ row }: { row: WorkDTO }) => (
+                    <>
+                      {row.is_hot ? (
+                        <el-tag type="danger">是</el-tag>
+                      ) : (
+                        <el-tag type="info">否</el-tag>
+                      )}
+                    </>
+                  ),
+                }}
+              </el-table-column>
+              <el-table-column label="是否模板">
+                {{
+                  default: ({ row }: { row: WorkDTO }) =>
+                    row.is_template ? "是" : "否",
+                }}
+              </el-table-column>
+              <el-table-column label="状态" prop="status" align="center">
+                {{
+                  default: ({ row }: { row: WorkDTO }) => (
+                    <el-tag type={row.status === 1 ? "success" : "danger"}>
+                      {row.status === 1 ? "正常" : "强制下线"}
+                    </el-tag>
+                  ),
+                }}
+              </el-table-column>
+              <el-table-column label="发布时间" align="center">
+                {{
+                  default: ({ row }: { row: WorkDTO }) =>
+                    row.latest_publish_time
+                      ? dateFormat(row.latest_publish_time)
+                      : "无",
+                }}
+              </el-table-column>
               <el-table-column label="操作" align="center">
                 {{
                   default: (data: { row: WorkDTO }) => (

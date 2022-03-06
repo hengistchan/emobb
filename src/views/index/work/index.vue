@@ -5,6 +5,7 @@
   import { pageHelper } from "@/helper/index";
   import message from "@/helper/message";
   import { useRouter } from "vue-router";
+  import { dateFormat } from "@/helper";
 
   export default defineComponent({
     setup() {
@@ -19,6 +20,13 @@
       };
       const handleEdit = async (uuid: string) => {
         router.push("/editor?id=" + uuid);
+      };
+      const handleDelete = async (uuid: string) => {
+        const { error, message: msg } = await Work.deleteByUUID(uuid);
+        if (!error) {
+          message("success", msg);
+        }
+        handleSearch();
       };
       onMounted(() => {
         handleSearch();
@@ -53,35 +61,66 @@
                 prop="title"
                 align="center"
               ></el-table-column>
-              <el-table-column
-                label="封面"
-                prop="cover_img"
-                align="center"
-              ></el-table-column>
-              <el-table-column
-                label="是否模板"
-                prop="is_template"
-                align="center"
-              ></el-table-column>
-              <el-table-column
-                label="状态"
-                prop="status"
-                align="center"
-              ></el-table-column>
-              <el-table-column
-                label="发布时间"
-                prop="last_publish_time"
-                align="center"
-              ></el-table-column>
+              <el-table-column label="封面" prop="cover_img" align="center">
+                {{
+                  default: ({ row }: { row: WorkDTO }) =>
+                    row.cover_img ? (
+                      <el-image
+                        style={{ width: "100px", height: "100px" }}
+                        src={row.cover_img}
+                      ></el-image>
+                    ) : (
+                      "无"
+                    ),
+                }}
+              </el-table-column>
+              <el-table-column label="是否热门" align="center">
+                {{
+                  default: ({ row }: { row: WorkDTO }) => (
+                    <>
+                      {row.is_hot ? (
+                        <el-tag type="danger">是</el-tag>
+                      ) : (
+                        <el-tag type="info">否</el-tag>
+                      )}
+                    </>
+                  ),
+                }}
+              </el-table-column>
+              <el-table-column label="状态" prop="status" align="center">
+                {{
+                  default: ({ row }: { row: WorkDTO }) => (
+                    <el-tag type={row.status === 1 ? "success" : "danger"}>
+                      {row.status === 1 ? "正常" : "强制下线"}
+                    </el-tag>
+                  ),
+                }}
+              </el-table-column>
+              <el-table-column label="发布时间" align="center">
+                {{
+                  default: ({ row }: { row: WorkDTO }) =>
+                    row.latest_publish_time
+                      ? dateFormat(row.latest_publish_time)
+                      : "无",
+                }}
+              </el-table-column>
               <el-table-column label="操作" align="center">
                 {{
                   default: (data: { row: WorkDTO }) => (
-                    <el-button
-                      type="primary"
-                      onClick={() => handleEdit(data.row.uuid)}
-                    >
-                      编辑
-                    </el-button>
+                    <>
+                      <el-button
+                        type="primary"
+                        onClick={() => handleEdit(data.row.uuid)}
+                      >
+                        编辑
+                      </el-button>
+                      <el-button
+                        type="danger"
+                        onClick={() => handleDelete(data.row.uuid)}
+                      >
+                        删除
+                      </el-button>
+                    </>
                   ),
                 }}
               </el-table-column>

@@ -15,6 +15,12 @@ declare module "axios" {
       data: K,
       config?: AxiosRequestConfig,
     ): RespPromise<T>;
+
+    delete<T, K = any>(
+      url: string,
+      data?: K,
+      config?: AxiosRequestConfig,
+    ): RespPromise<T>;
   }
 }
 

@@ -13,7 +13,7 @@ export interface WorkDTO {
   is_template: boolean;
   status: number;
   copied_count: number;
-  last_publish_time: string;
+  latest_publish_time: string;
   is_hot: boolean;
   is_publish: boolean;
 }
@@ -67,6 +67,10 @@ class Work {
     return _axios.get<PageResp<WorkDTO>>(
       queryUrlHelpper(`/work`, { search, template: isTemplate, ...page }),
     );
+  }
+
+  static deleteByUUID(uuid: string) {
+    return _axios.delete(`/work/${uuid}`);
   }
 }
 

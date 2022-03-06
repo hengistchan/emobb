@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { reactive } from "vue";
 
 export const getParentElement = (element: HTMLElement, className: string) => {
@@ -31,4 +32,8 @@ export const pageHelper = (page: number = 1, count: number = 20) => {
     page,
     count,
   });
+};
+
+export const dateFormat = (date: string, format = "YYYY-MM-DD HH:mm:ss") => {
+  return dayjs(date).format(format);
 };
