@@ -8,6 +8,7 @@ interface EditorInputProp {
   defaultValue?: any;
   tips?: string;
   required?: boolean;
+  type?: string;
 }
 
 export type EditorSelectOptions = {
@@ -30,12 +31,14 @@ export const createInputProp = ({
   defaultValue,
   tips,
   required,
+  type = "text",
 }: EditorInputProp): EditorProp => ({
   type: EditorPropType.input,
   label,
   tips,
   defaultValue,
   required,
+  inputType: type,
 });
 
 export function createSelectProp({
@@ -181,6 +184,22 @@ export function createInputWithSymbolProp({
 }: InputWithSymbolProp): EditorProp {
   return {
     type: EditorPropType.inputSymbol,
+    label,
+    defaultValue,
+  };
+}
+
+interface CrossSortableInputWithCheckboxProp {
+  label: string;
+  defaultValue: { label: string; value: string }[];
+}
+
+export function createCrossSortableInputWithCheckboxProp({
+  label,
+  defaultValue,
+}: CrossSortableInputWithCheckboxProp): EditorProp {
+  return {
+    type: EditorPropType.crossSortableInputWithCheckbox,
     label,
     defaultValue,
   };

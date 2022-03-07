@@ -5,6 +5,7 @@
   import { defineComponent, PropType } from "vue";
   import InputWithSymbol from "../layout/InputWithSymbol.vue";
   import CrossSortableInput from "./CrossSortableInput.vue";
+  import CrossSortableInputWithCheckbox from "./CrossSortableInputWithCheckbox.vue";
   import FormPropEditor from "./FormPropEditor.vue";
 
   export default defineComponent({
@@ -27,7 +28,7 @@
           [EditorPropType.input]: () => {
             return (
               <el-input
-                type="input"
+                type={propConfig.inputType ?? "text"}
                 v-model={props.component.props[key]}
                 onChange={(s: string) => console.log}
                 placeholder={propConfig.tips || propConfig.label}
@@ -87,6 +88,11 @@
           ),
           [EditorPropType.inputSymbol]: () => (
             <InputWithSymbol v-model={propObj[prop]}></InputWithSymbol>
+          ),
+          [EditorPropType.crossSortableInputWithCheckbox]: () => (
+            <CrossSortableInputWithCheckbox
+              v-model={propObj[prop]}
+            ></CrossSortableInputWithCheckbox>
           ),
         };
 

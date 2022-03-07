@@ -20,6 +20,8 @@ export enum EditorPropType {
   crossSortableInput = "CrossSortableInput",
   /** 带单位的输入框 */
   inputSymbol = "InputSymbol",
+  /** 可拖拽带checkbox的输入框 */
+  crossSortableInputWithCheckbox = "CrossSortableInputWithCheckbox",
 }
 
 export type EditorProp = {
@@ -31,6 +33,7 @@ export type EditorProp = {
   /** 表单项默认值 */
   defaultValue?: any;
   required?: boolean;
+  inputType?: string;
 } & {
   /** 可选项 */
   options?: SelectOptions;

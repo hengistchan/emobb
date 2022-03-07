@@ -3,12 +3,13 @@
   import { computed, defineComponent, PropType, reactive } from "vue";
   import draggable from "vuedraggable";
   import { Rank, Remove, CirclePlus } from "@element-plus/icons-vue";
+  import { ElCheckbox, ElCheckboxGroup, ElInput } from "element-plus";
 
   export default defineComponent({
     components: { draggable },
     props: {
       modelValue: {
-        type: Array as PropType<string[]>,
+        type: Array as PropType<{ label: string; value: string }[]>,
         default: () => [],
       },
     },
@@ -29,9 +30,10 @@
 
       const incrementOption = (index: number) => {
         const length = state.list.length + 1;
-        const newItem = "";
+        const newItem = { label: "", value: "" };
         state.list.splice(index + 1, 0, newItem);
       };
+
       return () => (
         <div class="sortable-prop">
           {state.list.length !== 0 ? (
@@ -51,21 +53,15 @@
               onEnd={() => (state.drag = false)}
             >
               {{
-                item: ({
-                  element,
-                  index,
-                }: {
-                  element: string;
-                  index: number;
-                }) => (
+                item: ({ element, index }: { element: any; index: number }) => (
                   <div class="item">
                     <el-icon class="handle" size={16}>
                       <Rank />
                     </el-icon>
-                    <el-input
-                      v-model={state.list[index]}
-                      class={"item-input"}
-                    ></el-input>
+                    label:
+                    <ElInput v-model={element.label}></ElInput>
+                    value:
+                    <ElInput v-model={element.value}></ElInput>
                     <div class="item-icons">
                       <el-icon onClick={() => incrementOption(index)} size={16}>
                         <CirclePlus></CirclePlus>
@@ -83,8 +79,8 @@
             </draggable>
           ) : (
             <el-button
-              size="small"
               type="primary"
+              size="small"
               onClick={() => incrementOption(-1)}
             >
               添加

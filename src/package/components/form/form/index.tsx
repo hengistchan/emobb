@@ -26,7 +26,8 @@ export default {
     const formRef = ref<FormInstance | null>(null);
     const model = reactive({});
     Object.values(models).reduce((prev, next) => {
-      prev[next.name] = next.defaultValue ?? undefined;
+      next.name !== undefined &&
+        (prev[next.name] = next.defaultValue ?? undefined);
       return prev;
     }, model as { [key: string]: any });
     provide("$$fromRef", formRef); // 表单引用

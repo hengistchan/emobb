@@ -11,6 +11,14 @@ import {
   createSwitchProp,
 } from "@/package/helper/CreateProps";
 
+export const commonFormKeys = [
+  "prop",
+  "label",
+  "required",
+  "size",
+  "placeholder",
+];
+
 export const createCommonFormProps = (label: string, placeholder: string) => {
   return {
     prop: createInputProp({

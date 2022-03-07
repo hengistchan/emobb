@@ -54,16 +54,7 @@ export const createNewComponent = (component: EditorComponent): Component => {
     draggable: component.draggable ?? true, // 是否可以拖拽
     showStyleConfig: component.showStyleConfig ?? true, // 是否显示组件样式配置
     events: component.events || [], // 事件集合
-    actions: {
-      click: {
-        fn: {
-          key: "123",
-          event: "click",
-          name: "fn",
-          code: `() => console.log(registerRef)`,
-        },
-      },
-    }, // 动作集合
+    actions: {}, // 动作集合
     models: {},
   };
   editorStore.addComponent(cpn);
