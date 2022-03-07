@@ -13,7 +13,7 @@ import useVantFormItem, {
 } from "@/package/helper/useVantFormItem";
 import IconHelper from "@/helper/IconHelper";
 import { Checkbox, CheckboxGroup } from "vant";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { doActions } from "@/package/helper/doActions";
 import dayjs from "dayjs";
 import { pick, omit } from "lodash-es";
@@ -25,22 +25,23 @@ export default {
   preview: () => <p>多选框</p>,
   render: ({ props, id, styles, actions }) => {
     const { model, FormItemWrapper } = useVantFormItem(props, id);
-    const checkList = computed({
-      get() {
-        return typeof model[props.prop] === "string"
-          ? model[props.prop].split(",")
-          : model[props.prop];
+
+    watch(
+      () => model[props.prop],
+      (newV) => {
+        if (typeof newV === "string") {
+          model[props.prop] =
+            newV === "" || newV == null ? [] : model[props.prop].split(",");
+        }
       },
-      set(val) {
-        model[props.prop] = val;
-      },
-    });
+      { immediate: true },
+    );
 
     return () => {
       return (
         <FormItemWrapper {...pick(props, commonFormKeys)}>
           <CheckboxGroup
-            v-model={checkList.value}
+            v-model={model[props.prop]}
             max={props.max}
             direction={props.direction}
           >
