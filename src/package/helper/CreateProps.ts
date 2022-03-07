@@ -204,3 +204,19 @@ export function createCrossSortableInputWithCheckboxProp({
     defaultValue,
   };
 }
+
+interface InnerEditorProp {
+  label: string;
+  defaultValue: string;
+}
+
+export function createInnerEditorProp({
+  label,
+  defaultValue,
+}: InnerEditorProp): EditorProp {
+  return {
+    type: EditorPropType.innerEditor,
+    label,
+    defaultValue,
+  };
+}

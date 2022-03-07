@@ -21,7 +21,11 @@ export default {
   render: ({ props, id, styles }) => {
     const { model, FormItemWrapper } = useVantFormItem(props, id);
     return () => (
-      <FormItemWrapper {...pick(props, commonFormKeys)}>
+      <FormItemWrapper
+        {...pick(props, commonFormKeys)}
+        rules={new Function(`${props.rules}; return rules;`)()}
+        value={model[props.prop]}
+      >
         <Switch v-model={model[props.prop]} size={props.size}></Switch>
       </FormItemWrapper>
     );

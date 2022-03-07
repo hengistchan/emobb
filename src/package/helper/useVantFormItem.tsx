@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Field } from "vant";
 
 import {
+  createInnerEditorProp,
   createInputProp,
   createInputWithSymbolProp,
   createSelectProp,
@@ -42,6 +43,15 @@ export const createCommonFormProps = (label: string, placeholder: string) => {
     placeholder: createInputProp({
       label: "占位文字",
       defaultValue: placeholder,
+    }),
+    rules: createInnerEditorProp({
+      label: "校验规则",
+      defaultValue: `/**
+* 在变量rules中键入规则，不要改变变量名称
+*/
+const rules = [
+
+]`,
     }),
   };
 };

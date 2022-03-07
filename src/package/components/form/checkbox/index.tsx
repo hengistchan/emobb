@@ -1,6 +1,7 @@
 import {
   createCrossSortableInputProp,
   createCrossSortableInputWithCheckboxProp,
+  createInnerEditorProp,
   createInputProp,
   createNumberInputProp,
   createSelectProp,
@@ -39,7 +40,11 @@ export default {
 
     return () => {
       return (
-        <FormItemWrapper {...pick(props, commonFormKeys)}>
+        <FormItemWrapper
+          {...pick(props, commonFormKeys)}
+          value={model[props.prop]}
+          rules={new Function(`${props.rules}; return rules;`)()}
+        >
           <CheckboxGroup
             v-model={model[props.prop]}
             max={props.max}
@@ -86,7 +91,7 @@ export default {
     }),
     max: createNumberInputProp({
       label: "最多可选",
-      defaultValue: "0",
+      defaultValue: 0,
       tips: "0为无限制",
     }),
     direction: createSelectProp({
@@ -96,6 +101,15 @@ export default {
         { label: "垂直", value: "vertical" },
       ],
       defaultValue: "horizontal",
+    }),
+    rules: createInnerEditorProp({
+      label: "校验规则",
+      defaultValue: `/**
+ * 在变量rules中键入规则，不要改变变量名称
+ */
+const rules = [
+
+]`,
     }),
   },
   icon: IconHelper("mdi:checkbox-marked-outline"),

@@ -7,6 +7,7 @@
   import CrossSortableInput from "./CrossSortableInput.vue";
   import CrossSortableInputWithCheckbox from "./CrossSortableInputWithCheckbox.vue";
   import FormPropEditor from "./FormPropEditor.vue";
+  import useInnerEditor from "./InnerEditor";
 
   export default defineComponent({
     props: {
@@ -20,6 +21,7 @@
       },
     },
     setup(props) {
+      const { InnerEditor } = useInnerEditor();
       const renderFormItem = (key: string, propConfig: EditorProp) => {
         const { propObj, prop } = useDotProp(props.component.props, key);
         propObj[prop] ??= propConfig.defaultValue;
@@ -93,6 +95,12 @@
             <CrossSortableInputWithCheckbox
               v-model={propObj[prop]}
             ></CrossSortableInputWithCheckbox>
+          ),
+          [EditorPropType.innerEditor]: () => (
+            <InnerEditor
+              v-model={propObj[prop]}
+              title={propConfig.label}
+            ></InnerEditor>
           ),
         };
 

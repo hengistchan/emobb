@@ -1,4 +1,5 @@
 import {
+  createInnerEditorProp,
   createInputProp,
   createNumberInputProp,
   createSelectProp,
@@ -19,7 +20,12 @@ export default {
   render: ({ props, id, styles }) => {
     const { model } = useVantFormItem(props, id);
     return () => (
-      <Field v-model={model[props.prop]} name={props.prop} {...props}></Field>
+      <Field
+        v-model={model[props.prop]}
+        name={props.prop}
+        {...props}
+        rules={new Function(`${props.rules}; return rules;`)()}
+      ></Field>
     );
   },
   props: {
@@ -35,6 +41,15 @@ export default {
     clearable: createSwitchProp({
       label: "清除图标",
       defaultValue: false,
+    }),
+    rules: createInnerEditorProp({
+      label: "校验规则",
+      defaultValue: `/**
+ * 在变量rules中键入规则，不要改变变量名称
+ */
+const rules = [
+
+]`,
     }),
   },
   icon: IconHelper("mdi:card-text-outline"),

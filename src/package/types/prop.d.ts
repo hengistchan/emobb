@@ -22,6 +22,8 @@ export enum EditorPropType {
   inputSymbol = "InputSymbol",
   /** 可拖拽带checkbox的输入框 */
   crossSortableInputWithCheckbox = "CrossSortableInputWithCheckbox",
+  /** 内置编辑器 */
+  innerEditor = "InnerEditor",
 }
 
 export type EditorProp = {

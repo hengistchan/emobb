@@ -39,6 +39,7 @@ export default {
         style={{ ...styles, width: "100%" }}
         class="form form-container"
         ref={(el: FormInstance) => (formRef.value = el)}
+        validateTrigger="onBlur"
         model={model}
       >
         {renderSlot(slots, "default")}

@@ -37,6 +37,7 @@ export default {
             onClick={() => {
               isShow.value = true;
             }}
+            rules={new Function(`${props.rules}; return rules;`)()}
           ></Field>
           <Calendar
             {...props}

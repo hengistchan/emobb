@@ -1,6 +1,7 @@
 import {
   createCrossSortableInputProp,
   createCrossSortableInputWithCheckboxProp,
+  createInnerEditorProp,
   createInputProp,
   createNumberInputProp,
   createSelectProp,
@@ -25,7 +26,7 @@ const confirmCode = `function action({ datetime, model, prop }) {
 export default {
   name: "datetime-picker",
   moduleName: "form",
-  label: "日期选择",
+  label: "日期时间选择",
   preview: () => <p>日期选择</p>,
   render: ({ props, id, styles, actions }) => {
     const { model } = useVantFormItem(props, id);
@@ -39,6 +40,7 @@ export default {
             readonly={true}
             v-model={model[props.prop]}
             onClick={() => (showPicker.value = true)}
+            rules={new Function(`${props.rules}; return rules;`)()}
           ></Field>
           <Popup position="bottom" v-model:show={showPicker.value}>
             <DatetimePicker

@@ -49,7 +49,11 @@ export default {
       Toast.fail(`文件不能超过 \`${parseFloat(props.size)} * 1024\` byte`);
     };
     return () => (
-      <FormItemWrapper {...pick(props, commonFormKeys)}>
+      <FormItemWrapper
+        {...pick(props, commonFormKeys)}
+        rules={new Function(`${props.rules}; return rules;`)()}
+        value={model[props.prop]}
+      >
         <Uploader
           v-model={fileList.value}
           maxCount={props.maxCount}
@@ -104,7 +108,7 @@ export default {
       tips: "空则不限制, 单位为Kb",
     }),
   },
-  icon: IconHelper("mdi:toggle-switch-outline"),
+  icon: IconHelper("mdi:file-upload-outline"),
   draggable: true,
   events: [
     {

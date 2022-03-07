@@ -28,7 +28,11 @@ export default {
 
     return () => {
       return (
-        <FormItemWrapper {...pick(props, commonFormKeys)}>
+        <FormItemWrapper
+          {...pick(props, commonFormKeys)}
+          rules={new Function(`${props.rules}; return rules;`)()}
+          value={model[props.prop]}
+        >
           <RadioGroup v-model={model[props.prop]} direction={props.direction}>
             {props.options.map((item: any) => (
               <Radio
