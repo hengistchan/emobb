@@ -12,7 +12,7 @@
   import RenderPage from "./views/RenderPage";
   import { Page } from "@/package/types/page";
   import SlotItem from "./views/SlotItem.vue";
-  import { useTitle, useUrlSearchParams } from "@vueuse/core";
+  import { useFavicon, useTitle, useUrlSearchParams } from "@vueuse/core";
   export default defineComponent({
     components: {
       RenderPage,
@@ -21,12 +21,16 @@
     setup() {
       const page = ref<Page | null>(null);
       const title = useTitle();
+      const favicon = useFavicon();
       const params = useUrlSearchParams("hash");
       onMounted(async () => {
         const uuid = params.id as string;
         const data = await getPage(uuid);
         page.value = data.page;
         title.value = page.value?.title || "Vite";
+        favicon.value =
+          page.value?.props?.icon ||
+          "http://file.hengistchan.site/c6582d71812141d39c74bfe34054b96f.ico";
       });
       return {
         page,

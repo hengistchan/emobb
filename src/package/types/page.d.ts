@@ -16,4 +16,5 @@ export interface PageProps {
   backgroundRepeat?: string;
   backgroundSize?: string;
   height?: string;
+  icon?: string;
 }

@@ -82,6 +82,12 @@
                 ></el-input>
               </el-form-item>
               <ImageUpload v-model={page.value.props.backgroundImage} />
+              <el-form-item label="页面图标">
+                <el-input
+                  v-model={page.value.props.icon}
+                  type="textarea"
+                ></el-input>
+              </el-form-item>
             </el-form>
           )}
         </>
