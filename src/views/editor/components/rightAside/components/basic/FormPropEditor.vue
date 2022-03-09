@@ -13,7 +13,11 @@
       return () => (
         <>
           {(model.value || []).map((item) => {
-            return <ElTag style={{ marginLeft: "2px" }}>{item._id}</ElTag>;
+            return (
+              <ElTag style={{ marginLeft: "2px", marginTop: "2px" }}>
+                {item._id}
+              </ElTag>
+            );
           })}
         </>
       );

@@ -17,7 +17,7 @@ const useContextMenu = () => {
   const actions: ActionItem[] = [
     {
       shortcut: "Backspace / Delete",
-      text: "删除图层",
+      text: "删除组件",
       action: () => {
         handleDelete(null, null, null);
       },

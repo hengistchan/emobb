@@ -22,6 +22,7 @@ export default {
         duration={props.duration}
         loop={props.loop}
         indicatorColor={props.indicatorColor}
+        showIndicators={props.showIndicators}
       >
         {props.images.map((image: string) => (
           <SwipeItem key={image}>
@@ -55,6 +56,10 @@ export default {
     indicatorColor: createColorProp({
       label: "指示器",
       defaultValue: "#1989fa",
+    }),
+    showIndicators: createSwitchProp({
+      label: "显示指示器",
+      defaultValue: true,
     }),
   },
   icon: IconHelper("mdi:view-carousel-outline"),
