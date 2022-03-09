@@ -48,5 +48,10 @@
     .el-color-picker__color {
       border: 0;
     }
+    .el-form-item__label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 </style>

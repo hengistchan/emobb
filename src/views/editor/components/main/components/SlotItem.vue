@@ -5,7 +5,7 @@
     class="inner-draggable"
     :class="{ slot: !slotChildren?.length }"
     draggable=".item-drag"
-    :data-slot="`插槽（${slotKey}）\n 拖拽组件到此处`"
+    :data-slot="`拖拽组件到此处`"
     item-key="_id"
     :data-key="slotKey"
     @add.stop.prevent="handleAdd($event)"

@@ -1,12 +1,14 @@
 import {
   createInputProp,
+  createNumberInputProp,
   createSelectProp,
+  createSwitchProp,
 } from "@/package/helper/CreateProps";
 import { EditorComponent } from "@/package/types/component";
-import { FolderOpened } from "@element-plus/icons-vue";
-import { ElRow as Row, ElCol as Col } from "element-plus";
 import { useSlots, renderSlot } from "vue";
 import useEditor from "@/views/editor/hook/useEditor";
+import { Col, Row } from "vant";
+import IconHelper from "@/helper/IconHelper";
 
 interface SlotItem {
   value: string;
@@ -48,8 +50,6 @@ export default {
           )
             ?.filter((item) => typeof item !== "string")
             .map((spanItem: any, spanIndex) => {
-              // console.log(spanItem);
-
               return (
                 <>
                   <Col span={parseInt(spanItem.span)}>
@@ -76,7 +76,26 @@ export default {
       ],
       defaultValue: createSlots("12:12"),
     }),
+    gutter: createNumberInputProp({
+      label: "列间隔",
+      defaultValue: 0,
+    }),
+    justify: createSelectProp({
+      label: "主轴对齐方式",
+      options: [
+        { label: "start", value: "start" },
+        { label: "end", value: "end" },
+        { label: "center", value: "center" },
+        { label: "space-around", value: "space-around" },
+        { label: "space-between", value: "space-between" },
+      ],
+      defaultValue: "start",
+    }),
+    wrap: createSwitchProp({
+      label: "是否换行",
+      defaultValue: true,
+    }),
   },
-  icon: FolderOpened,
+  icon: IconHelper("mdi:page-layout-header-footer"),
   draggable: true,
 } as EditorComponent;
