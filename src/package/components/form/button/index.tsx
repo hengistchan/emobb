@@ -1,4 +1,5 @@
 import {
+  createColorProp,
   createInputProp,
   createNumberInputProp,
   createSelectProp,
@@ -31,6 +32,7 @@ export default {
     return () => (
       <Button
         {...props}
+        style={styles}
         loading={loading.value}
         onClick={async () => {
           loading.value = true;
@@ -79,6 +81,9 @@ export default {
     block: createSwitchProp({
       label: "块级元素",
       defaultValue: false,
+    }),
+    color: createColorProp({
+      label: "按钮颜色",
     }),
   },
   icon: IconHelper("mdi:gesture-tap-button"),

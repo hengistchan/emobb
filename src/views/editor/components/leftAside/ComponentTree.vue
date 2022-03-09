@@ -49,7 +49,7 @@
             for (let j = 0; j < slots.length; j++) {
               const slot = slots[j];
               root[i].children.push({
-                label: `插槽${"_" + slot.key ?? ""}`,
+                label: `插槽${slot.key ? "_" + slot.key : ""}`,
                 children: [],
               });
               root[i].children[root[i].children.length - 1].children =
@@ -84,6 +84,7 @@
                   default-expand-all={true}
                   expand-on-click-node={false}
                   check-on-click-node={true}
+                  highlight-current={true}
                   class="tree-conatiner"
                 >
                   {{

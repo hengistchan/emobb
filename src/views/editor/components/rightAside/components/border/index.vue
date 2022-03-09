@@ -54,12 +54,13 @@
                   {currentComponent.value.styles["borderStyle"] &&
                     currentComponent.value.styles["borderStyle"] !== "none" && (
                       <>
-                        <el-form-item label={"边框宽度"}>
-                          <InputWithSymbol
+                        <el-form-item label={"边框宽度"} class="input-mini">
+                          <el-input
                             v-model={
                               currentComponent.value.styles[`borderWidth`]
                             }
-                          ></InputWithSymbol>
+                            placeholder=""
+                          ></el-input>
                         </el-form-item>
                         <el-form-item label={"边框颜色"}>
                           <el-color-picker

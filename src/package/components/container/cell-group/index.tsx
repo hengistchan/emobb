@@ -20,7 +20,9 @@ export default {
   render: ({ props, styles, component, models }) => {
     const slots = useSlots();
     return () => (
-      <CellGroup {...props}>{renderSlot(slots, "default")}</CellGroup>
+      <CellGroup {...props} style={styles}>
+        {renderSlot(slots, "default")}
+      </CellGroup>
     );
   },
   props: {

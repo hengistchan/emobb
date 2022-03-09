@@ -12,7 +12,14 @@
     Connection,
     Close,
   } from "@element-plus/icons-vue";
-  import { defineComponent, PropType, reactive, ref, watch } from "vue";
+  import {
+    computed,
+    defineComponent,
+    PropType,
+    reactive,
+    ref,
+    watch,
+  } from "vue";
   import FormWrapper from "../FormWrapper";
   import InputWithSymbol from "./InputWithSymbol.vue";
   import { useVModel } from "@vueuse/core";
@@ -36,44 +43,7 @@
         { name: "inline-block", label: "行内块布局", icon: <Connection /> },
         { name: "none", label: "隐藏", icon: <Close /> },
       ];
-      const padding = reactive({
-        paddingLeft: "0",
-        paddingRight: "0",
-        paddingTop: "0",
-        paddingBottom: "0",
-      });
-      const margin = reactive({
-        marginLeft: "0",
-        marginRight: "0",
-        marginTop: "0",
-        marginBottom: "0",
-      });
-      const currentComponent = useVModel(props, "currentComponent");
-      if (!currentComponent.value.styles["padding"]) {
-        currentComponent.value.styles["padding"] = "0 0 0 0";
-      }
-      if (!currentComponent.value.styles["margin"]) {
-        currentComponent.value.styles["margin"] = "0 0 0 0";
-      }
-      watch(
-        () => padding,
-        (padding) => {
-          currentComponent.value.styles[
-            "padding"
-          ] = `${padding.paddingTop} ${padding.paddingRight} ${padding.paddingBottom} ${padding.paddingLeft}`;
-        },
-        { deep: true },
-      );
-
-      watch(
-        () => margin,
-        (margin) => {
-          currentComponent.value.styles[
-            "margin"
-          ] = `${margin.marginTop} ${margin.marginRight} ${margin.marginBottom} ${margin.marginLeft}`;
-        },
-        { deep: true },
-      );
+      const currentComponent = computed(() => props.currentComponent);
 
       return () => (
         <FormWrapper>
@@ -98,83 +68,55 @@
                     ))}
                   </el-radio-group>
                 </el-form-item>
-                <el-form-item label={"宽度"}>
+                <el-form-item label={"宽度"} class="input-mini">
                   <el-input
                     v-model={currentComponent.value.styles["width"]}
                   ></el-input>
                 </el-form-item>
-                <el-form-item label={"高度"}>
+                <el-form-item label={"高度"} class="input-mini">
                   <el-input
                     v-model={currentComponent.value.styles["height"]}
                   ></el-input>
                 </el-form-item>
-                <el-form-item label={"内边距"}></el-form-item>
-                <el-form-item
-                  label-width="0"
-                  class="editor-right-aside__padding"
-                >
-                  <el-row style={{ width: "100%" }}>
-                    <el-col span={8} offset={8}>
-                      <InputWithSymbol
-                        v-model={padding[`paddingTop` as keyof typeof padding]}
-                      ></InputWithSymbol>
-                    </el-col>
-                  </el-row>
-                  <el-row style={{ width: "100%" }}>
-                    <el-col span={8} offset={0}>
-                      <InputWithSymbol
-                        v-model={padding[`paddingLeft` as keyof typeof padding]}
-                      ></InputWithSymbol>
-                    </el-col>
-                    <el-col span={8} offset={8}>
-                      <InputWithSymbol
-                        v-model={
-                          padding[`paddingRight` as keyof typeof padding]
-                        }
-                      ></InputWithSymbol>
-                    </el-col>
-                  </el-row>
-                  <el-row style={{ width: "100%" }}>
-                    <el-col span={8} offset={8}>
-                      <InputWithSymbol
-                        v-model={
-                          padding[`paddingBottom` as keyof typeof padding]
-                        }
-                      ></InputWithSymbol>
-                    </el-col>
-                  </el-row>
+                <el-form-item label="上内边距" class="input-mini">
+                  <el-input
+                    v-model={currentComponent.value.styles["paddingTop"]}
+                  ></el-input>
                 </el-form-item>
-                <el-form-item label={"外边距"}></el-form-item>
-                <el-form-item
-                  label-width="0"
-                  class="editor-right-aside__padding"
-                >
-                  <el-row style={{ width: "100%" }}>
-                    <el-col span={8} offset={8}>
-                      <InputWithSymbol
-                        v-model={margin[`marginTop` as keyof typeof margin]}
-                      ></InputWithSymbol>
-                    </el-col>
-                  </el-row>
-                  <el-row style={{ width: "100%" }}>
-                    <el-col span={8} offset={0}>
-                      <InputWithSymbol
-                        v-model={margin[`marginLeft` as keyof typeof margin]}
-                      ></InputWithSymbol>
-                    </el-col>
-                    <el-col span={8} offset={8}>
-                      <InputWithSymbol
-                        v-model={margin[`marginRight` as keyof typeof margin]}
-                      ></InputWithSymbol>
-                    </el-col>
-                  </el-row>
-                  <el-row style={{ width: "100%" }}>
-                    <el-col span={8} offset={8}>
-                      <InputWithSymbol
-                        v-model={margin[`marginBottom` as keyof typeof margin]}
-                      ></InputWithSymbol>
-                    </el-col>
-                  </el-row>
+                <el-form-item label="右内边距" class="input-mini">
+                  <el-input
+                    v-model={currentComponent.value.styles["paddingRight"]}
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="下内边距" class="input-mini">
+                  <el-input
+                    v-model={currentComponent.value.styles["paddingBottom"]}
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="左内边距" class="input-mini">
+                  <el-input
+                    v-model={currentComponent.value.styles["paddingLeft"]}
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="上外边距" class="input-mini">
+                  <el-input
+                    v-model={currentComponent.value.styles["marginTop"]}
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="右外边距" class="input-mini">
+                  <el-input
+                    v-model={currentComponent.value.styles["marginRight"]}
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="下外边距" class="input-mini">
+                  <el-input
+                    v-model={currentComponent.value.styles["marginBottom"]}
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="左外边距" class="input-mini">
+                  <el-input
+                    v-model={currentComponent.value.styles["marginLeft"]}
+                  ></el-input>
                 </el-form-item>
               </>
             ),

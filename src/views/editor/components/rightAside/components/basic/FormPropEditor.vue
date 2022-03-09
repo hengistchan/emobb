@@ -5,7 +5,7 @@
 
   export default defineComponent({
     props: {
-      modelValue: { type: Array as PropType<any[]>, required: true },
+      modelValue: { type: Array as PropType<any[]>, default: () => [] },
     },
     emits: ["update:modelValue"],
     setup(props, { emit }) {

@@ -57,15 +57,17 @@
                       ]}
                     ></el-color-picker>
                   </el-form-item>
-                  <el-form-item label={"字体大小"}>
-                    <InputWithSymbol
+                  <el-form-item label={"字体大小"} class="input-mini">
+                    <el-input
                       v-model={currentComponent.value.props[`fontSize`]}
-                    ></InputWithSymbol>
+                      placeholder=""
+                    ></el-input>
                   </el-form-item>
-                  <el-form-item label={"行高"}>
-                    <InputWithSymbol
+                  <el-form-item label={"行高"} class="input-mini">
+                    <el-input
                       v-model={currentComponent.value.styles[`lineHeight`]}
-                    ></InputWithSymbol>
+                      placeholder=""
+                    ></el-input>
                   </el-form-item>
                 </>
               ),

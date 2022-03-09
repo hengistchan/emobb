@@ -30,7 +30,7 @@
             return (
               <el-input
                 type={propConfig.inputType ?? "text"}
-                v-model={props.component.props[key]}
+                v-model={propObj[prop]}
                 onChange={(s: string) => console.log}
                 placeholder={propConfig.tips || propConfig.label}
               ></el-input>
@@ -39,7 +39,7 @@
           [EditorPropType.select]: () => {
             return (
               <el-select
-                v-model={props.component.props[key]}
+                v-model={propObj[prop]}
                 placeholder={propConfig.tips || propConfig.label}
               >
                 {propConfig.options?.map((option) => (
@@ -54,7 +54,7 @@
           },
           [EditorPropType.color]: () => (
             <el-color-picker
-              v-model={props.component.props[key]}
+              v-model={propObj[prop]}
               show-alpha
               predefine={[
                 "#ffffff",
@@ -72,20 +72,18 @@
           ),
           [EditorPropType.inputNumber]: () => (
             <el-input-number
-              v-model={props.component.props[key]}
+              v-model={propObj[prop]}
               placeholder={propConfig.tips || propConfig.label}
             ></el-input-number>
           ),
           [EditorPropType.switch]: () => (
-            <el-switch v-model={props.component.props[key]}></el-switch>
+            <el-switch v-model={propObj[prop]}></el-switch>
           ),
           [EditorPropType.crossSortableInput]: () => (
-            <CrossSortableInput
-              v-model={props.component.props[key]}
-            ></CrossSortableInput>
+            <CrossSortableInput v-model={propObj[prop]}></CrossSortableInput>
           ),
           [EditorPropType.table]: () => (
-            <FormPropEditor modelValue={propObj[prop]}></FormPropEditor>
+            <FormPropEditor v-model={propObj[prop]}></FormPropEditor>
           ),
           [EditorPropType.inputSymbol]: () => (
             <InputWithSymbol v-model={propObj[prop]}></InputWithSymbol>

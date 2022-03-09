@@ -80,17 +80,6 @@ export default {
       label: "列间隔",
       defaultValue: 0,
     }),
-    justify: createSelectProp({
-      label: "主轴对齐方式",
-      options: [
-        { label: "start", value: "start" },
-        { label: "end", value: "end" },
-        { label: "center", value: "center" },
-        { label: "space-around", value: "space-around" },
-        { label: "space-between", value: "space-between" },
-      ],
-      defaultValue: "start",
-    }),
     wrap: createSwitchProp({
       label: "是否换行",
       defaultValue: true,
