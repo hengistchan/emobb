@@ -31,6 +31,15 @@ export default {
   render: ({ props, id, styles, actions }) => {
     const { model } = useVantFormItem(props, id);
     const showPicker = ref(false);
+    const currentDate = ref(new Date());
+    const range =
+      props.type === "date" || props.type === "datetime"
+        ? {
+            minDate: dayjs().add(-100, "year").toDate(),
+            maxDate: dayjs().add(100, "year").toDate(),
+          }
+        : {};
+
     return () => {
       return (
         <div>
@@ -38,14 +47,15 @@ export default {
             {...pick(props, commonFormKeys)}
             is-link={true}
             readonly={true}
-            v-model={model[props.prop]}
             onClick={() => (showPicker.value = true)}
             rules={new Function(`${props.rules}; return rules;`)()}
           ></Field>
           <Popup position="bottom" v-model:show={showPicker.value}>
             <DatetimePicker
+              {...range}
               type={props.type}
               title={props.title}
+              v-model={currentDate.value}
               onConfirm={(datetime: string) => {
                 actions.confirm &&
                   doActions(actions.confirm, {
