@@ -30,6 +30,7 @@
       return () => (
         <>
           <el-container class="recycler-container">
+            <h2 style={{ marginBottom: "10px" }}>回收站</h2>
             <el-form label-width={80} label-position="left" class="form">
               <el-form-item label="搜索">
                 <el-input
@@ -147,6 +148,9 @@
       width: 400px;
       .el-input__suffix {
         align-items: center;
+      }
+      .el-form-item {
+        margin: 0;
       }
     }
     .table {

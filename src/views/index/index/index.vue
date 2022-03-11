@@ -192,8 +192,8 @@
       }
       .right {
         height: 100%;
-        width: 400px;
-        min-width: 400px;
+        width: 450px;
+        min-width: 450px;
         // border: 1px solid black;
         background-color: #fff;
         border-radius: 25px;
