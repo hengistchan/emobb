@@ -26,6 +26,7 @@
           <el-container class="index-container">
             <div class="top">
               <div class="left">
+                <h2 class="title">最近作品</h2>
                 <el-link
                   class="more"
                   type="primary"
@@ -171,6 +172,11 @@
         border-radius: 25px;
         margin-right: 40px;
         position: relative;
+        .title {
+          position: absolute;
+          top: 8px;
+          left: 20px;
+        }
         .more {
           position: absolute;
           top: 15px;

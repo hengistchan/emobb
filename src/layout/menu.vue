@@ -1,5 +1,5 @@
 <script lang="tsx">
-  import { defineComponent, ref } from "vue";
+  import { computed, defineComponent, ref } from "vue";
   import {
     HomeFilled,
     UserFilled,
@@ -13,8 +13,10 @@
 
   export default defineComponent({
     setup() {
-      const activeIndex = ref("1");
       const router = useRouter();
+      const activeIndex = computed(
+        () => router.currentRoute.value.name ?? "index",
+      );
       const showCreateDrawer = ref(false);
       const iconSize = 18;
       return () => (
@@ -26,9 +28,9 @@
             active-text-color="#fff"
             background-color="#1e222d"
             text-color="#c1c6c8"
-            default-activite={activeIndex.value}
+            default-active={activeIndex.value}
           >
-            <el-menu-item index="1" onClick={() => router.push("/")}>
+            <el-menu-item index="index" onClick={() => router.push("/")}>
               <el-icon size={iconSize}>
                 <HomeFilled />
               </el-icon>
@@ -57,25 +59,31 @@
                 ),
               }}
             </el-sub-menu>
-            <el-menu-item index="3" onClick={() => router.push("/work")}>
+            <el-menu-item index="work" onClick={() => router.push("/work")}>
               <el-icon size={iconSize}>
                 <TrendCharts />
               </el-icon>
               <span>作品管理</span>
             </el-menu-item>
-            <el-menu-item index="4" onClick={() => router.push("/template")}>
+            <el-menu-item
+              index="template"
+              onClick={() => router.push("/template")}
+            >
               <el-icon size={iconSize}>
                 <Tools />
               </el-icon>
               <span>模板管理</span>
             </el-menu-item>
-            <el-menu-item index="5" onClick={() => router.push("/recycler")}>
+            <el-menu-item
+              index="recycler"
+              onClick={() => router.push("/recycler")}
+            >
               <el-icon size={iconSize}>
                 <Delete />
               </el-icon>
               <span>回收站</span>
             </el-menu-item>
-            <el-menu-item index="6" onClick={() => router.push("/mine")}>
+            <el-menu-item index="mine" onClick={() => router.push("/mine")}>
               <el-icon size={iconSize}>
                 <UserFilled />
               </el-icon>

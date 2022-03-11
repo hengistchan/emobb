@@ -8,19 +8,30 @@ const routes: RouteRecordRaw[] = [
     path: "/",
     component: () => import("@/layout/index.vue"),
     children: [
-      { path: "", component: () => import("@/views/index/index/index.vue") },
-      { path: "mine", component: () => import("@/views/index/mine/index.vue") },
+      {
+        path: "",
+        component: () => import("@/views/index/index/index.vue"),
+        name: "index",
+      },
+      {
+        path: "mine",
+        component: () => import("@/views/index/mine/index.vue"),
+        name: "mine",
+      },
       {
         path: "recycler",
         component: () => import("@/views/index/recycler/index.vue"),
+        name: "recycler",
       },
       {
         path: "work",
         component: () => import("@/views/index/work/index.vue"),
+        name: "work",
       },
       {
         path: "template",
         component: () => import("@/views/index/template/index.vue"),
+        name: "template",
       },
     ],
   },
