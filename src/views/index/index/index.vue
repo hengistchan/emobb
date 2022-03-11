@@ -14,9 +14,19 @@
       const router = useRouter();
       const avatar =
         "http://file.hengistchan.site/9e335ad40618455daa12c19e5b6f28e8.png";
-      let works = ref<WorkDTO[]>([]);
+      const works = ref<WorkDTO[]>([]);
+      let counts = reactive<{
+        sum: number;
+        template: number;
+        publish: number;
+      }>({
+        sum: 0,
+        template: 0,
+        publish: 0,
+      });
       onMounted(async () => {
         const res = (await Work.getRecentWork(5)) as WorkDTO[];
+        counts = await Work.getCount();
         works.value = res;
       });
       const url = ref("");
@@ -26,7 +36,7 @@
           <el-container class="index-container">
             <div class="top">
               <div class="left">
-                <h2 class="title">最近作品</h2>
+                <h2 class="title">最近编辑</h2>
                 <el-link
                   class="more"
                   type="primary"
@@ -137,12 +147,25 @@
               <div class="right">
                 <div class="avatar">
                   <el-avatar
-                    size={100}
+                    size={150}
                     src={userInfo.value.picture || avatar}
                   ></el-avatar>
                 </div>
                 <div class="name">{userInfo.value.username}</div>
-                <div class="info"></div>
+                <div class="infos">
+                  <div class="info" onClick={() => router.push("/work")}>
+                    <span class="num">{counts.sum}</span>
+                    <span class="title">作品数</span>
+                  </div>
+                  <div class="info" onClick={() => router.push("/template")}>
+                    <span class="num">{counts.template}</span>
+                    <span class="title">模板数</span>
+                  </div>
+                  <div class="info" onClick={() => router.push("/work")}>
+                    <span class="num">{counts.publish}</span>
+                    <span class="title">已发布</span>
+                  </div>
+                </div>
               </div>
             </div>
           </el-container>
@@ -204,12 +227,47 @@
           margin: 0 auto;
           text-align: center;
           margin-top: 20px;
+          .el-avatar {
+            box-shadow: 0 0 3px 3px #cfd5e3;
+          }
         }
         .name {
           font-size: 25px;
           font-weight: 700;
           text-align: center;
-          margin-top: 15px;
+          margin-top: 25px;
+        }
+        .infos {
+          margin-top: 40px;
+          display: flex;
+          width: 100%;
+          justify-content: space-around;
+          .info {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            text-align: center;
+            cursor: pointer;
+            &:nth-child(1) {
+              color: #00c292;
+            }
+            &:nth-child(2) {
+              color: #fec108;
+            }
+            &:nth-child(3) {
+              color: #03a9f3;
+            }
+            .num {
+              font-size: 25px;
+              font-weight: 600;
+            }
+            .title {
+              font-size: 14px;
+              font-weight: 300;
+              margin-top: 8px;
+              color: #aa98ae;
+            }
+          }
         }
       }
     }

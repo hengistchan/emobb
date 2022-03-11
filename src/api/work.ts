@@ -76,6 +76,12 @@ class Work {
   static getRecentWork(num: number) {
     return _axios.get<WorkDTO[]>(`/work/recent/${num}`);
   }
+
+  static getCount() {
+    return _axios.get<{ sum: number; template: number; publish: number }>(
+      `/work/count`,
+    );
+  }
 }
 
 export default Work;

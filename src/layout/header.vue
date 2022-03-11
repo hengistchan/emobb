@@ -3,6 +3,7 @@
   import store from "store2";
   import { defineComponent } from "vue";
   import { useRouter } from "vue-router";
+  import useUserStore from "@/store/user";
 
   export default defineComponent({
     setup() {
@@ -12,18 +13,22 @@
         store.clearAll();
         router.push("/user");
       };
+      const userStore = useUserStore();
       return () => (
         <el-container class="layout-header-container">
           <el-aside class="left"></el-aside>
           <el-aside class="right">
             <el-button
               type="danger"
-              size="large"
               class="logout-button"
               onClick={() => handleLogout()}
             >
               退出登录
             </el-button>
+            <el-avatar
+              src={userStore.userInfo.picture}
+              onClick={() => router.push("/mine")}
+            ></el-avatar>
           </el-aside>
         </el-container>
       );
@@ -46,8 +51,12 @@
       display: flex;
       justify-content: end;
       padding-right: 20px;
+      align-items: center;
       .logout-button {
-        transform: translateY(25%);
+        margin-right: 20px;
+      }
+      .el-avatar {
+        cursor: pointer;
       }
     }
   }
