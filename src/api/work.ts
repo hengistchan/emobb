@@ -72,6 +72,10 @@ class Work {
   static deleteByUUID(uuid: string) {
     return _axios.delete(`/work/${uuid}`);
   }
+
+  static getRecentWork(num: number) {
+    return _axios.get<WorkDTO[]>(`/work/recent/${num}`);
+  }
 }
 
 export default Work;

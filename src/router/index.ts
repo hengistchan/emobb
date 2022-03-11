@@ -8,6 +8,7 @@ const routes: RouteRecordRaw[] = [
     path: "/",
     component: () => import("@/layout/index.vue"),
     children: [
+      { path: "", component: () => import("@/views/index/index/index.vue") },
       { path: "mine", component: () => import("@/views/index/mine/index.vue") },
       {
         path: "recycler",

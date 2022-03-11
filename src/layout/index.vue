@@ -58,7 +58,7 @@
     .layout-main {
       height: calc(100vh - 40px);
       padding: 20px 0 0 0;
-      background-color: #fff;
+      background-color: #f0f0f0;
     }
   }
 </style>

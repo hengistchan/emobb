@@ -13,9 +13,11 @@ app.mount("#app");
 
 (globalThis as any).$cpn = useEditorStore().componentMap;
 
-window.onbeforeunload = () => {
-  if (window.location.href.includes("editor")) {
-    return "确认要退出吗?";
-  }
-  return true;
-};
+// window.onbeforeunload = () => {
+//   console.log(window.location.href);
+
+//   if (window.location.href.includes("editor")) {
+//     return "确认要退出吗?";
+//   }
+//   return true;
+// };
