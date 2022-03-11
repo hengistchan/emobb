@@ -4,11 +4,11 @@
       <el-icon><arrow-left-bold /></el-icon>
     </template>
     <template #content>
-      <div
-        class="editor-header-content w-full flex text-light-50 justify-center"
-      >
+      <div class="editor-header-content">
         <div class="page-name">{{ title }}</div>
-        <div class="page-actions"></div>
+        <div class="page-actions">
+          <el-button type="primary" @click="handlePublish">发布作品</el-button>
+        </div>
       </div>
     </template>
   </el-page-header>
@@ -19,6 +19,9 @@
   import { ArrowLeftBold } from "@element-plus/icons-vue";
   import { useRouter } from "vue-router";
   import useEditorStore from "@/store/editor";
+  import Work from "@/api/work";
+  import message from "@/helper/message";
+  import domtoimage from "dom-to-image";
 
   export default defineComponent({
     components: {
@@ -28,7 +31,30 @@
       const editorStore = useEditorStore();
       const title = computed(() => editorStore.page?.title);
       const router = useRouter();
-      return { router, title };
+      const handlePublish = async () => {
+        if (editorStore.uuid == null) {
+          message("error", "获取作品UUID失败");
+          return;
+        }
+        const dom = document.querySelector(
+          ".simulator-editor > .drag-area",
+        ) as HTMLElement;
+        if (dom == null) {
+          message("error", "获取作品dom元素失败");
+          return;
+        }
+        try {
+          const png = await domtoimage.toPng(dom);
+          const { error, message: msg } = await Work.publish(editorStore.uuid);
+          if (!error) {
+            message("success", msg);
+          }
+        } catch (err) {
+          console.log(err);
+          message("error", "unknow error");
+        }
+      };
+      return { router, title, handlePublish };
     },
   });
 </script>
@@ -42,17 +68,24 @@
 
     .editor-header-content {
       width: 100%;
-      display: flex;
+      // display: flex;
       color: rgba(253, 253, 253, 1);
-      justify-content: center;
+      // justify-content: center;
     }
 
     .el-page-header__content {
       width: 100%;
+      text-align: center;
     }
 
     .page-name {
-      transform: translateX(-95px);
+      transform: translateX(-150%);
+      display: inline-block;
+    }
+
+    .page-actions {
+      float: right;
+      padding-right: 20px;
     }
   }
 </style>

@@ -82,6 +82,10 @@ class Work {
       `/work/count`,
     );
   }
+
+  static publish(uuid: string) {
+    return _axios.post(`/work/publish/${uuid}`, null);
+  }
 }
 
 export default Work;

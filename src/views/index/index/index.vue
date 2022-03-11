@@ -168,6 +168,20 @@
                 </div>
               </div>
             </div>
+            <div class="middle">
+              <div class="inner">
+                <h2 class="title">热门模板</h2>
+                <el-link
+                  class="more"
+                  type="primary"
+                  underline={false}
+                  icon={IconHelper("mdi:dots-horizontal", 18)}
+                  href="/#/work"
+                >
+                  查看更多
+                </el-link>
+              </div>
+            </div>
           </el-container>
         </>
       );
@@ -180,7 +194,7 @@
     width: 100%;
     height: 100%;
     padding: 0 40px 0 40px;
-    margin: 0;
+    display: block;
     .top {
       display: flex;
       width: 100%;
@@ -267,6 +281,31 @@
               margin-top: 8px;
               color: #aa98ae;
             }
+          }
+        }
+      }
+    }
+    .middle {
+      height: 350px;
+      width: 100%;
+      margin-top: 20px;
+      .inner {
+        height: 100%;
+        width: 100%;
+        border-radius: 25px;
+        background-color: #fff;
+        position: relative;
+        .title {
+          position: absolute;
+          top: 8px;
+          left: 20px;
+        }
+        .more {
+          position: absolute;
+          top: 15px;
+          right: 24px;
+          .el-icon {
+            margin-right: 3px;
           }
         }
       }
