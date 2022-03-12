@@ -6,14 +6,14 @@ const useAutoSaveWork = (model: Ref<boolean>, time: number) => {
   const editorStore = useEditorStore();
   const timer = setInterval(async () => {
     if (editorStore.page) {
-      model.value = true;
-      const { error } = await Work.saveWorkContent(editorStore.uuid || "", {
-        page: editorStore.page,
-      });
-      if (error) {
-        clearInterval(timer);
-      }
-      model.value = false;
+      // model.value = true;
+      // const { error } = await Work.saveWorkContent(editorStore.uuid || "", {
+      //   page: editorStore.page,
+      // });
+      // if (error) {
+      //   clearInterval(timer);
+      // }
+      // model.value = false;
     }
   }, time);
   return () => {

@@ -20,6 +20,7 @@
     "dom-to-image": "^2.6.0",
     "element-plus": "^2.0.4",
     "hotkeys-js": "^3.8.7",
+    "html2canvas": "^1.4.1",
     "lodash-es": "^4.17.21",
     "monaco-editor": "0.32.1",
     "normalize.css": "^8.0.1",

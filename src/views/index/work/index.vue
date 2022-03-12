@@ -67,7 +67,7 @@
                   default: ({ row }: { row: WorkDTO }) =>
                     row.cover_img ? (
                       <el-image
-                        style={{ width: "100px", height: "100px" }}
+                        style={{ width: "100px", height: "200px" }}
                         src={row.cover_img}
                       ></el-image>
                     ) : (

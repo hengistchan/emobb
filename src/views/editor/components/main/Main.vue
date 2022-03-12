@@ -8,6 +8,7 @@
         v-model="page!.components"
         draggable=".item-drag"
         item-key="_id"
+        :style="page.props"
         @add.stop.prevent="handleAdd($event)"
         @end.stop.prevent="handleEnd($event)"
       >

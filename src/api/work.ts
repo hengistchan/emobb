@@ -83,8 +83,8 @@ class Work {
     );
   }
 
-  static publish(uuid: string) {
-    return _axios.post(`/work/publish/${uuid}`, null);
+  static publish(uuid: string, data: any) {
+    return _axios.post(`/work/publish/${uuid}`, data);
   }
 }
 
