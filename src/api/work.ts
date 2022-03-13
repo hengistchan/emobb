@@ -53,6 +53,10 @@ class Work {
     return _axios.post<WortCreateSuccess>(`/work`, data);
   }
 
+  static createWorkByTemplate(uuid: string) {
+    return _axios.post<WortCreateSuccess>(`/work/template/${uuid}`, null);
+  }
+
   static getInRecycler(search: string | null, page: PageRest) {
     return _axios.get<PageResp<WorkDTO>>(
       queryUrlHelpper(`/work/can`, { search, ...page }),
@@ -85,6 +89,10 @@ class Work {
 
   static publish(uuid: string, data: any) {
     return _axios.post(`/work/publish/${uuid}`, data);
+  }
+
+  static getTemplates() {
+    return _axios.get<(WorkDTO & { username: string })[]>(`/work/template`);
   }
 }
 

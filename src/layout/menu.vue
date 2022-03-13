@@ -54,7 +54,6 @@
                     >
                       新建空白模板
                     </el-menu-item>
-                    <el-menu-item index="2-2">从模板新建</el-menu-item>
                   </>
                 ),
               }}

@@ -4,6 +4,7 @@
   import type { PageResp, Nullable } from "types";
   import { dateFormat, pageHelper } from "@/helper/index";
   import message from "@/helper/message";
+  import { ElMessageBox } from "element-plus";
 
   export default defineComponent({
     setup() {
@@ -16,13 +17,20 @@
         data.value = v;
       };
       const handleRecover = async (uuid: string) => {
-        const { error, message: msg } = await Work.recover(uuid);
-        if (error) {
-          message("error", msg);
-          return;
-        }
-        handleSearch();
-        message("success", msg);
+        ElMessageBox.confirm("确认恢复?", "恢复页面", {
+          confirmButtonText: "确认",
+          cancelButtonText: "取消",
+        })
+          .then(async () => {
+            const { error, message: msg } = await Work.recover(uuid);
+            if (error) {
+              message("error", msg);
+              return;
+            }
+            handleSearch();
+            message("success", msg);
+          })
+          .catch(() => ({}));
       };
       onMounted(() => {
         handleSearch();

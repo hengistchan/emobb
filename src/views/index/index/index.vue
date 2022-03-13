@@ -6,6 +6,8 @@
   import { dateFormat } from "@/helper";
   import { useRouter } from "vue-router";
   import { useQRCode } from "@vueuse/integrations/useQRCode";
+  import { ElMessageBox } from "element-plus";
+  import message from "@/helper/message";
 
   export default defineComponent({
     setup() {
@@ -24,13 +26,29 @@
         template: 0,
         publish: 0,
       });
+      const templates = ref<(WorkDTO & { username: string })[]>([]);
       onMounted(async () => {
         const res = (await Work.getRecentWork(5)) as WorkDTO[];
         counts = await Work.getCount();
+        templates.value = await Work.getTemplates();
         works.value = res;
       });
       const url = ref("");
       const qrcode = useQRCode(url);
+      const handleClickTemplate = (uuid: string) => {
+        ElMessageBox.confirm("确认使用该模板创建吗?", "创建页面", {
+          confirmButtonText: "确认",
+          cancelButtonText: "取消",
+        })
+          .then(async () => {
+            const { error, ...data } = await Work.createWorkByTemplate(uuid);
+            if (!error) {
+              message("success", "创建成功");
+              router.push("/editor?id=" + data.uuid);
+            }
+          })
+          .catch(() => ({}));
+      };
       return () => (
         <>
           <el-container class="index-container">
@@ -98,7 +116,11 @@
                       ),
                     }}
                   </el-table-column>
-                  <el-table-column label="发布时间" align="center">
+                  <el-table-column
+                    label="发布时间"
+                    align="center"
+                    width="180px"
+                  >
                     {{
                       default: ({ row }: { row: WorkDTO }) =>
                         row.latest_publish_time
@@ -180,6 +202,38 @@
                 >
                   查看更多
                 </el-link>
+                {templates.value.map((item, index) => (
+                  // <div key={index}>
+                  //   <div class="content">
+                  //
+                  //   </div>
+                  //   <div class="body"></div>
+                  // </div>
+                  <el-card
+                    class="inner-template__item"
+                    shadow="hover"
+                    onClick={() => handleClickTemplate(item.uuid)}
+                  >
+                    <div class="inner-image">
+                      <div
+                        class="image"
+                        style={{
+                          backgroundImage: `url(${item.cover_img})`,
+                        }}
+                      ></div>
+                    </div>
+                    <div class="bottom">
+                      <span>{item.title}</span>
+                      <div class="copied_count">
+                        <div class="name">作者：{item.username}</div>
+                        <div class="count">
+                          {IconHelper("mdi:account-outline")}
+                          {item.copied_count}
+                        </div>
+                      </div>
+                    </div>
+                  </el-card>
+                ))}
               </div>
             </div>
           </el-container>
@@ -191,9 +245,10 @@
 
 <style lang="scss">
   .index-container {
-    width: 100%;
+    width: 80%;
     height: 100%;
-    padding: 0 40px 0 40px;
+    // padding: 0 40px 0 40px;
+    margin: 0 auto;
     display: block;
     .top {
       display: flex;
@@ -229,8 +284,8 @@
       }
       .right {
         height: 100%;
-        width: 450px;
-        min-width: 450px;
+        width: 27%;
+        // min-width: 450px;
         // border: 1px solid black;
         background-color: #fff;
         border-radius: 25px;
@@ -286,7 +341,7 @@
       }
     }
     .middle {
-      height: 350px;
+      // height: 350px;
       width: 100%;
       margin-top: 20px;
       .inner {
@@ -295,6 +350,12 @@
         border-radius: 25px;
         background-color: #fff;
         position: relative;
+        display: flex;
+        justify-content: flex-start;
+        padding: 40px 20px 40px 20px;
+        align-items: stretch;
+        flex-wrap: wrap;
+        box-sizing: border-box;
         .title {
           position: absolute;
           top: 8px;
@@ -306,6 +367,60 @@
           right: 24px;
           .el-icon {
             margin-right: 3px;
+          }
+        }
+        .inner-template__item {
+          width: 300px;
+          height: 380px;
+          border-radius: 5px;
+          cursor: pointer;
+          position: relative;
+          &:hover {
+            &::before {
+              content: "从该模板创建";
+              display: block;
+              width: 300px;
+              height: 380px;
+              position: absolute;
+              top: 0;
+              left: 0;
+              color: rgb(243, 243, 243);
+              font-size: 16px;
+              font-weight: 600;
+              line-height: 380px;
+              text-align: center;
+              background-color: rgba($color: #000000, $alpha: 0.5);
+            }
+          }
+          .inner-image {
+            height: 280px;
+            .image {
+              height: 100%;
+              background-size: cover;
+              background-position: 0 0;
+            }
+          }
+          .bottom {
+            padding: 10px 0 0 0;
+            > span {
+              height: 20px;
+              line-height: 20px;
+              font-size: 16px;
+              color: #333;
+              font-weight: 500;
+            }
+            .copied_count {
+              display: flex;
+              width: 100%;
+              justify-content: space-between;
+              margin-top: 18px;
+              color: #999;
+              font-size: 14px;
+              .el-icon {
+                vertical-align: bottom;
+                margin-right: 3px;
+              }
+            }
           }
         }
       }

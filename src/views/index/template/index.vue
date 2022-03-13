@@ -5,6 +5,7 @@
   import { dateFormat, pageHelper } from "@/helper/index";
   import message from "@/helper/message";
   import { useRouter } from "vue-router";
+  import { ElMessageBox } from "element-plus";
 
   export default defineComponent({
     setup() {
@@ -21,11 +22,18 @@
         router.push("/editor?id=" + uuid);
       };
       const handleDelete = async (uuid: string) => {
-        const { error, message: msg } = await Work.deleteByUUID(uuid);
-        if (!error) {
-          message("success", msg);
-        }
-        handleSearch();
+        ElMessageBox.confirm("确认删除?", "删除页面", {
+          confirmButtonText: "确认",
+          cancelButtonText: "取消",
+        })
+          .then(async () => {
+            const { error, message: msg } = await Work.deleteByUUID(uuid);
+            if (!error) {
+              message("success", msg);
+            }
+            handleSearch();
+          })
+          .catch(() => ({}));
       };
       onMounted(() => {
         handleSearch();
