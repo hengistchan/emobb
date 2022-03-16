@@ -10,6 +10,10 @@ export interface ActionItem {
   shortcut: string;
 }
 let dom: HTMLDivElement | null = null;
+/**
+ * It creates a context menu.
+ * @returns The `handleContextMenu` function is being returned.
+ */
 const useContextMenu = () => {
   const { handleDelete } = useEditor();
   const editorStore = useEditorStore();

@@ -10,8 +10,8 @@ import store from "store2";
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 const config: AxiosRequestConfig = {
-  // baseURL: import.meta.env.VITE_BASE_URL as string,
-  baseURL: "http://localhost:8088",
+  baseURL: import.meta.env.VITE_BASE_URL as string,
+  // baseURL: "http://localhost:8088",
   timeout: 60 * 1000, // Timeout
 };
 

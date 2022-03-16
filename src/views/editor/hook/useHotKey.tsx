@@ -3,6 +3,11 @@ import { computed, onMounted, onUnmounted } from "vue";
 import useEditor from "./useEditor";
 import useEditorStore from "@/store/editor";
 
+/**
+ * It binds a key handler to the hotkeys library.
+ * @param {string} keys - A string of keys and key combinations delimited by spaces.
+ * @param {KeyHandler} callback - The function that will be called when the hotkey is pressed.
+ */
 const registerHotKey = (keys: string, callback: KeyHandler): void => {
   onMounted(() => {
     hotkeys(keys, callback);

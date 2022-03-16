@@ -1,5 +1,10 @@
 import { monaco } from "@/plugin/Monaco";
 
+/**
+ * It creates a monaco editor.
+ * @param [language=javascript] - The language of the editor.
+ * @returns The `useMonacoEditor` function returns an object with the following properties:
+ */
 const useMonacoEditor = (language = "javascript") => {
   let monacoEditor: monaco.editor.IStandaloneCodeEditor | null = null;
   let initReadOnly = false;

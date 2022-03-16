@@ -1,5 +1,7 @@
 <template>
-  <router-view />
+  <el-config-provider :message="{ max: 1 }">
+    <router-view />
+  </el-config-provider>
 </template>
 
 <script setup lang="ts">

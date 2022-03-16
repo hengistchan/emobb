@@ -203,16 +203,15 @@
                   查看更多
                 </el-link>
                 {templates.value.map((item, index) => (
-                  // <div key={index}>
-                  //   <div class="content">
-                  //
-                  //   </div>
-                  //   <div class="body"></div>
-                  // </div>
                   <el-card
                     class="inner-template__item"
                     shadow="hover"
                     onClick={() => handleClickTemplate(item.uuid)}
+                    style={
+                      index === 0
+                        ? { marginLeft: "0px" }
+                        : { marginLeft: "10px" }
+                    }
                   >
                     <div class="inner-image">
                       <div
