@@ -38,14 +38,14 @@
 </template>
 
 <script lang="ts">
-  import { Component, computed, defineComponent, ref } from "vue";
+  import { Component, computed, defineComponent, ref, defineEmits } from "vue";
   import componentModules from "@/package";
   import RenderVNode from "@/helper/RenderVNode";
   import draggable from "vuedraggable";
   import { cloneDeep } from "lodash-es";
   import { EditorComponent } from "@/package/types/component";
   import { createNewComponent } from "./../../hook/useEditorInit";
-
+  const emit = defineEmits(["123"]);
   export default defineComponent({
     components: {
       RenderVNode,

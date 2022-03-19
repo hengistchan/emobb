@@ -113,10 +113,16 @@
                       : "无",
                 }}
               </el-table-column>
-              <el-table-column label="操作" align="center" width="165px">
+              <el-table-column label="操作" align="center" width="270px">
                 {{
                   default: (data: { row: WorkDTO }) => (
                     <>
+                      <el-button
+                        type="primary"
+                        onClick={() => router.push(`/data/${data.row.uuid}`)}
+                      >
+                        数据统计
+                      </el-button>
                       <el-button
                         type="primary"
                         onClick={() => handleEdit(data.row.uuid)}

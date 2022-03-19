@@ -33,6 +33,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import("@/views/index/template/index.vue"),
         name: "template",
       },
+      {
+        path: "data/:uuid",
+        component: () => import("@/views/index/data/index.vue"),
+        name: "data",
+      },
     ],
   },
   {
