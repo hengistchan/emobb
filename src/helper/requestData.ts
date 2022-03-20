@@ -10,8 +10,8 @@ import store from "store2";
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 const config: AxiosRequestConfig = {
-  baseURL: "http://81.69.58.208:3002",
-  // baseURL: "http://localhost:8088",
+  // baseURL: "http://81.69.58.208:3002",
+  baseURL: "http://localhost:3002",
   timeout: 60 * 1000, // Timeout
 };
 

@@ -13,6 +13,8 @@
   import { Page } from "@/package/types/page";
   import SlotItem from "./views/SlotItem.vue";
   import { useFavicon, useTitle, useUrlSearchParams } from "@vueuse/core";
+  import { emit } from "./helper/events";
+
   export default defineComponent({
     components: {
       RenderPage,
@@ -31,6 +33,7 @@
         favicon.value =
           page.value?.props?.icon ||
           "http://file.hengistchan.site/c6582d71812141d39c74bfe34054b96f.ico";
+        emit(uuid);
       });
       return {
         page,
