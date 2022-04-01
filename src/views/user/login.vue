@@ -13,8 +13,8 @@
       const loginRef = ref<InstanceType<typeof ElForm> | null>(null);
       const router = useRouter();
       const user = reactive({
-        username: "",
-        password: "",
+        username: "HJ",
+        password: "123456",
       });
       const loading = ref(false);
       const handleLogin = async () => {
